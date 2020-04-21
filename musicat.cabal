@@ -4,17 +4,17 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e656914bfd1eb0a8ab5e2976d1750fa297b0220481b550b0663f4b8adaaf097b
+-- hash: f5158fc3329ddc496b43993644788d39a7d8eae2cead646e0c9ee4d48f28580a
 
 name:           musicat
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/musicat#readme>
-homepage:       https://github.com/githubuser/musicat#readme
-bug-reports:    https://github.com/githubuser/musicat/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2020 Author name here
-license:        BSD3
+description:    Please see the README on GitHub at <https://github.com/141592653/musicat#readme>
+homepage:       https://github.com/141592653/musicat#readme
+bug-reports:    https://github.com/141592653/musicat/issues
+author:         Alice Rixte
+maintainer:     alice.rixte@gmail.com
+copyright:      2020 Alice Rixte
+license:        GPL
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -23,11 +23,11 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/musicat
+  location: https://github.com/141592653/musicat
 
 library
   exposed-modules:
-      Lib
+      StrAdd
   other-modules:
       Paths_musicat
   hs-source-dirs:
