@@ -118,13 +118,29 @@ We have seen that the rotations of the dodecahedron match with the notion of tra
 The idea behind K-nets is that instead of analyse chords transformations threw transposition only, which is not very rich, we could instead use also inversions.
 
 \begin{defn}
- A Klumpenhouwer network is a network where objects are pitch classes and arrows between objects are labeled by an element of the 
+ A Klumpenhouwer network is a network where objects are pitch classes and arrows between objects are labeled by an element of the group $T/I$.
 \end{defn}
+
+\begin{defn}
+Two K-nets $K$ and $K'$ are said \textbf{isographic} if and only if :
+\begin{itemize}
+    \item there exist a bijection $f:V(K)\rightarrow V(K')$ from the set of vertices $V(K)$ to $V(K')$
+    \item if there is an arrow $a:s\rightarrow t$ where $s,t\in V(K)$ in $K$, then there is an arrow $a':f(s)\rightarrow f(t)$ in $K'$
+    \item there is an automorphism $F \in Aut(T/I)$ such that if $X$ is the label of an arrow $a:s\rightarrow t$, then $F(X)$ is the label of the arrow $a':f(s)\rightarrow f(t)$.
+\end{itemize}
+\end{defn}
+
+
 
 
 \section{Presentation of PK-nets}
 
-PK-nets\cite{PAAE2016} are the generalization of the
+PK-nets\cite{PAAE2016} are a generalization of K-nets. They are defined in the paradigm of category theory. Let's first present informally category theory.
+
+The concept of category theory is simply summarized by the french proverb "Tell me who your friends are and I'll tell you who you are." The idea is that, in mathematics, it can be more important to consider the relations between objects than look at the objects themselves. 
+
+Another concept fundamental of category theory is composition. 
+%TODO
 
 
 \begin{defn}\textbf{Set} is the category where objects are the sets and morphisms are functions between sets.\end{defn}
@@ -144,6 +160,7 @@ PK-nets\cite{PAAE2016} are the generalization of the
     \caption{PK-net definition}
 \end{figure}
 
+The definition of a PK-net is very general and covers a lot of the concepts introduced, such as (TODO) transposition class, Lewin's GIS (TODO), Forte's (TODO) normal order class, , (TODO) K-nets, symmetric groups of permutations (TODO), Tonnetz...
 
 
 
@@ -164,7 +181,7 @@ $el(S)$ is then a category with $24$ objects. One can use it as a $\Delta$ categ
 
 => How to add more structure to eliminate arrow? Maybe take two generators
 
-
+\chapter{Polyphony}
 
 \begin{defn}
     The \textbf{free strict monoidal category} $ \Sigma (C)$ over a category $C$ is a monoidal category such that :
