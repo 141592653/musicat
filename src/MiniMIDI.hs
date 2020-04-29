@@ -1,4 +1,4 @@
-module Lib
+module MiniMIDI
   ( MusObj
   , stretch
   , noteCount
@@ -30,6 +30,7 @@ voice1 = Sequential
 voice2 = Sequential [Note 52 2000 100, Note 55 1000 100, Note 55 1000 100]
 
 exemple = Parallel [voice1, voice2]
+
 
 --Calcule la duree d'un objet musical
 getDur :: MusObj -> Integer

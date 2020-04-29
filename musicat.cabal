@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7cb62d22659b802166e59e5f0d16d31b2216854515a51ddfeb2257fc5bf38b42
+-- hash: 9621f8267b32fdccb4eff187a4bcdc801e1944608a7582ee3992d606f2c38ac7
 
 name:           musicat
 version:        0.1.0.0
@@ -27,8 +27,7 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
-      StrAdd
+      MiniMIDI
   other-modules:
       Paths_musicat
   hs-source-dirs:
