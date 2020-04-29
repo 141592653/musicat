@@ -13,10 +13,11 @@ module MiniMIDI
   , mkList
   , repeatN
   , canon
+  , nextChord
   )
 where
 
-data MusObj = Note Integer Integer Integer | Rest Integer | Sequential [MusObj] | Parallel [MusObj] deriving (Show)
+data MusObj =  Note Integer Integer Integer | Rest Integer | Sequential [MusObj] | Parallel [MusObj] deriving (Show)
 
 
 voice1 = Sequential
@@ -30,6 +31,24 @@ voice1 = Sequential
 voice2 = Sequential [Note 52 2000 100, Note 55 1000 100, Note 55 1000 100]
 
 exemple = Parallel [voice1, voice2]
+
+-- Calcule le prochain accord
+nextChord :: MusObj -> Maybe ([MusObj],MusObj)
+nextChord ( Rest   0         ) = Nothing
+nextChord ( Rest   d         ) = Just ([], Rest (d-1) )
+nextChord ( Note p 0 v       ) = Nothing
+nextChord ( Note p d v       ) = Just ([Note p 1 v], Note p (d-1) v)
+nextChord ( Sequential []    ) = Nothing  
+nextChord ( Sequential (h:t) ) = case nextChord h of
+                                     Nothing -> nextChord (Sequential t)
+                                     Just (c,ct) -> Just (c,Sequential (ct:t))
+nextChord ( Parallel   []    ) = Nothing  
+nextChord ( Parallel   (h:t) ) = 
+  case (nextChord h, nextChord (Parallel t)) of
+    (Nothing , Nothing ) -> Nothing 
+    (c, Nothing ) -> c
+    (Nothing , t )-> t
+    (Just (ch,ct), Just (th,tt)) -> Just (ch ++th,Parallel [ct,tt])
 
 
 --Calcule la duree d'un objet musical
@@ -82,7 +101,6 @@ retrograde obj            = obj
 --make a list of n obj 
 mkList :: MusObj -> Integer -> [MusObj]
 mkList obj 0 = []
-mkList obj 1 = [copy obj]
 mkList obj n = copy obj : mkList obj (n - 1)
 
 --make a sequential avec n fois obj 

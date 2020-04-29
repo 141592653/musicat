@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9621f8267b32fdccb4eff187a4bcdc801e1944608a7582ee3992d606f2c38ac7
+-- hash: e1cd98fdffd0d004a465f155551eff6f7d1db137ac74a5aa0e448b183c384e16
 
 name:           musicat
 version:        0.1.0.0
@@ -34,6 +34,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , positive >=0.4
   default-language: Haskell2010
 
 executable musicat-exe
@@ -46,6 +47,7 @@ executable musicat-exe
   build-depends:
       base >=4.7 && <5
     , musicat
+    , positive >=0.4
   default-language: Haskell2010
 
 test-suite musicat-test
@@ -59,4 +61,5 @@ test-suite musicat-test
   build-depends:
       base >=4.7 && <5
     , musicat
+    , positive >=0.4
   default-language: Haskell2010
