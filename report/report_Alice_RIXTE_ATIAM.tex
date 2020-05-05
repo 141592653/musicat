@@ -101,7 +101,7 @@ We have seen that the rotations of the dodecahedron match with the notion of tra
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
-        \tikzset{myptr/.style={decoration={markings,mark=at position 1 with %
+        \tikzset{myptr/.style={decoration={markings,mark=at position 1 with
                                 {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}}}
         \dolistloop{\pc}
         \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
@@ -118,16 +118,16 @@ We have seen that the rotations of the dodecahedron match with the notion of tra
 The idea behind K-nets is that instead of analyse chords transformations threw transposition only, which is not very rich, we could instead use also inversions.
 
 \begin{defn}
- A Klumpenhouwer network is a network where objects are pitch classes and arrows between objects are labeled by an element of the group $T/I$.
+    A Klumpenhouwer network is a network where objects are pitch classes and arrows between objects are labeled by an element of the group $T/I$.
 \end{defn}
 
 \begin{defn}
-Two K-nets $K$ and $K'$ are said \textbf{isographic} if and only if :
-\begin{itemize}
-    \item there exist a bijection $f:V(K)\rightarrow V(K')$ from the set of vertices $V(K)$ to $V(K')$
-    \item if there is an arrow $a:s\rightarrow t$ where $s,t\in V(K)$ in $K$, then there is an arrow $a':f(s)\rightarrow f(t)$ in $K'$
-    \item there is an automorphism $F \in Aut(T/I)$ such that if $X$ is the label of an arrow $a:s\rightarrow t$, then $F(X)$ is the label of the arrow $a':f(s)\rightarrow f(t)$.
-\end{itemize}
+    Two K-nets $K$ and $K'$ are said \textbf{isographic} if and only if :
+    \begin{itemize}
+        \item there exist a bijection $f:V(K)\rightarrow V(K')$ from the set of vertices $V(K)$ to $V(K')$
+        \item if there is an arrow $a:s\rightarrow t$ where $s,t\in V(K)$ in $K$, then there is an arrow $a':f(s)\rightarrow f(t)$ in $K'$
+        \item there is an automorphism $F \in Aut(T/I)$ such that if $X$ is the label of an arrow $a:s\rightarrow t$, then $F(X)$ is the label of the arrow $a':f(s)\rightarrow f(t)$.
+    \end{itemize}
 \end{defn}
 
 
@@ -137,32 +137,145 @@ Two K-nets $K$ and $K'$ are said \textbf{isographic} if and only if :
 
 PK-nets\cite{PAAE2016} are a generalization of K-nets. They are defined in the paradigm of category theory. Let's first present informally category theory.
 
-The concept of category theory is simply summarized by the french proverb "Tell me who your friends are and I'll tell you who you are." The idea is that, in mathematics, it can be more important to consider the relations between objects than look at the objects themselves. 
+The concept of category theory is simply summarized by the french proverb "Tell me who your friends are and I'll tell you who you are." The idea is that, in mathematics, it can be more important to consider the relations between objects than look at the objects themselves.
 
-Another concept fundamental of category theory is composition. 
+Another concept fundamental of category theory is composition.
 %TODO
 
 
-\begin{defn}\textbf{Set} is the category where objects are the sets and morphisms are functions between sets.\end{defn}
+\begin{defn}\textbf{Set} is the category where objects are the sets and morphisms are functions between sets.
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[baseline= (a).base]
+            \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}[column sep=tiny]
+                    \Delta
+                    \ar[ddr, "R"',""{name=R,right}]
+                    \ar[rr,"F"]
+                    & &
+                    \mathcal{C}
+                    \ar[ddl,"S",""{name=S,left}] \\
+                    & \ar[dashed,bend left=80,from=R, to=S, "\phi"']& \\
+                    & \bf Set &
+                \end{tikzcd}
+            };
+        \end{tikzpicture}
+        \caption{PK-net definition}
+    \end{figure}
+\end{defn}
 
+
+
+
+
+The definition of a PK-net is very general and covers a lot of the concepts introduced, such as (TODO) transposition class, Lewin's GIS (TODO), Forte's (TODO) normal order class, , (TODO) K-nets, symmetric groups of permutations (TODO), Tonnetz...
+
+\paragraph{Contribution (sort of)}
+
+Let's study a particular class of PK-nets such that $\Delta$, $\mathcal{C}$, $R$ and $S$ are fixed. The only thing we are allowed to change is $F$.
+
+\begin{prop}
+    Let $F' : \Delta \rightarrow \mathcal{C}$ such that there exist a natural transformation $\psi : F \rightarrow F'$, then we get an obvious natural transformation $\phi' : R \rightarrow SF$
+\end{prop}
+\begin{proof}
+    Let $\phi'_A : R(A) \rightarrow SF'(A)$ such that, $\phi'_A = S\psi_A$. In other words, in the category of functors, $\phi' = Id_S\psi$ which is necessarily a natural transformation, due to the axioms of the category of functors.
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}[baseline= (a).base]
+            \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}[column sep = small, row sep = 5.5ex]
+                    \Delta
+                    \arrow[bend left=40]{rr}[name=F,label=above:$F$]{}
+                    \arrow[bend right=40]{rr}[name=F2,label=below:$F'$]{}
+                    \ar[ddr, "R"',""{name=R,right}]
+                    & &
+                    \mathcal{C}
+                    \arrow[shorten <=5pt,shorten >=0pt,Rightarrow,to path={(F) -- node[label=right:$\psi$] {} (F2)}]{}
+                    \ar[ddl,"S",""{name=S,left}] \\
+                    & & \\
+                    & \textbf{Set}&
+                \end{tikzcd}
+            };
+        \end{tikzpicture}
+    \end{figure}
+
+\end{proof}
+
+\subsection{Study of $\psi$}
+
+Let $F:\Delta\rightarrow G$ and $F':\Delta\rightarrow G$ be two parallel functors where $G\in \textbf{Grp}$. Let $X,Y\in\Delta$ and $f\in Hom(X,Y)$. We then get the following commutating diagram :
 
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}[baseline= (a).base]
         \node[scale=1.3] (a) at (0,0){
-            \begin{tikzcd}[column sep=tiny]
-                \Delta \ar[ddr, "R"',""{name=R,right}] \ar[rr,"F"]	& & \textbf{C} \ar[ddl,"S",""{name=S,left}] \\
-                & \ar[dashed,bend left=80,from=R, to=S, "\phi"']& \\
-                & \bf Set &
+            \begin{tikzcd}[column sep = small]
+                F(X) \arrow[dd, "F(f)"'] \arrow[rr, "\psi_X"] &  & F'(X) \arrow[dd, "F'(f)"] \\
+                &  &                           \\
+                F(Y) \arrow[rr, "\psi_Y"']                    &  & F'(Y)
             \end{tikzcd}
         };
     \end{tikzpicture}
-    \caption{PK-net definition}
 \end{figure}
 
-The definition of a PK-net is very general and covers a lot of the concepts introduced, such as (TODO) transposition class, Lewin's GIS (TODO), Forte's (TODO) normal order class, , (TODO) K-nets, symmetric groups of permutations (TODO), Tonnetz...
+This diagrams corresponds to the equation : 
+\begin{eqnarray*}
+    &a\cdot y &= x \cdot b\\
+    \Leftrightarrow & y &= a^{-1}\cdot x\cdot  b\\
+\end{eqnarray*}
+
+Hence, there is no constraint on the couple $(x,y)$, we juste need to choose $a = x$ and $b = y$, and we get our natural transformation.
+
+Though, $X$ and $Y$ are actually the same object and $f$ is a reflexive object, we get $a = b$, and consequently,
+$$y = b^{-1}\cdot x \cdot b $$
+
+In other words, $\psi$ is an \textbf{inner automorphism} of $G$.
 
 
+\section{T/I PK-nets}
+% \subsection{$\mathhcal{C}$ is a one-object category}
+% A natural transformation of $\Delta$ to $M$ associates each object of $\Delta$ to an arrow of $M$, i.e.an element of the underlying monoid.
+
+We are particularly interested in the case where $\mathcal{C} = T/I$. Since $T/I$ has only one element, all the functors $F:\Delta \rightarrow T/I$ send all the elements on the unique element of $T/I$. In the following, we will not recall the image of the elements of $\Delta$.
+
+Moreover, we ask that
+
+\begin{equation}
+    \forall X, Y\in \Delta, \forall f, g \in Hom(X,Y), F(f) = F(g) \Rightarrow f = g
+    \label{Fcondition}
+\end{equation}
+%TODO define group action
+Here, $S:\mathcal{C}\rightarrow \textbf{Set}$ is the action of $T/I$ on the set $Notes = \{C,C\sharp,D,E\flat,E,F,F\sharp,G\sharp,A,B\flat,B\}$.
+
+Let us study what shape the category $\Delta$ could have. It can of course be void, since the empty category is the initial object of $\textbf{Cat}$.
+
+\subsection{Recover pitch classes}
+%TODO : better proof
+Let us suppose that $\Delta$ has only one element $A$. Then the condition  \ref{Fcondition} implies that $F$ is a monomorphism in the $\textbf{Grp}$ category. Consequently, $\Delta$ is isomorphic to a subgroup of $T/I$. Each of these subgroups is in one-to-one correspondance with the functors $F$ following the condition \ref{Fcondition}.
+
+\paragraph{$\Delta$ has exactly one arrow}
+Let us suppose $\Delta$ has only one arrow : the identity $Id_A$. There is only one functor $F:\Delta \rightarrow T/I$ which maps $Id_A$ to $T_0$.
+
+Hence, the PK-nets allow only one type of analysis here. Let us choose $R(A) = B$. We can the choose any function $f : B \rightarrow Notes$, to be our natural isomorphism $\phi$. Since the elements of $B$ are not relevant, we can consider this function as a \textbf{multiset} of notes.
+
+\paragraph{$\Delta$ has two arrows}
+There are $13$ 2-elements subgroups of $T/I$ : $\{T_0,T_6\}$ and $\forall k\in[\![1,12]\!], \{T_0,I_k\}$. They are both obviously isomorphic to the group $\mathbb{Z}_2$, that we can safely \footnote{ since all the 2-elements groups are isomorphic to $\mathbb{Z}_2$} choose as our $\Delta$. Consequently, we get $13$ parallel functors from $\mathbb{Z}_2$ to $T/I$.
+
+We also know that all the natural transformations between those functors are (inner) automorphisms of T/I. Precisely, all the functors corresponding to the subgroups $\{T_0,I_k\}$ are isomorphic threw a positive automorphism.
+%TODO define positive isomorphisms
+
+However, since all automorphisms of T/I send transpositions on transpositions and inversions on inversions, there is no natural transformations for $\{T_0,T_6\}$ to any other functor.
+%TODO maybe name better those functors
+
+Consequently, we have two classes of equivalent functors. This gives to the analyst two different tools to analyse a point with two arrows on it. Actually, if we label the two arrows of a point with $T_0$ and $I_k$, we get the $k^{th}$ pitch class, and the natural transformation $T_i$ is a transposition. 
+%TODO not cleat at all
+
+\subsection{Recovering intervals}
+
+
+
+
+% TODO  : what is the juxtaposition of two connected component (ie no morphism between them)
 
 
 \subsection{Recover Tonnetz}
@@ -182,32 +295,110 @@ $el(S)$ is then a category with $24$ objects. One can use it as a $\Delta$ categ
 => How to add more structure to eliminate arrow? Maybe take two generators
 
 \chapter{Polyphony}
+\section{Strict monoidal category freely generated by a group}
 
+% McLane, Categories for the working mathematician p.161 -162
 \begin{defn}
-    The \textbf{free strict monoidal category} $ \Sigma (C)$ over a category $C$ is a monoidal category such that :
+    A \textbf{strict monoidal category}\cite{lane_1971} $\big<\mathcal{C},1,\otimes\big>$ is a category $\mathcal{C}$ with a bifunctor $\otimes : \mathcal{C}\times\mathcal{C} \rightarrow \mathcal{C}$ and an object $1\in\mathcal{C}$ such that :
     \begin{itemize}
-        \item objects of $\Sigma (C)$ are the list of objects of $C$
-        \item for two objects $A = A_1,\dots,A_m$ and $B = B_1,\dots,B_n$ of $\Sigma (C)$, if $m = n$ then every list of morphisms $f_1,\dots,f_m$ such that $f_i$ is a morphism from $A_i$ to $B_i$ in $C$ is a morphism of $\Sigma(C)$ from $A$ to $B$
-        \item The tensor product of two $\Sigma(C)$ objects is there concatenation as well as the tensor product of two morphisms.
+        \item $\otimes$ is associative : $(-\otimes-)\otimes - = - \otimes (-\otimes-)$
+        \item $1$ which is a left and right unit for $\otimes$ : $1\otimes - = Id_{\mathcal{C}} = - \otimes 1$
     \end{itemize}
 \end{defn}
 
 
+\begin{defn}
+    The \textbf{free strict monoidal category} $ \Sigma (\mathcal{C})$ over a category $\mathcal{C}$ is a strict monoidal category such that :
+    \begin{itemize}
+        \item objects of $\Sigma (\mathcal{C})$ are the list of objects of $\mathcal{C}$
+        \item for two objects $A = A_1,\dots,A_m$ and $B = B_1,\dots,B_n$ of $\Sigma (\mathcal{C})$, if $m = n$ then every list of morphisms $f_1,\dots,f_m$ such that $f_i$ is a morphism from $A_i$ to $B_i$ in $C$ is a morphism of $\Sigma(\mathcal{C})$ from $A$ to $B$
+        \item The tensor product of two $\Sigma(\mathcal{C})$ objects is there concatenation as well as the tensor product of two morphisms.
+    \end{itemize}
+\end{defn}
+
 \paragraph{Strict monoidal category freely generated by a group}
 
 
-
-Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a category such that : 
+Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a category such that :
 \begin{itemize}
     \item $\Sigma(G)$ has a countable infinity objects : the lists $A_n$ of length $n \in \mathbb{N}$ and where all the elements of $A_n$ are $A$.
     \item Since there is only one object of length $n$, there is no morphism between two different objects of $\Sigma(G)$. Let's consider the full subcategory containing only the $A_n$ object. Then the morphisms of this category are of the form $f_1,...,f_n$ where $f_i$ is a morphism from $G$. We recognize the group $G^{n}$. $\Sigma (G)$ is then the disjoint union of the $G^{n}$ for $ n\in\mathbb{N}$.
-    \item  The tensor product is such that  $A_m \otimes A_n = A_{m+n}$, or, in other words, $G^m \otimes G^n = G^{m+n}$. 
+    \item  The tensor product is such that  $A_m \otimes A_n = A_{m+n}$, or, in other words, $G^m \otimes G^n = G^{m+n}$.
 \end{itemize}
+
+\section{Free symmetric strict monoidal category generated by a group}
+\begin{defn}
+    A \textbf{symmetric strict monoïdal category} is a strict monoidal category a long with a natural isomorphism $B_{x,y}: x\otimes y \rightarrow y\otimes x$ called the \textbf{braiding} such that : \begin{itemize}
+        \item the diagram in Figure \ref{braid_commut} commutes
+              \begin{figure}[ht]
+                  \centering
+                  \begin{tikzpicture}[baseline= (a).base]
+                      \node[scale=1.3] (a) at (0,0){
+                          \begin{tikzcd}
+                              x\otimes y \otimes z \arrow[dd, "{B_{x,y}\otimes \mathit{Id}}"'] \arrow[rd, "{B_{x,y\otimes z}}"] &                      \\
+                              & y\otimes z \otimes x \\
+                              y\otimes x \otimes z \arrow[ru, "{\mathit{Id} \otimes B_{x,z} }"']                                &
+                          \end{tikzcd}};
+                  \end{tikzpicture}
+                  \caption{Commutation diagram for symmetric strict monoidal categories}
+                  \label{braid_commut}
+              \end{figure}
+
+        \item $B_{x,y}B_{y,x} = 1_{x\otimes y}$
+    \end{itemize}
+\end{defn}
+wreath product
+\begin{defn}
+    The \textbf{free symmetric strict monoidal category} $S(\mathcal{C})$ over a category $\mathcal{C}$ is a strict monoidal category such that :
+    \begin{itemize}
+        \item objects of $S(\mathcal{C})$ are the list of objects of $\mathcal{C}$
+              %TODO : more formal definitions of labeled definitions
+        \item morphisms of  $S(\mathcal{C})$ are labeled permutations $\big<p,l\big> : (x_1,\dots,x_n)\rightarrow (y_1,\dots,y_n)$ where $y_i = l(p_i)x_{p_i}$
+    \end{itemize}
+\end{defn}
+
+
 
 
 
 \chapter{Conclusion}
 
+\paragraph{Can we adapt natural transformations to fit all K-net isographies}
+There are 48 automorphisms of the $T/I$ group. 24 are covered by $T/I$ acting on it self. How to get the 24 others?
+
+$$\circ : T/I \times T/I \rightarrow T/I$$
+
+\begin{itemize}
+    \item $T_i \circ T_j = T_{i + j}$
+    \item $T_i \circ I_j = I_{i + j}$
+    \item $I_i \circ T_j = I_{-i + j}$
+    \item $I_i \circ I_j = T_{-i + j}$
+\end{itemize}
+
+Let us define
+$$\star : T/I \times T/I \rightarrow T/I$$.
+
+Idea : add a multiplication (ie another group action).
+
+We want to use $T/I$ as a ring. BUT $T/I$ is not abelian. So we just use a wtf construction. Don't know if it's useful but still this is a category.
+\begin{itemize}
+    \item $T_i \star T_j = T_{5(i + j)}$
+    \item $I_i \star T_j = I_{5(i + j)}$
+    \item $I_i \star I_j = T_{7i + 5j}$
+    \item $T_i \star I_j = I_{7i + 5j}$
+\end{itemize}
+
+
+
+\begin{prop}
+    $a \star (b \circ c) = (a \star b) \circ (b \star c)) $
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item $T_i \star (T_j \circ T_k) = T_{i(j+k)} = T_{ij}\circ T{jk}$
+        \item $I_i \star (T_j \circ T_k) = I_{i(j+k)} = T_{ij}\circ T{jk}$
+    \end{itemize}
+\end{proof}
 \newpage
 
 \bibliography{bibliography}

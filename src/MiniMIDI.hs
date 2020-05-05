@@ -48,7 +48,7 @@ nextChord ( Parallel   (h:t) ) =
     (Nothing , Nothing ) -> Nothing 
     (c, Nothing ) -> c
     (Nothing , t )-> t
-    (Just (ch,ct), Just (th,tt)) -> Just (ch ++th,Parallel [ct,tt])
+    (Just (ch,ct), Just (th,tt)) -> Just (ch ++ th,Parallel [ct,tt])
 
 
 --Calcule la duree d'un objet musical
