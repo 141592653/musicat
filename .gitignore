@@ -3,6 +3,8 @@ Biblio
 .vscode
 .stack-work/
 *~
+*.cabal
+*.yaml.lock
 
 ############################ TeX #############################
 
@@ -282,3 +284,4 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+

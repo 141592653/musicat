@@ -24,11 +24,11 @@
 \listadd{\pc}{$B$}
 \usepackage{calc}
 
-
-
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=2.5cm]{geometry}
 \usepackage{caption}
 \captionsetup{margin=10pt,font=small,labelfont=bf}
+
+\input{fig_environments}
 
 
 \begin{document}
@@ -58,17 +58,14 @@ The set of all pitch classes comes naturally with a group structure, which is ac
     node[anchor={\number\value{itemcount}-180}]
         {#1\addtocounter{itemcount}{-30}};
 }
-
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}
-        \dolistloop{\pc}
-        \draw[fill=blue!20] (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
-        \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
-    \end{tikzpicture}
-    \caption{The C Major chord in the chromatic circle}
-    \label{Cmajor}
-\end{figure}
+\begin{tzfigure}{
+        \caption{The C Major chord in the chromatic circle}
+        \label{Cmajor}
+    }
+    \dolistloop{\pc}
+    \draw[fill=blue!20] (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
+    \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
+\end{tzfigure}
 
 The idea of Forte relies on the fact that a major chord will always have the same representation up to 12 rotations in this geometrical paradigm. In mathematics they are the 12 rotational symmetries of the regular dodecahedron.In music theory, these rotations are called \textbf{transpositions} and are named $T_i$ for $i\in[\![0,11]\!]$.
 
@@ -76,19 +73,19 @@ His intuition was that instead of considering triads (three notes chord) as the 
 
 \paragraph{Contribution (sort of)}
 From another point of view, the work of Forte can be seen as networks, as in Figure \ref{transpose_net}. Nonetheless, this representation does not allow for the moment to embed the notion of pitch-class set of Forte. For this we have to introduce the Klumpenhouwer networks.
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[baseline= (a).base]
-        \node[scale=1.3] (a) at (0,0){
-            \begin{tikzcd}
-                G                                                            \\
-                E \arrow[u, "T_3", bend left]                                \\
-                C \arrow[u, "T_4", bend left] \arrow[uu, "T_7"', bend right]
-            \end{tikzcd}};
-    \end{tikzpicture}
-    \caption{Transpositional network}
-    \label{transpose_net}
-\end{figure}
+\begin{tzcategory}{
+        \caption{Transpositional network}
+        \label{transpose_net}
+    }
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}
+            G                                                            \\
+            E \arrow[u, "T_3", bend left]                                \\
+            C \arrow[u, "T_4", bend left] \arrow[uu, "T_7"', bend right]
+        \end{tikzcd}};
+\end{tzcategory}
+
+
 
 \section{Presentation of Klumpenhouwer networks}
 In  the 1980s, David Lewin developped a branch of music theory called transformational theory\cite{rahn_lewin_1987}. It consists of, rather than looking the musical objects for themselves but instead to mathematically study the relation between them.
@@ -100,22 +97,20 @@ We have seen that the rotations of the dodecahedron match with the notion of tra
 
 \setcounter{itemcount}{450}
 
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}
-        \tikzset{myptr/.style={decoration={markings,mark=at position 1 with
-                                {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}}}
-        \dolistloop{\pc}
-        \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
-        \draw [dashed,purple] (90:3cm) -- (270:3cm);
-        \foreach \i in {1,...,5}{
-                \draw [<->, >=stealth, thick, purple] (90 + \i*30:3cm) -- (90-\i*30:3cm) ;
-            }
+\begin{tzfigure}{
+        \caption{The $I_0$ inversion}
+        \label{inversions}
+    }
+    \tikzset{myptr/.style={decoration={markings,mark=at position 1 with
+                            {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}}}
+    \dolistloop{\pc}
+    \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
+    \draw [dashed,purple] (90:3cm) -- (270:3cm);
+    \foreach \i in {1,...,5}{
+            \draw [<->, >=stealth, thick, purple] (90 + \i*30:3cm) -- (90-\i*30:3cm) ;
+        }
+\end{tzfigure}
 
-    \end{tikzpicture}
-    \caption{The $I_0$ inversion}
-    \label{inversions}
-\end{figure}
 
 The idea behind K-nets is that instead of analyse chords transformations threw transposition only, which is not very rich, we could instead use also inversions.
 
@@ -166,6 +161,21 @@ Another concept fundamental of category theory is composition.
     \end{figure}
 \end{defn}
 
+\begin{tzcategory}{\caption{PK-net definition}}
+    % \node[scale=1.3] (a) at (0,0){
+    \begin{tikzcd}[column sep=tiny]
+        \Delta
+        \ar[ddr, "R"',""{name=R,right}]
+        \ar[rr,"F"]
+        & &
+        \mathcal{C}
+        \ar[ddl,"S",""{name=S,left}] \\
+        & \ar[dashed,bend left=80,from=R, to=S, "\phi"']& \\
+        & \bf Set &
+    \end{tikzcd}
+    % };
+\end{tzcategory}
+
 
 
 
@@ -181,44 +191,38 @@ Let's study a particular class of PK-nets such that $\Delta$, $\mathcal{C}$, $R$
 \end{prop}
 \begin{proof}
     Let $\phi'_A : R(A) \rightarrow SF'(A)$ such that, $\phi'_A = S\psi_A$. In other words, in the category of functors, $\phi' = Id_S\psi$ which is necessarily a natural transformation, due to the axioms of the category of functors.
-    \begin{figure}[ht]
-        \centering
-        \begin{tikzpicture}[baseline= (a).base]
-            \node[scale=1.3] (a) at (0,0){
-                \begin{tikzcd}[column sep = small, row sep = 5.5ex]
-                    \Delta
-                    \arrow[bend left=40]{rr}[name=F,label=above:$F$]{}
-                    \arrow[bend right=40]{rr}[name=F2,label=below:$F'$]{}
-                    \ar[ddr, "R"',""{name=R,right}]
-                    & &
-                    \mathcal{C}
-                    \arrow[shorten <=5pt,shorten >=0pt,Rightarrow,to path={(F) -- node[label=right:$\psi$] {} (F2)}]{}
-                    \ar[ddl,"S",""{name=S,left}] \\
-                    & & \\
-                    & \textbf{Set}&
-                \end{tikzcd}
-            };
-        \end{tikzpicture}
-    \end{figure}
-
+    \begin{tzcategory}{}
+        \node[scale=1.3] (a) at (0,0){
+            \begin{tikzcd}[column sep = small, row sep = 5.5ex]
+                \Delta
+                \arrow[bend left=40]{rr}[name=F,label=above:$F$]{}
+                \arrow[bend right=40]{rr}[name=F2,label=below:$F'$]{}
+                \ar[ddr, "R"',""{name=R,right}]
+                & &
+                \mathcal{C}
+                \arrow[shorten <=5pt,shorten >=0pt,Rightarrow,to path={(F) -- node[label=right:$\psi$] {} (F2)}]{}
+                \ar[ddl,"S",""{name=S,left}] \\
+                & & \\
+                & \textbf{Set}&
+            \end{tikzcd}
+        };
+    \end{tzcategory}
 \end{proof}
 
 \subsection{Study of $\psi$}
 
 Let $F:\Delta\rightarrow G$ and $F':\Delta\rightarrow G$ be two parallel functors where $G\in \textbf{Grp}$. Let $X,Y\in\Delta$ and $f\in Hom(X,Y)$. We then get the following commutating diagram :
 
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[baseline= (a).base]
-        \node[scale=1.3] (a) at (0,0){
-            \begin{tikzcd}[column sep = small]
-                F(X) \arrow[dd, "F(f)"'] \arrow[rr, "\psi_X"] &  & F'(X) \arrow[dd, "F'(f)"] \\
-                &  &                           \\
-                F(Y) \arrow[rr, "\psi_Y"']                    &  & F'(Y)
-            \end{tikzcd}
-        };
-    \end{tikzpicture}
-\end{figure}
+\begin{tzcategory}{}
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}[column sep = small]
+            F(X) \arrow[dd, "F(f)"'] \arrow[rr, "\psi_X"] &  & F'(X) \arrow[dd, "F'(f)"] \\
+            &  &                           \\
+            F(Y) \arrow[rr, "\psi_Y"']                    &  & F'(Y)
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
 
 This diagrams corresponds to the equation :
 \begin{eqnarray*}
@@ -286,19 +290,17 @@ However, this would not be coherent with the interaction between two pitch-class
 
 %TODO : finish paragraph
 
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[baseline= (a).base]
-        \node[scale=1.3] (a) at (0,0){
-            \begin{tikzcd}
-                {}
-                \bullet \arrow["I_i"', loop, distance=2em, in=125, out=55] &      \\
-                &      \\
-                \bullet \arrow["I_j"', loop, distance=2em, in=305, out=235] \arrow[uu, "I_y"', bend right] \arrow[uu, "T_x", bend left] &
-            \end{tikzcd}
-        };
-    \end{tikzpicture}
-\end{figure}
+\begin{tzcategory}{}
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}
+            {}
+            \bullet \arrow["I_i"', loop, distance=2em, in=125, out=55] &      \\
+            &      \\
+            \bullet \arrow["I_j"', loop, distance=2em, in=305, out=235] \arrow[uu, "I_y"', bend right] \arrow[uu, "T_x", bend left] &
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
 
 \begin{proof}
     $i$ and $j$ are fixed.
@@ -317,21 +319,21 @@ However, this would not be coherent with the interaction between two pitch-class
 A fix to this problem is to consider a pitch class as a 2-objects PK-net :
 
 % % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[baseline= (a).base]
-        \node[scale=1.3] (a) at (0,0){
-            \begin{tikzcd}
-                {}
-                X \arrow["I_{2i}"', loop, distance=2em, in=125, out=55] &      \\
-                &      \\
-                Y %\arrow["T_{k}"', loop, distance=2em, in=305, out=235] 
-                \arrow[uu, "I_{i}"', bend right] \arrow[uu, "T_{i}", bend left] &
-            \end{tikzcd}
-        };
-    \end{tikzpicture}
-    \caption{The k pitch-classes as PK-nets}
-\end{figure}
+\begin{tzcategory}{
+        \caption{The k pitch-classes as PK-nets}
+    }
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}
+            {}
+            X \arrow["I_{2i}"', loop, distance=2em, in=125, out=55] &      \\
+            &      \\
+            Y %\arrow["T_{k}"', loop, distance=2em, in=305, out=235] 
+            \arrow[uu, "I_{i}"', bend right] \arrow[uu, "T_{i}", bend left] &
+        \end{tikzcd}
+    };
+
+\end{tzcategory}
+
 
 Let's verify that this kind of PK-nets form indeed the set of pitch classes.
 
@@ -403,6 +405,7 @@ $el(S)$ is then a category with $24$ objects. One can use it as a $\Delta$ categ
         \item $\otimes$ is associative : $(-\otimes-)\otimes - = - \otimes (-\otimes-)$
         \item $1$ which is a left and right unit for $\otimes$ : $1\otimes - = Id_{\mathcal{C}} = - \otimes 1$
     \end{itemize}
+    \label{strict-mon}
 \end{defn}
 
 
@@ -429,19 +432,17 @@ Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a catego
 \begin{defn}
     A \textbf{symmetric strict monoïdal category} is a strict monoidal category a long with a natural isomorphism $B_{x,y}: x\otimes y \rightarrow y\otimes x$ called the \textbf{braiding} such that : \begin{itemize}
         \item the diagram in Figure \ref{braid_commut} commutes
-              \begin{figure}[ht]
-                  \centering
-                  \begin{tikzpicture}[baseline= (a).base]
-                      \node[scale=1.3] (a) at (0,0){
-                          \begin{tikzcd}
-                              x\otimes y \otimes z \arrow[dd, "{B_{x,y}\otimes \mathit{Id}}"'] \arrow[rd, "{B_{x,y\otimes z}}"] &                      \\
-                              & y\otimes z \otimes x \\
-                              y\otimes x \otimes z \arrow[ru, "{\mathit{Id} \otimes B_{x,z} }"']                                &
-                          \end{tikzcd}};
-                  \end{tikzpicture}
-                  \caption{Commutation diagram for symmetric strict monoidal categories}
-                  \label{braid_commut}
-              \end{figure}
+              \begin{tzcategory}{
+                      \caption{Commutation diagram for symmetric strict monoidal categories}
+                      \label{braid_commut}
+                  }
+                  \node[scale=1.3] (a) at (0,0){
+                      \begin{tikzcd}
+                          x\otimes y \otimes z \arrow[dd, "{B_{x,y}\otimes \mathit{Id}}"'] \arrow[rd, "{B_{x,y\otimes z}}"] &                      \\
+                          & y\otimes z \otimes x \\
+                          y\otimes x \otimes z \arrow[ru, "{\mathit{Id} \otimes B_{x,z} }"']                                &
+                      \end{tikzcd}};
+              \end{tzcategory}
 
         \item $B_{x,y}B_{y,x} = 1_{x\otimes y}$
     \end{itemize}
@@ -496,20 +497,75 @@ Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a catego
     The object $A_n = (\underbrace{A,\dots,A}_\textrm{n times})\in S(G)$ is the only object of size $n$ and the underlying set of its reflexive arrows (according to the definition we gave) is $ Hom(A,A)^{n} \times S_n$. We also know that $Hom(A,A)$ is the group $G$.
     Let us reconstruct from the definition to understand what are its elements.
     We have $$K_n = \prod_{i\in [\![1,n]\!]}G_i$$
-    In other words, $K_n$ is here the group $G^n$. Consequently, the underlying set of $G_n$ is $G^n\times S_n$. 
+    In other words, $K_n$ is here the group $G^n$. Consequently, the underlying set of $G_n$ is $G^n\times S_n$.
     \vspace{0.5cm}
 
     Now, we need to verify that the group operation of $G_n$ corresponds to the composition law in $Hom(A_n,A_n)$.
     Let $\phi_n : S_n \rightarrow Aut(G^n)$ is such that $$\phi_n(\sigma)(i\rightarrow l_i) = i \rightarrow l_{\sigma_i}$$ where $(l_i)_{i\in \Omega_n}$ are elements of $G$. The composition in $G_n$ is then
     \begin{align*}
-        (l,\sigma)\cdot (k,\tau) &= \big(l\circ \phi(\sigma)(k),\sigma\circ\tau\big)\\
-        & = \big((l_1 \circ k_{\sigma_1},\dots, l_n \circ k_{\sigma_n}),\sigma\circ\tau\big)
+        (l,\sigma)\cdot (k,\tau) & = \big(l\circ \phi(\sigma)(k),\sigma\circ\tau\big)                                 \\
+                                 & = \big((l_1 \circ k_{\sigma_1},\dots, l_n \circ k_{\sigma_n}),\sigma\circ\tau\big)
     \end{align*}
     This is exactly the composition in $Hom(A_n,A_n)$. We can then conclude that $G_n = Hom(A_n,A_n)$.
 
 \end{proof}
 
+\section{Monoidal monad}
 
+\begin{defn}
+    A \textbf{monad} on the category $\mathcal{C}$ is an endofunctor $T : \mathcal{C}\rightarrow\mathcal{C}$ together with two natural transformations $\eta : 1_\mathcal{C}\rightarrow T$ and $\mu : T^2 \rightarrow T$ such that both diagrams in Figure \ref{monad-coherence} commute.
+
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRABUA9AZhAF9S6TLnyEUARnJVajFmy4AmfoJAZseAkTLjp9Zq0QdOSgUPWiikndT1zD7ZWZGaU3KTdkGOj1cI1jkABZSaxl9eR81ZwDgyg9w+2NIvwtXEN1PeSS+aRgoAHN4IlAAMwAnCABbJDIQHAgkSTC7DgAdVsqmH3Kqmup6pAV4lvbOgAIHagY6ACMYBgAFFJcQMqx8gAscborqxCG6hsQ3EGm5xeWxVfWtkGGvUa7TEB69poHjqdn5pfMVhhgJW29zYjx2vUQwUOSAArFMsGAvFAIEwZgC7iANjA6FA2JBERicHQsAw8QRWM9XkgAOz9I5w5oPDpdL7nX7RNhrTbbSm7JAANjpsJBhkeY3BeyhH1pp2+Fz+Vy5txFbVaMCJEqQUqOgsZoLVRIm-AofCAA
+    \begin{tzcategory}{\caption{The monad coherence conditions}
+        \label{monad-coherence}}
+        \node[scale=1.3] (a) at (0,0){
+
+            \begin{tikzcd}[column sep = 3em, row sep = 3em]
+                T^3 \arrow[r, "T\mu"] \arrow[d, "\mu T"'] & T^2 \arrow[d, "\mu"] &  & T \arrow[rd, equal] \arrow[d, "T\eta"'] \arrow[r, "\eta T"] & T^2 \arrow[d, "\mu "] \\
+                T^2 \arrow[r, "\mu"']                     & T                    &  & T^2 \arrow[r, "\mu"']                                                     & T
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+
+\end{defn}
+
+\begin{defn}
+    Two functors $F : \mathcal{D}\rightarrow \mathcal{C}$ and $G : \mathcal{C} \rightarrow \mathcal{D}$ are \textbf{adjoints} if and only if
+    %TODO define \cong
+    $$\forall X\in \mathcal{C}, Y \in \mathcal{D}, Hom(FY,X) \cong Hom(Y,GX)$$
+\end{defn}
+
+
+\begin{prop}
+    Let $F: \mathcal{C} \rightarrow \mathcal{D}$ and $\Sigma : \textbf{Cat}\rightarrow \textbf{MonCat}$ where $\Sigma(\mathcal{C})$ is defined as described in Definition \ref{strict-mon} and, 
+    $\forall c \in \Sigma(\mathcal{C}), 
+    d \in \Sigma(\mathcal{D}),
+    f \in Hom(c,d), 
+    c_i \in \mathcal{C},
+    d_i\in \mathcal{D}, 
+    f_i \in Hom(c_i,d_i)$
+    \begin{align*}
+        \Sigma(F)(c) &= \big(F(c_1),\dots,F(c_n)\big)\\
+        \Sigma(F)(f) &= \big(F(f_1),\dots,F(f_n)\big)
+    \end{align*}
+\end{prop}
+
+
+\begin{prop}
+    $\Sigma$ is an endofunctor $\Sigma : \bf Cat \rightarrow Cat$
+\end{prop}
+
+\begin{proof}
+    Let $\mathcal{C},\mathcal{D}\in \bf Cat$ two categories and $F : \mathcal{C} \rightarrow \mathcal{D}$ a functor between them. Let $c,c' \in \Sigma(\mathcal{C})$ and $f : c\rightarrow c'$. Then $c$ is a list $c = (c_i)_{i\in[\![1,n]\!]}\in \mathcal{C}^n$ as well as $f = (f_i)_{i\in[\![1,n]\!]}\in Hom(c,c')^n$. We can then define 
+    \begin{align*}
+        \Sigma(F)(c) &= \big(F(c_1),\dots,F(c_n)\big)\\
+        \Sigma(F)(f) &= \big(F(f_1),\dots,F(f_n)\big)
+    \end{align*}
+
+    We have to verify that $\Sigma$ complies with the coherence conditions of a functor, or in other words that
+    $$\Sigma(F)(\Sigma(\mathcal{C})) =  $$
+
+\end{proof}
 
 
 
