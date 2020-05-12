@@ -4,4 +4,4 @@ module EKnets
     )
 where
 
--- import Control.Category.Fre
+import Control.Category.Free
