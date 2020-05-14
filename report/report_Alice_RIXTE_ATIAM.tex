@@ -26,14 +26,13 @@
 
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=2.5cm]{geometry}
 \usepackage{caption}
+\usepackage{hyperref}
 \captionsetup{margin=10pt,font=small,labelfont=bf}
 
 \input{fig_environments}
 
 
 \begin{document}
-
-
 
 %\begingroup
 \title{Categories and music}
@@ -49,7 +48,7 @@
 \begin{defn}
     A \textbf{pitch class} consists of all the pitches separated with a whole number of octaves.
 \end{defn}
-The set of all pitch classes comes naturally with a group structure, which is actually the group $\mathbb{Z}_{12}$. Indeed, we can associate $C$ to the pitch class $0$, $C\sharp$ to the pitch class $1$ and so on. We then have the possibillity to represent a $C$ major chord  from a geometrical point of vue (see Figure \ref{Cmajor}).
+The set of all pitch classes comes naturally with a group structure, which is actually the group $\mathbb{Z}_{12}$. Indeed, we can associate $C$ to the pitch class $0$, $C\sharp$ to the pitch class $1$ and so on. We then have the possibillity to represent a $C$ major chord  from a geometrical point of vue (see \hyperref[Cmajor]{Figure \ref*{Cmajor}}).
 
 \newcounter{itemcount}
 \setcounter{itemcount}{450}
@@ -72,7 +71,7 @@ The idea of Forte relies on the fact that a major chord will always have the sam
 His intuition was that instead of considering triads (three notes chord) as the set of the notes that compose them, we should consider them as the set of the intervals between each note. As a result, every inversion of chord \footnote{the term inversion has to be taken here from a musical point of view, for instance the inversions of a C major chord are C-E-G, G-C-E, E-G-C. Later in this report, we will use inversion with another definition and we will stick to it.} will be in the same \textbf{pitch-class set}\cite{forte_1980}. This can be seen in the geometrical point of view where the simple fact  of representing the chord as a triangle allow to forget any order between the three note. Similarly, all the transpositions of the chord will be in the same pitch-class.
 
 \paragraph{Contribution (sort of)}
-From another point of view, the work of Forte can be seen as networks, as in Figure \ref{transpose_net}. Nonetheless, this representation does not allow for the moment to embed the notion of pitch-class set of Forte. For this we have to introduce the Klumpenhouwer networks.
+From another point of view, the work of Forte can be seen as networks, as in \hyperref[transpose_net]{Figure \ref*{transpose_net}}. Nonetheless, this representation does not allow for the moment to embed the notion of pitch-class set of Forte. For this we have to introduce the Klumpenhouwer networks.
 \begin{tzcategory}{
         \caption{Transpositional network}
         \label{transpose_net}
@@ -93,7 +92,7 @@ In  the 1980s, David Lewin developped a branch of music theory called transforma
 
 Klumpenhouwer networks, or K-nets, were then introduced by Henry Klumpenhouwer, former PhD student of Lewin, to formalize the relation between two chords\cite{lewin_1990}.
 
-We have seen that the rotations of the dodecahedron match with the notion of transposition. However, there another type of symmetry in the dodecahedron : the $12$ reflexion symmetries (see Figure \ref{inversions}), called \textbf{inversions} in transformational music theory. Along with transposition, they form the $T/I$ group, otherwise known in mathematics as the \textbf{dihedral group} of a dodecahedron.
+We have seen that the rotations of the dodecahedron match with the notion of transposition. However, there another type of symmetry in the dodecahedron : the $12$ reflexion symmetries (see\hyperref[inversions]{Figure \ref*{inversions}}), called \textbf{inversions} in transformational music theory. Along with transposition, they form the $T/I$ group, otherwise known in mathematics as the \textbf{dihedral group} of a dodecahedron.
 
 \setcounter{itemcount}{450}
 
@@ -257,7 +256,7 @@ Let us study what shape the category $\Delta$ could have. It can of course be vo
 
 \subsection{Recover pitch classes}
 %TODO : better proof
-Let us suppose that $\Delta$ has only one element $A$. Then the condition  \ref{Fcondition} implies that $F$ is a monomorphism in the $\textbf{Grp}$ category. Consequently, $\Delta$ is isomorphic to a subgroup of $T/I$. Each of these subgroups is in one-to-one correspondance with the functors $F$ following the condition \ref{Fcondition}.
+Let us suppose that $\Delta$ has only one element $A$. Then the \hyperref[Fcondition]{Condition \ref*{Fcondition}} implies that $F$ is a monomorphism in the $\textbf{Grp}$ category. Consequently, $\Delta$ is isomorphic to a subgroup of $T/I$. Each of these subgroups is in one-to-one correspondance with the functors $F$ following the \hyperref[Fcondition]{Condition \ref*{Fcondition}}.
 
 \paragraph{$\Delta$ has exactly one arrow}
 Let us suppose $\Delta$ has only one arrow : the identity $Id_A$. There is only one functor $F:\Delta \rightarrow T/I$ which maps $Id_A$ to $T_0$.
@@ -431,7 +430,7 @@ Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a catego
 \section{Free symmetric strict monoidal category generated by a group}
 \begin{defn}
     A \textbf{symmetric strict monoïdal category} is a strict monoidal category a long with a natural isomorphism $B_{x,y}: x\otimes y \rightarrow y\otimes x$ called the \textbf{braiding} such that : \begin{itemize}
-        \item the diagram in Figure \ref{braid_commut} commutes
+        \item the diagram in \hyperref[braid_commut]{Figure \ref*{braid_commut}} commutes
               \begin{tzcategory}{
                       \caption{Commutation diagram for symmetric strict monoidal categories}
                       \label{braid_commut}
@@ -513,7 +512,7 @@ Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a catego
 \section{Monoidal monad}
 
 \begin{defn}
-    A \textbf{monad} on the category $\mathcal{C}$ is an endofunctor $T : \mathcal{C}\rightarrow\mathcal{C}$ together with two natural transformations $\eta : 1_\mathcal{C}\rightarrow T$ and $\mu : T^2 \rightarrow T$ such that both diagrams in Figure \ref{monad-coherence} commute.
+    A \textbf{monad} on the category $\mathcal{C}$ is an endofunctor $T : \mathcal{C}\rightarrow\mathcal{C}$ together with two natural transformations $\eta : 1_\mathcal{C}\rightarrow T$ and $\mu : T^2 \rightarrow T$ such that both diagrams in \hyperref[monad-coherence]{Figure \ref*{monad-coherence}} commute.
 
     % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRABUA9AZhAF9S6TLnyEUARnJVajFmy4AmfoJAZseAkTLjp9Zq0QdOSgUPWiikndT1zD7ZWZGaU3KTdkGOj1cI1jkABZSaxl9eR81ZwDgyg9w+2NIvwtXEN1PeSS+aRgoAHN4IlAAMwAnCABbJDIQHAgkSTC7DgAdVsqmH3Kqmup6pAV4lvbOgAIHagY6ACMYBgAFFJcQMqx8gAscborqxCG6hsQ3EGm5xeWxVfWtkGGvUa7TEB69poHjqdn5pfMVhhgJW29zYjx2vUQwUOSAArFMsGAvFAIEwZgC7iANjA6FA2JBERicHQsAw8QRWM9XkgAOz9I5w5oPDpdL7nX7RNhrTbbSm7JAANjpsJBhkeY3BeyhH1pp2+Fz+Vy5txFbVaMCJEqQUqOgsZoLVRIm-AofCAA
     \begin{tzcategory}{\caption{The monad coherence conditions}
@@ -537,7 +536,7 @@ Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a catego
 
 
 \begin{prop}
-    Let $F: \mathcal{C} \rightarrow \mathcal{D}$ and $\Sigma : \textbf{Cat}\rightarrow \textbf{MonCat}$ where $\Sigma(\mathcal{C})$ is defined as described in Definition \ref{strict-mon} and, 
+    Let $F: \mathcal{C} \rightarrow \mathcal{D}$ and $\Sigma : \textbf{Cat}\rightarrow \textbf{MonCat}$ where $\Sigma(\mathcal{C})$ is defined as described in \hyperref[strict-mon]{Definition \ref*{strict-mon}} and, 
     $\forall c \in \Sigma(\mathcal{C}), 
     d \in \Sigma(\mathcal{D}),
     f \in Hom(c,d), 
@@ -609,6 +608,15 @@ We want to use $T/I$ as a ring. BUT $T/I$ is not abelian. So we just use a wtf c
         \item $I_i \star (T_j \circ T_k) = I_{i(j+k)} = T_{ij}\circ T{jk}$
     \end{itemize}
 \end{proof}
+
+
+\chapter{Implementation}
+\paragraph{What Haskell library will we use ?}
+\begin{itemize}
+    \item \href{http://hackage.haskell.org/package/base-4.7.0.1/docs/Control-Category.html}{the base library}
+    \item the package \href{https://hackage.haskell.org/package/categories}{categories} which extends the base library
+    \item the package \href{https://hackage.haskell.org/package/constrained-categories}{constrained-categories} which is more general than above libraries since we can use constraints on the types in the category.
+\end{itemize}
 \newpage
 
 \bibliography{bibliography}
