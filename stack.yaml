@@ -39,11 +39,12 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 extra-deps:
+ - trivial-constraint-0.4.0.0
+ - constraints-0.12
  - git: git@github.com:morphismtech/free-categories.git
    commit: 38e68fa4910ff1ab16d5c340b569882219c087d3 
- - trivial-constraint-0.4.0.0
- - git: git@github.com:141592653/constrained-categories.git
-   commit: f306f648b8165cb5046d32e318cc7f710a59e75b
+ - git: git@github.com:leftaroundabout/constrained-categories.git
+   commit: 07bea2fdaebfad63edde7f09a1e966477fd95b0d
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
