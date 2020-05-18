@@ -514,11 +514,11 @@ Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a catego
 \begin{defn}
     A \textbf{monad} on the category $\mathcal{C}$ is an endofunctor $T : \mathcal{C}\rightarrow\mathcal{C}$ together with two natural transformations $\eta : 1_\mathcal{C}\rightarrow T$ and $\mu : T^2 \rightarrow T$ such that both diagrams in \hyperref[monad-coherence]{Figure \ref*{monad-coherence}} commute.
 
-    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRABUA9AZhAF9S6TLnyEUARnJVajFmy4AmfoJAZseAkTLjp9Zq0QdOSgUPWiikndT1zD7ZWZGaU3KTdkGOj1cI1jkABZSaxl9eR81ZwDgyg9w+2NIvwtXEN1PeSS+aRgoAHN4IlAAMwAnCABbJDIQHAgkSTC7DgAdVsqmH3Kqmup6pAV4lvbOgAIHagY6ACMYBgAFFJcQMqx8gAscborqxCG6hsQ3EGm5xeWxVfWtkGGvUa7TEB69poHjqdn5pfMVhhgJW29zYjx2vUQwUOSAArFMsGAvFAIEwZgC7iANjA6FA2JBERicHQsAw8QRWM9XkgAOz9I5w5oPDpdL7nX7RNhrTbbSm7JAANjpsJBhkeY3BeyhH1pp2+Fz+Vy5txFbVaMCJEqQUqOgsZoLVRIm-AofCAA
-    \begin{tzcategory}{\caption{The monad coherence conditions}
-        \label{monad-coherence}}
-        \node[scale=1.3] (a) at (0,0){
 
+    \begin{tzcategory}{\caption{The monad coherence conditions}
+            \label{monad-coherence}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRABUA9AZhAF9S6TLnyEUARnJVajFmy4AmfoJAZseAkTLjp9Zq0QdOSgUPWiikndT1zD7ZWZGaU3KTdkGOj1cI1jkABZSaxl9eR81ZwDgyg9w+2NIvwtXEN1PeSS+aRgoAHN4IlAAMwAnCABbJDIQHAgkSTC7DgAdVsqmH3Kqmup6pAV4lvbOgAIHagY6ACMYBgAFFJcQMqx8gAscborqxCG6hsQ3EGm5xeWxVfWtkGGvUa7TEB69poHjqdn5pfMVhhgJW29zYjx2vUQwUOSAArFMsGAvFAIEwZgC7iANjA6FA2JBERicHQsAw8QRWM9XkgAOz9I5w5oPDpdL7nX7RNhrTbbSm7JAANjpsJBhkeY3BeyhH1pp2+Fz+Vy5txFbVaMCJEqQUqOgsZoLVRIm-AofCAA
             \begin{tikzcd}[column sep = 3em, row sep = 3em]
                 T^3 \arrow[r, "T\mu"] \arrow[d, "\mu T"'] & T^2 \arrow[d, "\mu"] &  & T \arrow[rd, equal] \arrow[d, "T\eta"'] \arrow[r, "\eta T"] & T^2 \arrow[d, "\mu "] \\
                 T^2 \arrow[r, "\mu"']                     & T                    &  & T^2 \arrow[r, "\mu"']                                                     & T
@@ -536,35 +536,102 @@ Let $G$ be a group seen as a one-element category. Then $ \Sigma(G)$ is a catego
 
 
 \begin{prop}
-    Let $F: \mathcal{C} \rightarrow \mathcal{D}$ and $\Sigma : \textbf{Cat}\rightarrow \textbf{MonCat}$ where $\Sigma(\mathcal{C})$ is defined as described in \hyperref[strict-mon]{Definition \ref*{strict-mon}} and, 
-    $\forall c \in \Sigma(\mathcal{C}), 
-    d \in \Sigma(\mathcal{D}),
-    f \in Hom(c,d), 
-    c_i \in \mathcal{C},
-    d_i\in \mathcal{D}, 
-    f_i \in Hom(c_i,d_i)$
+    Let $F: \mathcal{C} \rightarrow \mathcal{D}$ and $\Sigma : \textbf{Cat}\rightarrow \textbf{MonCat}$ where $\Sigma(\mathcal{C})$ is defined as described in \hyperref[strict-mon]{Definition \ref*{strict-mon}} and,
+    $\forall c = (c1,\dots,c_n)\in \Sigma(\mathcal{C}),
+        f = (f_1,\dots,f_n) \in Hom(c,d)$
     \begin{align*}
-        \Sigma(F)(c) &= \big(F(c_1),\dots,F(c_n)\big)\\
-        \Sigma(F)(f) &= \big(F(f_1),\dots,F(f_n)\big)
+        \Sigma(F)(c) & = \big(F(c_1),\dots,F(c_n)\big) \\
+        \Sigma(F)(f) & = \big(F(f_1),\dots,F(f_n)\big)
     \end{align*}
-\end{prop}
-
-
-\begin{prop}
-    $\Sigma$ is an endofunctor $\Sigma : \bf Cat \rightarrow Cat$
+    Then $\Sigma$ is a functor from $\textbf{Cat}$ to $\textbf{MonCat}$
 \end{prop}
 
 \begin{proof}
-    Let $\mathcal{C},\mathcal{D}\in \bf Cat$ two categories and $F : \mathcal{C} \rightarrow \mathcal{D}$ a functor between them. Let $c,c' \in \Sigma(\mathcal{C})$ and $f : c\rightarrow c'$. Then $c$ is a list $c = (c_i)_{i\in[\![1,n]\!]}\in \mathcal{C}^n$ as well as $f = (f_i)_{i\in[\![1,n]\!]}\in Hom(c,c')^n$. We can then define 
-    \begin{align*}
-        \Sigma(F)(c) &= \big(F(c_1),\dots,F(c_n)\big)\\
-        \Sigma(F)(f) &= \big(F(f_1),\dots,F(f_n)\big)
-    \end{align*}
+    We have first to verify that $\Sigma$ complies with the coherence conditions of a functor, or in other words that $\Sigma(F)$ is a monoidal functor and that
+    $$\Sigma(F) \cdot \Sigma(G) = \Sigma(F\cdot G) $$
 
-    We have to verify that $\Sigma$ complies with the coherence conditions of a functor, or in other words that
-    $$\Sigma(F)(\Sigma(\mathcal{C})) =  $$
+    \begin{itemize}
+        \item
+
+              \begin{align*}
+                  \Sigma(F)(1_{\Sigma(\mathcal{C})}) & = \Sigma(F)\big(()_\mathcal{C}\big) = ()_\mathcal{D} = 1_{\Sigma(\mathcal{D})} \\
+                  \Sigma(F)(c\otimes c')             & = \Sigma(F)\big((c_1,\dots,c_n,c'_1,\dots,c'_m) \big)                          \\
+                                                     & =  \big(F(c_1),\dots,F(c_n),F(c'_1),...F(c'_m)\big)                            \\
+                                                     & = \Sigma(F)(c) \otimes \Sigma(F)(c')
+              \end{align*}
+    \end{itemize}
+    %TODO I have to prove that this is enough for being a monoidal functor
 
 \end{proof}
+
+
+\begin{tzcategory}{\caption{We want to define $S_M$}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjYAGEAviDGl0mXPkIoATOSq1GLNgFkAFJx78hDUWICUk6SAzY8BIgEZSi1fWatEIAMowck1TCgA5vBEoABmAE4QXEhkIDgQSA5qrlrmYZHRiLHxSMrJGu4eINQMdABGMAwACrI2CiDhWAF8PlLpUYnUOYh5LgWeAPqavmJAA
+        \begin{tikzcd}[column sep = 1.8em, row sep = 2.2em]
+            \mathcal{C} \arrow[rr, "M"] \arrow[rdd, "S"'] &     & M(\mathcal{C}) \arrow[ldd, "S_M"] \\
+            &     &             \\
+            & Set &
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+
+\begin{tzcategory}{\caption{$S_M(f)$ is uniquely defined}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AFLAfWCycsYZJwCEyAIykwFcRQC+AZQAUAY15YAlCAWl0mXPkIoyAJiq1GLNqo3bd+kBmx4CRM6QvV6zVohA7AHJNHT0DV2MPcktfGwDOHn5BdmEAAlF2CWlZeWV1EIcFSxgoAHN4IlAAMwAnCABbJDIQHAgkaSs-NjRNEGoGOgAjGAYuQzcTEFqsMoALHEca+qbETrakTxBBkbGJqICZ+cWfa39AlWrQpZA6xqQAZmoNxC2487RCm7vVlpenrrxECXULJIQicRSGRyLKKb4rZrPdqvAbDUbjSLuQ6zBb9QHnVRXbScNRYWpqNK9LC6RRAA
+        \begin{tikzcd}[column sep = 2.5em, row sep = 3em]
+            {\Pi_{i\in[\![1,n]\!]}S(c_i)} \arrow[dd, "p_i"'] \arrow[rr, "{(S(f_i))_{i\in[\![1,n]\!]}}"] \arrow[rrdd, "S(f_i) \circ p_i"'] &  & {\Pi_{i\in [\![1,n]\!]}S(c'_i)} \arrow[dd, "p'_i"] \\
+            &  &                                                    \\
+            S(c_i) \arrow[rr, "S(f_i)"']  
+            &  & S(c'_i)
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+\begin{defn}
+    \begin{align*}
+        S_M\big((c_1,\dots,c_n)) = \big(S(c_1)\times\dots\times S(c_n)\big)
+        S_M\big((f_1,\dots,f_n)) = \big()
+    \end{align*}
+\end{defn}
+
+
+
+
+\begin{tzcategory}{\caption{A natural transformation $\xi$ between complete homographies}}
+    \node[scale=2] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12ARGBnOkAF9S6TLnyEUARlIAmKrUYs2AZRg4hIkBmx4CRGZWr1mrRB3YBbOjgAWAY0bAAwoM2jdEorPIKTy805rO0cGFwByN0EFGCgAc3giUAAzACcISyQyEBwIJBlFUzYAJRBqBjoAI14ABTE9SRBUrDjbDWEU9MzEHxy8xAL-MxAVMpAK6oY6z31zZtb2rTSMpABmalz84yVhlXD3EGXu7M2e7aLzADEDo6Re0-WQarAoNeyhtgA5AH0pG667ht+o9nq9EABaVbvHZfb6yMYTWr1LxzFptIQUQRAA
+        \begin{tikzcd}[column sep = 2.5em, row sep = 3em]
+            \Delta 
+            \arrow[rdd, "R"',""{name=R,right}] 
+            \arrow[r, "F"] 
+            &
+            \mathcal{C} 
+            \arrow[dd, "S"' near start,""{name=Sl,left},""{name=Sr,right}] 
+            \arrow[r, "N_1", bend left, ""{name=N1,right}]
+            \arrow[r, "N_2"', bend right,""{name=N2,right}] 
+            \arrow[Rightarrow, from=N1, to=N2, "\xi"']
+            &
+            \mathcal{C'} 
+            \arrow[ldd, "S'",""{name=Sp,left}] \\
+            & \ar[Rightarrow,bend left=30,from=Sr, to=Sp, "\widetilde{\nu}"'] 
+            & \ar[Rightarrow,bend left=30,from=R, to=Sl, "\phi"']  
+             \\
+            & Set &
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+\begin{defn}
+    A \textbf{natural transformation} between two complete homographies $(N_1,\nu_1)$ and $(N_2,\nu_2)$ is a natural transformation $\xi : S'N_1\rightarrow S'N_2$ such that 
+    \begin{equation}
+        \widetilde{\nu_2}= \xi\widetilde{\nu_1}
+    \end{equation}
+    Though I don't think this can easily satisfied...
+\end{defn}
+
+
 
 
 
@@ -616,6 +683,8 @@ We want to use $T/I$ as a ring. BUT $T/I$ is not abelian. So we just use a wtf c
     \item \href{http://hackage.haskell.org/package/base-4.7.0.1/docs/Control-Category.html}{the base library}
     \item the package \href{https://hackage.haskell.org/package/categories}{categories} which extends the base library
     \item the package \href{https://hackage.haskell.org/package/constrained-categories}{constrained-categories} which is more general than above libraries since we can use constraints on the types in the category.
+    \item the package \href{https://hackage.haskell.org/package/subhask-0.1.1.0}{subhask} which is quite similar to constrained categories
+    \item the package \href{https://hackage.haskell.org/package/free-categories}{free-categories} which is quite similar to Alexandre Popoff's \href{https://github.com/AlexPof/colubridae}{Colubridae}
 \end{itemize}
 \newpage
 
