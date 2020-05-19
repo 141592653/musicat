@@ -14,28 +14,51 @@
 -- #endif
 
 module EKnets
-    ( 
-
-    )
+    ()
 where
 
-import Control.Category.Constrained
-import Data.Constraint (Constraint)
-import qualified Data.Function as Func (id,const,(.))
+import           Prelude                        hiding (id, const, (.))
+import           Control.Category.Constrained   as ConstrCategories
+import           Data.Constraint                ( Constraint )
+import qualified Data.Function                 as Func
+                                                ( id
+                                                , const
+                                                , (.)
+                                                )
+import qualified Data.Monoid                    (Monoid(..) )
+import Data.Functor.Const                       (Const(..))
 
 newtype ThinCat a b = ThinCat {arrow :: Maybe (a -> b)}
 thinId :: ThinCat a a
-thinId = ThinCat {arrow = Just Func.id}
+thinId = ThinCat { arrow = Just Func.id }
 thinCompose :: ThinCat b c -> ThinCat a b -> ThinCat a c
-thinCompose ThinCat {arrow = Just f} ThinCat {arrow = Just g} = 
-    ThinCat {arrow = Just $ f Func.. g}
+thinCompose ThinCat { arrow = Just f } ThinCat { arrow = Just g } =
+    ThinCat { arrow = Just $ f Func.. g }
 
 instance Category ThinCat where
-    id = thinId
+    id  = thinId
     (.) = thinCompose
 
-type MonoidCat k x = ConstrainedCategory k ((~) x)
-type SimpleCat x = MonoidCat ThinCat x 
+
+
+class Category k => MonoidCategory x k where
+    reflComp :: Object k x => k x x -> k x x -> k x x
+
+newtype MonoidCat (x :: *) (k :: * -> * -> *) (a :: *) (b :: *)  =
+     MonoidCat {
+         getMonoid :: k a b -> ConstrainedCategory k ((~) x) a b
+        }
+
+instance Category (MonoidCat x k) where
+    type Object (MonoidCat x k) o = (~) x o 
+    id = ConstrCategories.id
+    (.) = (ConstrCategories..)
+
+instance (Category k, x ~ a) => MonoidCategory (Const x a) (MonoidCat x k)  where
+    reflComp = (.)
+
+
+type SimpleCat x = MonoidCat x ThinCat 
 
 
 
@@ -45,7 +68,7 @@ type SimpleCat x = MonoidCat ThinCat x
 
 
 
-   
+
 
 
 
