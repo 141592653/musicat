@@ -5,6 +5,8 @@ Biblio
 *~
 *.cabal
 *.yaml.lock
+dist-newstyle/
+cabal.project.local
 
 ############################ TeX #############################
 
