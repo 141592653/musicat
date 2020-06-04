@@ -415,11 +415,11 @@ $el(S)$ is then a category with $24$ objects. One can use it as a $\Delta$ categ
 % McLane, Categories for the working mathematician p.161 -162
 \begin{defn}[Strict monoidal functor]
     A \textbf{strict monoidal functor}
-    $F : \big<\mathcal{C},1_\mathcal{C},\otimes_\mathcal{C}\big> \rightarrow \big<\mathcal{D},1_\mathcal{D},\otimes_\mathcal{D}\big>$ 
+    $F : \big<\mathcal{C},1_\mathcal{C},\otimes_\mathcal{C}\big> \rightarrow \big<\mathcal{D},1_\mathcal{D},\otimes_\mathcal{D}\big>$
     is a $F : \mathcal{C} \rightarrow \mathcal{D}$ such that :
     \begin{itemize}
         \item $F(1_\mathcal{C}) = 1_\mathcal{D}$
-        \item $F(c\otimes_\mathcal{C} c') = F(c)\otimes_\mathcal{D}F(c') $ 
+        \item $F(c\otimes_\mathcal{C} c') = F(c)\otimes_\mathcal{D}F(c') $
     \end{itemize}
     \label{strict-mon_func}
 \end{defn}
@@ -603,8 +603,8 @@ Let G  be a group seen as a one-element $A$ category $\mathcal{G}$. Then $ \Sigm
     \begin{align*}
         \eta(\mathcal{C})
          & : \mathcal{C} \mapsto U\Sigma(\mathcal{C})                         \\
-         & : c \mapsto (c)^o                                                   \\
-         & : f \mapsto (f)^o                                                    \\
+         & : c \mapsto (c)^o                                                  \\
+         & : f \mapsto (f)^o                                                  \\
         \epsilon\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)
          & : \Sigma U\Big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\Big)
         \mapsto \big<\mathcal{C},()_{\mathcal{C}},\otimes\big>                \\
@@ -636,28 +636,39 @@ Let G  be a group seen as a one-element $A$ category $\mathcal{G}$. Then $ \Sigm
         \Sigma U(F) (l_1,\dots l_n)
     \end{align*}
 
-    To finish, we need to prove that 
+    To finish, we need to prove that
     \begin{align*}
-        \mathit{Id}_{\Sigma\mathcal{C}} 
-        & = \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C}) \\
+        \mathit{Id}_{\Sigma\mathcal{C}}
+         & = \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C}) \\
         \mathit{Id}_{U\mathcal{D}^\otimes}
-        & = U(\epsilon D^\otimes) \circ \eta_{U\mathcal{D}^\otimes}
+         & = U(\epsilon D^\otimes) \circ \eta_{U\mathcal{D}^\otimes}
     \end{align*}
     which is true because
     \begin{align*}
-        \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C}) 
+        \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C})
         (c_1,\dots,c_n)
-        & = \epsilon_{\Sigma\mathcal{C}} \big((c_1)^o,\dots,(c_n)^o\big) \\
-        & = (c_1)\otimes\dots\otimes(c_n) \\
-        & = (c_1, \dots, c_n) \\
+         & = \epsilon_{\Sigma\mathcal{C}} \big((c_1)^o,\dots,(c_n)^o\big) \\
+         & = (c_1)\otimes\dots\otimes(c_n)                                \\
+         & = (c_1, \dots, c_n)                                            \\
         U(\epsilon D^\otimes) \circ \eta_{U\mathcal{D}^\otimes} (l^o)
-        & =  U(\epsilon D^\otimes) ((l^o)^o)\\
-        & = l^o
+         & =  U(\epsilon D^\otimes) ((l^o)^o)                             \\
+         & = l^o
     \end{align*}
 \end{proof}
 
 \begin{defn}
     Let $M = U\Sigma$. Then $M$ is a monad in the $\bf Cat$ category.
+\end{defn}
+
+\begin{defn}
+    Let $[\_,\mathcal{E}]$ be a category such that :
+    \begin{itemize}
+        \item the objects are functors from any category $\mathcal{C}$ to $\mathcal{E}$.
+        \item an arrow between a functor $S : [\mathcal{C},\mathcal{E}]$ and another functor $S' : [\mathcal{D},\mathcal{E}]$ is a pair $\big<N,\nu\big>$ of a functor $N : \mathcal{C}\rightarrow \mathcal{D}$ and a natural transformation $\nu : S \rightarrow S'N$.
+        \item the identity of the object $S : [\mathcal{C},\mathcal{D}]$ is $Id_S = \big<Id_\mathcal{C}, \mathds{1}_S\big>$
+        \item for $\big<N,\nu\big> : S' \rightarrow S''$ and $\big<P,\pi\big> : S \rightarrow S'$, the composition is defined as follow :
+              $\big<N,\nu\big>\circ\big<P,\pi\big> = \big<NP,(\nu P)\pi\big>$
+    \end{itemize}
 \end{defn}
 
 We would like to find a monad from the functor category $\big[\_,Set\big]$.
@@ -670,14 +681,17 @@ We would like to find a monad from the functor category $\big[\_,Set\big]$.
             \mathcal{C}
             \arrow[rr, "\eta_M(\mathcal{C})"]
             \arrow[rdd, "S"',""{name=S, right}]
-            & & M(\mathcal{D})
+            & & M(\mathcal{C})
             \arrow[ldd, "S_\prodmon", ""{name=SP, left}] \\
-            &  \arrow[Rightarrow, from=S, to=SP, "\zeta_\prodmon"]   &             \\
+            &  \arrow[Rightarrow, from=S, to=SP, "\mathds{1}_S"]   &             \\
             & Set &
         \end{tikzcd}
     };
 \end{tzcategory}
 
+% \begin{defn}
+%     Let $$\zeta_M(\mathcal{C}) : c \mapsto S(c) = S_\prodmon((c)^o)$$
+% \end{defn}
 
 \begin{tzcategory}{\caption{$S_\prodmon(f)$ is uniquely defined}}
     \node[scale=1.3] (a) at (0,0){
@@ -691,21 +705,192 @@ We would like to find a monad from the functor category $\big[\_,Set\big]$.
     };
 \end{tzcategory}
 
+\begin{prop}{\cite{wakamatsu1980note}}
+    \label{fullSplitEpi}
+    Let $L\dashv R$ a pair of adjoint functors.
+
+    Then $L : \mathcal{D}\rightarrow \mathcal{C}$ is fully faithful iff the unit $\eta$ of the adjunction is a natural isomorphism.
+    %TODO : define split epi/mono
+\end{prop}
+
+\begin{thm}
+    Let $\textbf{E}$ be a category.
+    Let $\mathfrak{A} : \textbf{L}\dashv \textbf{R}$ be an adjunction such that $\textbf{L} : \textbf{Cat} \rightarrow \textbf{E}$, $R : \textbf{E} \rightarrow \textbf{Cat}$  such that $\bf L$ is fully faithful.
+    %TODO define full/ faithful
+
+    Then, $\mathfrak{A}$ induces a monad $(\_)^\mathfrak{A}$ on $[\_,\textbf{R}(E)]$, for $E \in \textbf{E}$.
+\end{thm}
+
+\begin{proof}
+    \begin{tzcategory}{\caption{$S_L$ is uniquely defined }
+            \label{uniqueSA}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjYAGEAviDGl0mXPkIoATOSq1GLNgFkAFJx78hDUWICUk6SAzY8BIgEZSi1fWatEIAMowck1TCgA5vBEoABmAE4QXEhkIDgQSA5qrlrmYZHRiLHxSMrJGu4eINQMdABGMAwACrI2CiDhWAF8PlLpUYnUOYh5LgWeAPqavmJAA
+            \begin{tikzcd}[column sep = 1.8em, row sep = 2.2em]
+                \mathcal{C}
+                \arrow[rr, "\eta^\mathfrak{A}(\mathcal{C})"]
+                \arrow[rdd, "S"',""{name=S, right}]
+                & & \textbf{RL}(\mathcal{C})
+                \arrow[ldd, "\textbf{R}(S_L)", ""{name=SP, left}] \\
+                &  \arrow[Rightarrow, from=S, to=SP, "\mathds{1}_S"]   &             \\
+                & \textbf{R}(E) &
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+
+
+    According to the Hom-set definition of an adjunction, there is a natural isomorphism
+    $\phi :  Hom(\textbf{L}\_,\_) \rightarrow Hom(\_,\textbf{R}\_)$. Let then $S_L : L(\mathcal{C})\rightarrow E$ such that
+    $S_L = \phi^{-1}_{\mathcal{C},E}(S)$. The equivalence with the definition via universal morphism of an adjunction (Theorem 2 p.83 in \cite{lane_1971}) tells us that the Figure \ref{uniqueSA} commutes.
+
+    Since $\bf L$ is fully faithful, Proposition \ref{fullSplitEpi} tells us that for all category $\mathcal{C}$, $\eta^\mathfrak{A}_\mathcal{C} $ is an isomorphism. Consequently, there exists a functor $\big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1}$ such that $\eta^\mathfrak{A}_\mathcal{C} \circ \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1}
+        =  Id_{\textbf{RL}(\mathcal{C})}$.
+    Since $S = S^\mathfrak{A}\eta^\mathfrak{A}_\mathcal{C} $ we can then deduce that
+    \begin{equation}
+        \label{proofSA}
+        S\big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} = S^\mathfrak{A}
+    \end{equation}
+
+    $S^{A} = S\eta^{-1}$
+
+    $S^{A}\eta = S$
+
+    Donc, si $S^A = R(truc)$
+
+    $S^{A} = R(S_L)$
+
+    par unicité
+
+    Moreover, since $\eta^\mathfrak{A}$ is a natural transformation, 
+    $ \eta^\mathfrak{A}_\mathcal{D}N =  N^\mathfrak{A}
+    \eta^\mathfrak{A}_\mathcal{C}$
+    %  \begin{align*}
+    %     \mathds{1}_S  \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1}  
+    %     & = id_{S\big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1}  }  \\
+    %     & = id_{S^\mathfrak{A}\eta^\mathfrak{A}_\mathcal{C} 
+    %     \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} }  \\
+    %  \end{align*}
+
+    % According to the definition via universal morphism of an adjunction (Theorem 2 p.83 in \cite{lane_1971}), there is a unique functor $S_L$ such that Figure \ref{uniqueSA} commutes. We can now define $S^\mathfrak{A}$ as  $S^\mathfrak{A} = \textbf{R}(S_L)$. Moreover, we have $S_L \in Hom(\textbf{L}\mathcal{C},E)$. So by considering the Hom-set definition of an adjunction, there is a natural isomorphism $\phi :  Hom(\textbf{L}\_,\_) \rightarrow Hom(\_,\textbf{R}\_)$. Let then $S_R : \mathcal{C}\rightarrow\textbf{R}(E)$ such that $S_R = \phi_{\mathcal{C},E}(S_L)$.
+
+    Let $\big<N,\nu\big> : [\mathcal{C},\textbf{R}(E)] \rightarrow [\mathcal{D}, \textbf{R}(E)]$  be an arrow of $[\_,\textbf{R}(E)]$. We define
+    \begin{align*}
+        \big<N^\mathfrak{A},\nu^\mathfrak{A}\big>
+         & : [\textbf{RL}(\mathcal{C}),\textbf{R}(E)]
+        \rightarrow [\textbf{RL}(\mathcal{D}), \textbf{R}(E)]                             \\
+        \big<N^\mathfrak{A},\nu^\mathfrak{A}\big>
+         & = \big<\textbf{RL}(N), \nu \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1}  \big>
+    \end{align*}
+
+
+    We now have to prove that $(\_)^\mathfrak{A}$ is an endofunctor of $[\_,\textbf{R}(E)]$  :
+    \begin{align*}
+        (Id_S)^\mathfrak{A}
+         & = \big<\textbf {RL}(Id_\mathcal{C}),
+        \mathds{1}_S  \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} \big>  \\
+         & = \big<Id_{\textbf {RL}(\mathcal{C})},
+        \mathds{1}_{S \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} }\big> \\
+         & = \big<Id_{\textbf {RL}(\mathcal{C})},
+        \mathds{1}_{S^\mathfrak{A}}\big>
+         & \text{because of (\ref{proofSA})}                              \\
+         & = Id_{S^\mathfrak{A}}
+    \end{align*}
+    Let  $\big<N,\nu\big> : [\mathcal{D},\textbf{R}(E)] \rightarrow
+        [\mathcal{E},\textbf{R}(E)] $ and
+    $\big<P,\pi\big> :[\mathcal{C},\textbf{R}(E)] \rightarrow
+        [\mathcal{D},\textbf{R}(E)]$
+    \begin{align*}
+        \Big(\big<N,\nu\big>\circ \big<P,\pi\big> \Big)^\mathfrak{A}
+         & = \Big(\big<NP,(\nu P)\pi\big> \Big)^\mathfrak{A}           \\
+         & = \big<\textbf{RL}(NP),
+        (\nu\pi)\big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} \big>     \\
+         & = \big<(NP)^\mathfrak{A},
+        ((\nu P)\pi)\big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} \big> \\
+         & = \big<(NP)^\mathfrak{A},
+        (\nu P\big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1}  \circ
+        \pi \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} \big>         \\
+         & = \big<(NP)^\mathfrak{A},
+        \nu \big(\eta^\mathfrak{A}_\mathcal{D}\big)^{-1}
+        \eta^\mathfrak{A}_\mathcal{D}
+        P \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} \circ
+        \pi \big(\eta^\mathfrak{A}_\mathcal{C}\big)^{-1} \big>         \\
+         & =                                                           \\
+         & = \nu^\mathfrak{A}\pi^\mathfrak{A}
+    \end{align*}
+
+
+    
+    \begin{tzcategory}{\caption{A natural transformation $\xi$ between complete homographies}}
+        \node[scale=1.5] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQAdDgW3pwAsAxk2ABhAL4hxpdJlz5CKAEwVqdJq3ZdeA4Y2AARSdNnY8BIioDMahizaJOHAEYAzAAQBlGDikyQGGYKROSkxLYaDiAAsgAU2nxCIhIAlH6m8hYoVmER9uxxCboiRmniajBQAObwRKCuAE4Q3EhkIDgQSCrq+Y6eIDSM9M4wjAAKcuaKIA1YVfy+JiCNzUih7Z2I3XaafQDkAyBDI+OTwY6z84v+Ky2IbR1rNDtRAHLpy013D5s5PbsxD63J4bJAAFmekQKh2OowmQSyRxgrmu9S+SD+j0QEP+bwOS2BiExm22UL6AH1ojDhnCzojLgtDiMwFBWoMsGAolB6HB+JUgejsTQsaTeiBPHtKVJKOIgA
+            \begin{tikzcd}[column sep = 2.7em, row sep = 3em]
+                & RL(\mathcal{C})
+                \arrow[rr, "N^\mathfrak{A}"]
+                \arrow[rddd, "S^\mathfrak{A}"', ""{name=SM, right}]
+                & & RL(\mathcal{D})
+                \arrow[lddd, "{S'}^\mathfrak{A}",""{name=SpM, left}]
+                \\
+                \mathcal{C} \arrow[rrdd, "S"',""{name=S,right}]
+                \arrow[rr, "N", crossing over]
+                \arrow[ru, "\eta^\mathfrak{A}(\mathcal{C})"]
+                & \ar[Rightarrow,from=SM, to=SpM, "\nu^\mathfrak{A}"' near start]
+                & \mathcal{D}
+                \arrow[dd, "S'",""{name=Sp, left}, crossing over]
+                \arrow[ru, "\eta^\mathfrak{A}(\mathcal{D})"]
+                & \\
+                & \ar[Rightarrow,from=S, to=Sp, "\nu"' near start, crossing over]
+                & & \\
+                & & R(E) &
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+
+
+    \begin{tzcategory}{\caption{A natural transformation $\xi$ between complete homographies}}
+        \node[scale=1.5] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQAdDgW3pwAsAxk2ABhAL4hxpdJlz5CKAEwVqdJq3ZdeA4Y2AARSdNnY8BIioDMahizaJOHAEYAzAAQBlGDikyQGGYKROSkxLYaDiAAsgAU2nxCIhIAlH6m8hYoVmER9uxxCboiRmniajBQAObwRKCuAE4Q3EhkIDgQSCrq+Y6eIDSM9M4wjAAKcuaKIA1YVfy+JiCNzUih7Z2I3XaafQDkAyBDI+OTwY6z84v+Ky2IbR1rNDtRAHLpy013D5s5PbsxD63J4bJAAFmekQKh2OowmQSyRxgrmu9S+SD+j0QEP+bwOS2BiExm22UL6AH1ojDhnCzojLgtDiMwFBWoMsGAolB6HB+JUgejsTQsaTeiBPHtKVJKOIgA
+            \begin{tikzcd}[column sep = 2.7em, row sep = 3em]
+                & LRL(\mathcal{C})
+                \arrow[rr, "N^\mathfrak{A}"]
+                \arrow[rddd, "S^\mathfrak{A}"', ""{name=SM, right}]
+                & & LRL(\mathcal{D})
+                \arrow[lddd, "{S'}^\mathfrak{A}",""{name=SpM, left}]
+                \\
+                L(\mathcal{C}) \arrow[rrdd, "L(S)"',""{name=S,right}]
+                \arrow[rr, "L(N)", crossing over]
+                \arrow[ru, "\eta^\mathfrak{A}(\mathcal{C})"]
+                & \ar[Rightarrow,from=SM, to=SpM, "\nu^\mathfrak{A}"' near start]
+                & L(\mathcal{D})
+                \arrow[dd, "L(S')",""{name=Sp, left}, crossing over]
+                \arrow[ru, "\eta^\mathfrak{A}(\mathcal{D})"]
+                & \\
+                & \ar[Rightarrow,from=S, to=Sp, "L(\nu)"' near start, crossing over]
+                & & \\
+                & & LR(E) &
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+
+
+
+\end{proof}
+
+
 \begin{defn}[The monad $(\_)_\prodmon$]
     Let $(\_)_\prodmon : [\_, \bf Set] \rightarrow [\_,\bf Set]$ be an endofunctor of the category $ [\_, \bf Set] $ such that, for a functor $S : \mathcal{C} \rightarrow \bf Set$, a functor $S' : \mathcal{D} \rightarrow \bf Set$ and an arrow $(N,\nu)$ between $S$ and $S'$
     \begin{align*}
-        S_\prodmon\big((c_1,\dots,c_n)\big)
-         & = \big(S(c_1)\times\dots\times S(c_n)\big)          \\
-        S_\prodmon\big((f_1,\dots,f_n)\big)
-         & = \big(S(f_1)\times\dots\times S(f_n)\big)          \\
-        N_\prodmon\big((c_1,\dots,c_n)\big)
-         & = \big(N(c_1),\dots, N(c_n)\big)                    \\
-        N_\prodmon\big((f_1,\dots,f_n)\big)
-         & = \big(N(f_1),\dots, N(f_n)\big)                    \\
-        \nu_\prodmon\big((c_1,\dots,c_n)\big)
-         & = \big(S(c_1)\times\dots\times S(c_n)\big)  \mapsto \\
+        S_\prodmon\big(c_1,\dots,c_n\big)
+         & = S(c_1)\times\dots\times S(c_n)           \\
+        S_\prodmon\big(f_1,\dots,f_n\big)
+         & = S(f_1)\times\dots\times S(f_n)           \\
+        N_\prodmon\big(c_1,\dots,c_n\big)
+         & = N(c_1),\dots, N(c_n)                     \\
+        N_\prodmon\big(f_1,\dots,f_n\big)
+         & = N(f_1),\dots, N(f_n)                     \\
+        \nu_\prodmon\big(c_1,\dots,c_n\big)
+         & = S(c_1)\times\dots\times S(c_n))  \mapsto \\
          & \hspace{1cm}
-        \big(\nu(c_1) S(c_1)\times\dots\times \nu(c_n) S(c_n)\big)
+        \nu(c_1) S(c_1)\times\dots\times \nu(c_n) S(c_n)
     \end{align*}
     \begin{align*}
         \eta_\prodmon(S)                                                       & = \big<\eta_M(\mathcal{C}),\mathrm{1}\big>             \\
