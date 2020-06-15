@@ -10,6 +10,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,decorations.markings}
 \usetikzlibrary{cd}
+\usetikzlibrary{shapes.geometric,fit}
 
 
 \usepackage{etoolbox}
@@ -47,8 +48,6 @@
 
 
 \chapter{Introduction}
-
-
 \section{Presentation of Allen Forte's work}
 \begin{defn}
     A \textbf{pitch class} consists of all the pitches separated with a whole number of octaves.
@@ -135,35 +134,41 @@ The idea behind K-nets is that instead of analyse chords transformations threw t
 
 
 \section{Presentation of PK-nets}
+Klumpenhouwer networks propose many ways to analyse music but they are quite a rigid framework which does not let room for other ways to see music. However, we can get inspiration from them to create a more flexible framework inside the category theory. PK-nets\cite{PAAE2016} are a generalization of K-nets. They are defined in the paradigm of category theory. Let's first present informally category theory.
+Categories rely on graph, which means we are not so far from Klumpenhouwer's concept. However, one of the main goal of representing threw mathematics is to point some patterns or ways of construction usually used in music creation. So we would like to have a general enough mathematic construction so it encompasses the more musical concepts but restricted enough so that we are not overwhelmed by too many possible interpretation of the same piece of music.
+In fact categories are one of the best ways to get a structured system without losing to many generalities.
 
-PK-nets\cite{PAAE2016} are a generalization of K-nets. They are defined in the paradigm of category theory. Let's first present informally category theory.
+One of the more important concept behind category theory is compositionality. Musically, it also seems a basic concept : if I can go from $C$ to $D$ and from $D$ to $E$, I would expect I can go from $C$ to $E$. This is in fact the whole concept of a scale : if from $C$, I can hit $D$, $E$, $F$, $G$, $A$, $B$ and finally to $C$ again, then, implicitely, I can go from any of the pitchs of the scale to another pitch of the scale.
 
-The concept of category theory is simply summarized by the french proverb "Tell me who your friends are and I'll tell you who you are." The idea is that, in mathematics, it can be more important to consider the relations between objects than look at the objects themselves.
-
-Another concept fundamental of category theory is composition.
-%TODO
-
+A category is in fact a graph such that the composition of two arrows always exists and that for each vertex (called an object in category theory), there is an arrow on itself called the identity. This is a minimal structure that we want to use to go further than the K-net analysis.
 
 \begin{defn}\textbf{Set} is the category where objects are the sets and morphisms are functions between sets.
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}[baseline= (a).base]
-            \node[scale=1.3] (a) at (0,0){
-                \begin{tikzcd}[column sep=tiny]
-                    \Delta
-                    \ar[ddr, "R"',""{name=R,right}]
-                    \ar[rr,"F"]
-                    & &
-                    \mathcal{C}
-                    \ar[ddl,"S",""{name=S,left}] \\
-                    & \ar[dashed,bend left=80,from=R, to=S, "\phi"']& \\
-                    & \bf Set &
-                \end{tikzcd}
-            };
-        \end{tikzpicture}
-        \caption{PK-net definition}
-    \end{figure}
 \end{defn}
+
+% \begin{tzfigure}
+%     \foreach[count=\i] \lseti/\lsetmi in {A/{$a$,$b$,$c$},B/{5,6,$z$}} {
+%         \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+%         \foreach[count=\j] \lj in \lsetmi {
+%             \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+%         }
+%         \end{scope}
+%         \node[ellipse, draw, fit=(\lseti), 
+%         label={[name=l-\lseti]above:$\lseti$}] {};
+%     }
+%     \draw[->] (n-1-A) -- (n-1-B);
+%     \draw[->] (n-2-A) -- (n-2-B);
+%     \draw[->] (n-3-A) -- (n-3-B);
+%     \draw[->] (l-A) -- node[above]{$f$}(l-A.center-|l-B.west);
+% \end{tzfigure}
+
+
+The idea behind PK-nets is to lean on the category $\bf Set$ in such a way that musical objects are sets and relation between them are arrows. However, we need to add a frame to this principle. First of all, if we use the example of K-nets, we would like to use the group T/I to act on a 12 elements set. In fact, a group can be defined as a single-object category where the elements of the group are the reflexive arrows of this object and the group operation corresponds to the composition of two arrows.
+
+The group action can be defined as a functor between the category T/I and the category $Set$ which associates the unique object of T/I to a 12 elements set and the arrows to functions on this set. Indeed, functors in category theory are defined in such a way that they preserve identity and compositions, which makes every functor from a group to $\bf Set$ an action of this group on some set. So we have defined the set of pitch classes and how we want to analyse it.
+
+We still need to know how to select some sets to be musical objects to analyse. For this, we use a category $\Delta$ where every object of $\Delta$ represents a musical object and the arrows between them their interactions. We then send  $\Delta$ on $\bf Set$ via a functor $R$ to have knowledge about the components of each musical object. But these interactions between objects are not defined either. So we need also a functor $F$ from $\Delta$ to $T/I$ which will exhibit how musical objects are related to each other.
+
+To finish, we need to send each musical object seen as a set to the set of pitch-classes. This is the role of the natural transformation $\phi$.
 
 \begin{tzcategory}{\caption{PK-net definition}}
     % \node[scale=1.3] (a) at (0,0){
@@ -174,7 +179,7 @@ Another concept fundamental of category theory is composition.
         & &
         \mathcal{C}
         \ar[ddl,"S",""{name=S,left}] \\
-        & \ar[dashed,bend left=80,from=R, to=S, "\phi"']& \\
+        & \ar[Rightarrow,bend left=80,from=R, to=S, "\phi"']& \\
         & \bf Set &
     \end{tikzcd}
     % };
@@ -184,70 +189,40 @@ Another concept fundamental of category theory is composition.
 
 
 
-The definition of a PK-net is very general and covers a lot of the concepts introduced, such as (TODO) transposition class, Lewin's GIS (TODO), Forte's (TODO) normal order class, , (TODO) K-nets, symmetric groups of permutations (TODO), Tonnetz...
+\chapter{EK-nets}
 
-\paragraph{Contribution (sort of)}
+
+The definition of a PK-net is very general and covers a lot of the concepts introduced, such as (TODO) transposition class, Lewin's GIS (TODO), Forte's (TODO) normal order class, , (TODO) K-nets, symmetric groups of permutations (TODO), Tonnetz...
 
 Let's study a particular class of PK-nets such that $\Delta$, $\mathcal{C}$, $R$ and $S$ are fixed. The only thing we are allowed to change is $F$.
 
 \begin{prop}
     Let $F' : \Delta \rightarrow \mathcal{C}$ such that there exist a natural transformation $\psi : F \rightarrow F'$, then we get an obvious natural transformation $\phi' : R \rightarrow SF$
 \end{prop}
-\begin{proof}
-    Let $\phi'_A : R(A) \rightarrow SF'(A)$ such that, $\phi'_A = S\psi_A$. In other words, in the category of functors, $\phi' = Id_S\psi$ which is necessarily a natural transformation, due to the axioms of the category of functors.
-    \begin{tzcategory}{}
-        \node[scale=1.3] (a) at (0,0){
-            \begin{tikzcd}[column sep = small, row sep = 5.5ex]
-                \Delta
-                \arrow[bend left=40]{rr}[name=F,label=above:$F$]{}
-                \arrow[bend right=40]{rr}[name=F2,label=below:$F'$]{}
-                \ar[ddr, "R"',""{name=R,right}]
-                & &
-                \mathcal{C}
-                \arrow[shorten <=5pt,shorten >=0pt,Rightarrow,to path={(F) -- node[label=right:$\psi$] {} (F2)}]{}
-                \ar[ddl,"S",""{name=S,left}] \\
-                & & \\
-                & \textbf{Set}&
-            \end{tikzcd}
-        };
-    \end{tzcategory}
-\end{proof}
+% \begin{proof}
+%     Let $\phi'_A : R(A) \rightarrow SF'(A)$ such that, $\phi'_A = S\psi_A$. In other words, in the category of functors, $\phi' = Id_S\psi$ which is necessarily a natural transformation, due to the axioms of the category of functors.
 
-\subsection{Study of $\psi$}
-
-Let $F:\Delta\rightarrow G$ and $F':\Delta\rightarrow G$ be two parallel functors where $G\in \textbf{Grp}$. Let $X,Y\in\Delta$ and $f\in Hom(X,Y)$. We then get the following commutating diagram :
+% \end{proof}
 
 \begin{tzcategory}{}
     \node[scale=1.3] (a) at (0,0){
-        \begin{tikzcd}[column sep = small]
-            F(X) \arrow[dd, "F(f)"'] \arrow[rr, "\psi_X"] &  & F'(X) \arrow[dd, "F'(f)"] \\
-            &  &                           \\
-            F(Y) \arrow[rr, "\psi_Y"']                    &  & F'(Y)
+        \begin{tikzcd}[column sep = small, row sep = 5.5ex]
+            \Delta
+            \arrow[bend left=40]{rr}[name=F,label=above:$F$]{}
+            \arrow[bend right=40]{rr}[name=F2,label=below:$F'$]{}
+            \ar[ddr, "R"',""{name=R,right}]
+            & &
+            \mathcal{C}
+            \arrow[shorten <=5pt,shorten >=0pt,Rightarrow,to path={(F) -- node[label=right:$\psi$] {} (F2)}]{}
+            \ar[ddl,"S",""{name=S,left}] \\
+            & & \\
+            & \textbf{Set}&
         \end{tikzcd}
     };
 \end{tzcategory}
 
 
-This diagrams corresponds to the equation :
-\begin{eqnarray*}
-    &a\cdot y &= x \cdot b\\
-    \Leftrightarrow & y &= a^{-1}\cdot x\cdot  b\\
-\end{eqnarray*}
-
-Hence, there is no constraint on the couple $(x,y)$, we juste need to choose $a = x$ and $b = y$, and we get our natural transformation.
-
-Though, $X$ and $Y$ are actually the same object and $f$ is a reflexive object, we get $a = b$, and consequently,
-$$y = b^{-1}\cdot x \cdot b $$
-
-In other words, $\psi$ is an \textbf{inner automorphism} of $G$.
-
-
-\chapter{EK-nets}
-
-
-% \subsection{$\mathhcal{C}$ is a one-object category}
-% A natural transformation of $\Delta$ to $M$ associates each object of $\Delta$ to an arrow of $M$, i.e.an element of the underlying monoid.
-\section{Definition}
+\section{Formal definition}
 \begin{defn}
     \label{funcCat}
     Let $[\_,\mathcal{E}]$ be a category such that :
@@ -260,19 +235,35 @@ In other words, $\psi$ is an \textbf{inner automorphism} of $G$.
     \end{itemize}
 \end{defn}
 
-\begin{defn}
-    Let $\mathcal{C}$ be a category. The \textbf{anchor category} $\text{Anch}(\mathcal{C})_a$ over the category $\mathcal{C}$  and an anchor $a \in \mathcal{C}$ is defined as follows :
+\begin{defn}[Slice category]
+    Let $\mathcal{C}$ be a category. The \textbf{slice category} $\mathcal{C}/c$ over the category $\mathcal{C}$  and an object $c \in \mathcal{C}$ is defined as follows :
     \begin{itemize}
-        \item the objects of  $\text{Anch}(\mathcal{C})_a$ are the arrows $[a,c]$ for any $c\in \mathcal{C}$
-        \item an arrow two objects $f : a \rightarrow c$ and $g : a \rightarrow d$ is an arrow $h : c\rightarrow d$ such that $h \circ f = g$.
+        \item the objects of  $\mathcal{C}/c$ are the arrows $f\in \mathcal{C}$ such that the codomain of $f$ is precisely $c$
+        \item an arrow two objects $f : x \rightarrow c$ and $f' : x' \rightarrow d$ is an arrow $g : x\rightarrow x'$ such tha Figure \ref{sliceDef} commutes.
+
     \end{itemize}
+    \begin{tzcategory}{\caption{Slice category morphisms definition}
+            \label{sliceDef}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAA8QBfU9TXfIRQBGclVqMWbdgHJuvEBmx4CRMsPH1mrRCADG3cTCgBzeEVAAzAE4QAtkjIgcEJACZqWqbsshqDOgAjGAYABX4VIRBrLBMACxx5K1sHRFFnV0QPCW02EySQG3tHahckdK8dEDjDLiA
+            \begin{tikzcd}[column sep = 2em, row sep = 2em]
+                x \arrow[d, "f"'] \arrow[r, "g"] & x' \arrow[ld, "f'"] \\
+                c                                &
+            \end{tikzcd}
+        };
+    \end{tzcategory}
 \end{defn}
+
+\begin{defn}[Coslice category]
+    The notion of \textbf{coslice category} is the dual notion of slice category and will be denoted here as $c/\mathcal{C}$.
+\end{defn}
+
 \begin{rem}
-    $\textbf{CompHoPKN}_R  = \text{Anch}([\_,\bf Set])_R$
+    $\textbf{CompHoPKN}_R  = R/[\_,\bf Set]$
 \end{rem}
 
 \begin{defn}
-    Let $\mathcal{C}$ be a category. Then, $\bf EKN_\mathcal{C}$ is defined as the full subcategory of $[\_,\mathcal{C}]$ (see Definition \ref{funcCat}) where forall $F\in [\_,\mathcal{C}]$, $F$ is faithful.
+    Let $\mathcal{C}$ be a small category. Then, $\bf \text{EKN}_\mathcal{C}$ is defined as the full subcategory of $[\_,\mathcal{C}]$ (see Definition \ref{funcCat}) where for all $F\in \text{EKN}_\mathcal{C}$, $F$ is faithful.
 \end{defn}
 
 \begin{rem}
@@ -280,7 +271,7 @@ In other words, $\psi$ is an \textbf{inner automorphism} of $G$.
 \end{rem}
 
 For a category $\mathcal{D}$, there may not exist any $\mathcal{C}$ EK-Net from $\mathcal{D}$ to $\mathcal{C}$.
-\begin{defn}
+\begin{defn}[EK candidate]
     A category $\Delta$ is an $EKN_{\mathcal{C}}$ \textbf{candidate} if there exists at least one $\mathcal{C}$ EK-Net on $\Delta$.
 \end{defn}
 
@@ -288,30 +279,23 @@ For a category $\mathcal{D}$, there may not exist any $\mathcal{C}$ EK-Net from 
     From now on, we will presuppose that all the categories named $\Delta$ are candidates for the EK-net category considered.
 \end{note}
 
+Intuitively, $\mathcal{C}$ will be the analysis tool we will keep throughout the whole analysis. For a particular EK-Net $F : \Delta \rightarrow \mathcal{C}$, $\Delta$ is a pattern matched by the musical object analysed and $F$ is the musical object analysed.
+
+Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the pattern of $F$ and $\mathcal{C}$ the analysis of $F$.
+
+\begin{defn}[Constraint]
+    In $\text{EKN}_\mathcal{C}$, a \textbf{constraint} $\psi_\mathcal{C}$ on a pattern $\Delta$ is a family $(\psi_c)_{c\in\mathcal{C}}$ of mappings $\psi_c$ from $Obj(\Delta)$ to the powerset $\wp\big(\bigcup_{c'\in\mathcal{C}}Hom(c,c')\big)$.
+\end{defn}
 
 
-TODO : pas clair du tout
+\begin{defn}[Constraint solving]
+    Let $\psi_\mathcal{C}$ be a constraint on a pattern $\Delta$.
+    Let us consider the subfamily $\psi_F = (\psi_{F(\delta)})_{\delta\in\Delta}$. Then, $solve(\psi,F)$ is the set of $F' \in \text{EKN}_\mathcal{C}$ such that there exists an arrow $\big< N, \nu\big> : F \rightarrow F'$ such that
+    $$\forall \delta \in \Delta, \nu_\delta \in \psi_F(\delta)$$.
+\end{defn}
 
-Intuitively, $\mathcal{C}$ will be the analysis tool we will keep throughout the whole analysis. For a particular EK-Net $F : \Delta \rightarrow \mathcal{C}$, $\Delta$ is a pattern matched by the musical object analysed and $F$ is the object analysed in itself, or, in other words, how the pattern is being analysed from the $\mathcal{C}$ point of view.
-
-
-
-
-In EK-nets, we are particularly interested in the case where $\mathcal{C} = T/I$. Since $T/I$ has only one element, all the functors $F:\Delta \rightarrow T/I$ send all the elements on the unique element of $T/I$. In the following, we will not recall the image of the elements of $\Delta$.
-
-\subsection{EK-nets on monoids}
-
-EK-nets have particular properties when the category $\mathcal{C}$ has a single element. Let $\mathcal{M}$ be such a category and let us consider  an $\mathcal{M}$ EK-nets .
-
-If $\Delta$ has a single element, then the functors $[\Delta,\mathcal{M}]$ are in one-to-one correspondance with the monoid morphisms. Since EK-nets are faithful, we only get the injective morphisms. In other words, the set of $\text{EKN}_{\mathcal{M}}$ candidates is in one-to-one correspondence with the submonoids of $M$. 
-    
-\begin{prop}
-    The natural transformation components $\nu : F \rightarrow F'N$ of EK-homographies do not actually depend on $F$ when we consider $\mathcal{M}$ EK-nets. 
-\end{prop}
-
-Indeed, since $\mathcal{M}$ has only one element $\bullet$, any mapping from $\Delta$'s elements to a reflexive arrows of $\bullet$ defines a set of endomorphisms from any $T/I$ EK-net on $\Delta$.
-%TODO define group action
-% Here, $S:\mathcal{C}\rightarrow \textbf{Set}$ is the action of $T/I$ on the set $Notes = \{C,C\sharp,D,E\flat,E,F,F\sharp,G\sharp,A,B\flat,B\}$.
+Consequenyly, each constraint $\psi_\mathcal{C}$ on $\Delta$ induces a relation
+$\_\Psi_\psi \_$ where $F\Psi_\psi F'$ if and only if $F'\in solve(\psi,F)$.
 
 
 
@@ -385,6 +369,10 @@ However, this would not be coherent with the interaction between two pitch-class
 
 A fix to this problem is to consider a pitch class as a 2-objects EK-net (see Figure \ref{pitchClassDef}).
 
+\begin{defn}
+    A T/I EK pitch class $i$ is define as the foll
+\end{defn}
+
 
 \begin{tzcategory}{\caption{The k pitch-classes as PK-nets}
         \label{pitchClassDef}}
@@ -428,6 +416,57 @@ A fix to this problem is to consider a pitch class as a 2-objects EK-net (see Fi
 \end{proof}
 
 
+
+
+
+
+
+
+\subsection{EK-nets on monoids}
+In EK-nets, we are particularly interested in the case where $\mathcal{C} = T/I$. Since $T/I$ has only one element, all the functors $F:\Delta \rightarrow T/I$ send all the elements on the unique element of $T/I$. In the following, we will not recall the image of the elements of $\Delta$.
+
+EK-nets have particular properties when the category $\mathcal{C}$ has a single element. Let $\mathcal{M}$ be such a category and let us consider  an $\mathcal{M}$ EK-nets .
+
+If $\Delta$ has a single element, then the functors $[\Delta,\mathcal{M}]$ are in one-to-one correspondance with the monoid morphisms. Since EK-nets are faithful, we only get the injective morphisms. In other words, the set of $\text{EKN}_{\mathcal{M}}$ candidates is in one-to-one correspondence with the submonoids of $M$.
+
+\begin{prop}
+    The natural transformation components $\nu : F \rightarrow F'N$ of EK-homographies do not actually depend on $F$ when we consider $\mathcal{M}$ EK-nets.
+\end{prop}
+
+Indeed, since $\mathcal{M}$ has only one element $\bullet$, any mapping from $\Delta$'s elements to a reflexive arrows of $\bullet$ defines a set of endomorphisms from any $T/I$ EK-net on $\Delta$.
+%TODO define group action
+% Here, $S:\mathcal{C}\rightarrow \textbf{Set}$ is the action of $T/I$ on the set $Notes = \{C,C\sharp,D,E\flat,E,F,F\sharp,G\sharp,A,B\flat,B\}$.
+
+\subsection{EK-nets on groups}
+
+Let $F:\Delta\rightarrow G$ and $F':\Delta\rightarrow G$ be two parallel functors where $G\in \textbf{Grp}$. Let $X,Y\in\Delta$ and $f\in Hom(X,Y)$. We then get the following commutating diagram :
+
+\begin{tzcategory}{}
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}[column sep = small]
+            F(X) \arrow[dd, "F(f)"'] \arrow[rr, "\psi_X"] &  & F'(X) \arrow[dd, "F'(f)"] \\
+            &  &                           \\
+            F(Y) \arrow[rr, "\psi_Y"']                    &  & F'(Y)
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+
+This diagram corresponds to the equation :
+\begin{eqnarray*}
+    &\psi_Y\cdot F(f) &=   F'(f) \cdot \psi_X \\
+    \Leftrightarrow &
+    F'(f) &=   \psi_Y\cdot F(f) \cdot \psi_X^{-1}\\
+\end{eqnarray*}
+
+Hence, there is no constraint on the couple $(x,y)$, we juste need to choose $a = x$ and $b = y$, and we get our natural transformation.
+
+Though, $X$ and $Y$ are actually the same object and $f$ is a reflexive object, we get $a = b$, and consequently,
+$$y = b^{-1}\cdot x \cdot b $$
+
+In other words, $\psi$ is an \textbf{inner automorphism} of $G$.
+
+
 \subsection{Transposition generalization}
 
 % \begin{defn}[Connected components of a category]
@@ -456,6 +495,17 @@ A fix to this problem is to consider a pitch class as a 2-objects EK-net (see Fi
 
 \begin{defn}[Generalization of transposition]
     For any T/I EK-net $F$ on $\Delta$, a transposition $\tau$ is a mapping from $Obj(\Delta)$ to $ $
+\end{defn}
+
+
+\section{Constraints}
+
+\begin{defn}[EK-domain]
+    An $EKN_\mathcal{C}$ musical domain
+\end{defn}
+
+\begin{defn}
+
 \end{defn}
 
 
@@ -618,24 +668,9 @@ Let G  be a group seen as a one-element $A$ category $\mathcal{G}$. Then $ \Sigm
 
 
 
-\section{Monoidal monad}
-
-\begin{defn}[Monad]
-    A \textbf{monad} on the category $\mathcal{C}$ is an endofunctor $T : \mathcal{C}\rightarrow\mathcal{C}$ together with two natural transformations $\eta : 1_\mathcal{C}\rightarrow T$ and $\mu : T^2 \rightarrow T$ such that both diagrams in \hyperref[monad-coherence]{Figure \ref*{monad-coherence}} commute.
 
 
-    \begin{tzcategory}{\caption{The monad coherence conditions}
-            \label{monad-coherence}}
-        \node[scale=1.3] (a) at (0,0){
-            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRABUA9AZhAF9S6TLnyEUARnJVajFmy4AmfoJAZseAkTLjp9Zq0QdOSgUPWiikndT1zD7ZWZGaU3KTdkGOj1cI1jkABZSaxl9eR81ZwDgyg9w+2NIvwtXEN1PeSS+aRgoAHN4IlAAMwAnCABbJDIQHAgkSTC7DgAdVsqmH3Kqmup6pAV4lvbOgAIHagY6ACMYBgAFFJcQMqx8gAscborqxCG6hsQ3EGm5xeWxVfWtkGGvUa7TEB69poHjqdn5pfMVhhgJW29zYjx2vUQwUOSAArFMsGAvFAIEwZgC7iANjA6FA2JBERicHQsAw8QRWM9XkgAOz9I5w5oPDpdL7nX7RNhrTbbSm7JAANjpsJBhkeY3BeyhH1pp2+Fz+Vy5txFbVaMCJEqQUqOgsZoLVRIm-AofCAA
-            \begin{tikzcd}[column sep = 3em, row sep = 3em]
-                T^3 \arrow[r, "T\mu"] \arrow[d, "\mu T"'] & T^2 \arrow[d, "\mu"] &  & T \arrow[rd, equal] \arrow[d, "T\eta"'] \arrow[r, "\eta T"] & T^2 \arrow[d, "\mu "] \\
-                T^2 \arrow[r, "\mu"']                     & T                    &  & T^2 \arrow[r, "\mu"']                                                     & T
-            \end{tikzcd}
-        };
-    \end{tzcategory}
-
-\end{defn}
+\section{Ajunction + monad theorem}
 
 \begin{defn}[Adjunction]
     Two functors $F : \mathcal{D}\rightarrow \mathcal{C}$ and $G : \mathcal{C} \rightarrow \mathcal{D}$ are \textbf{adjoints} if and only if
@@ -643,144 +678,6 @@ Let G  be a group seen as a one-element $A$ category $\mathcal{G}$. Then $ \Sigm
     $$\forall X\in \mathcal{C}, Y \in \mathcal{D}, Hom(FY,X) \cong Hom(Y,GX)$$
 \end{defn}
 
-
-\begin{prop}
-    Let $F: \mathcal{C} \rightarrow \mathcal{D}$ and $\Sigma : \textbf{Cat}\rightarrow \textbf{StrictMonCat}$ where $\Sigma(\mathcal{C})$ is defined as described in \hyperref[strict-mon]{Definition \ref*{strict-mon}} and,
-    $\forall c = (c1,\dots,c_n)\in \Sigma(\mathcal{C}),
-        f = (f_1,\dots,f_n) \in Hom(c,d)$
-    \begin{align*}
-        \Sigma(F)(c) & = \big(F(c_1),\dots,F(c_n)\big) \\
-        \Sigma(F)(f) & = \big(F(f_1),\dots,F(f_n)\big)
-    \end{align*}
-    Then $\Sigma$ is a functor from $\textbf{Cat}$ to $\textbf{StrictMonCat}$
-\end{prop}
-
-\begin{proof}
-    We have to verify that $\Sigma$ complies with the coherence conditions of a functor, or in other words that $\Sigma(F)$ is a monoidal functor and that
-    $$\Sigma(F) \cdot \Sigma(G) = \Sigma(F\cdot G) $$
-    %TODO : well verify it please
-
-    Moreover, $\Sigma(F)$ has to be a monoidal functor :%TODO : define it
-    \begin{align*}
-        \Sigma(F)\big(()_{\Sigma(\mathcal{C})}\big)
-         & = ()_\mathcal{\Sigma{D}}                                   \\
-        \Sigma(F)(c\otimes c')
-         & = \Sigma(F) \big((c_1, \dots, c_n,c'_1, \dots, c'_m) \big) \\
-         & =  \big(F(c_1),\dots,F(c_n),F(c'_1),...F(c'_m)\big)        \\
-         & = \Sigma(F)(c) \otimes \Sigma(F)(c')
-    \end{align*}
-    %TODO I have to prove that this is enough for being a monoidal functor in the case where we only have strict monoidal functors.
-\end{proof}
-
-\begin{prop}
-    $\Sigma$ is a left adjunct of the forgetful functor $U : \textbf{StrictMonCat} \rightarrow \textbf{Cat}$ where
-    \begin{align*}
-        U\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)
-         & = \mathcal{C} \\
-        U\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)
-         & = \mathcal{C} \\
-    \end{align*}
-\end{prop}
-
-\begin{proof}
-    Let $l_1,...,l_p\in \big<\mathcal{C},()_{\mathcal{C}},\otimes\big>$ such that $\forall i \in  [\![1,n]\!], l_i = (c^i_1,\dots,c^i_{n_p})$, where $c^i_j \in \mathcal{C}$. Let also, for each $x\in \big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>$ define $x^o \in U\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)$ the corresponding object in the structure without the tensorial product, and $F^o = U(F)$.
-
-    Let us define the unit $\eta$ and the counit $\epsilon$ of the adjunction :
-    \begin{align*}
-        \eta(\mathcal{C})
-         & : \mathcal{C} \mapsto U\Sigma(\mathcal{C})                         \\
-         & : c \mapsto (c)^o                                                  \\
-         & : f \mapsto (f)^o                                                  \\
-        \epsilon\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)
-         & : \Sigma U\Big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\Big)
-        \mapsto \big<\mathcal{C},()_{\mathcal{C}},\otimes\big>                \\
-         & : \big(l_1^o,\dots,l_p^o\big) \mapsto
-        l_1 \otimes_\mathcal{C} \dots \otimes_\mathcal{C} l_p                 \\
-         & : \big(\mathit{lf}_1^o,\dots, \mathit{lf}_p^o\big) \mapsto
-        \mathit{lf}_1 \otimes_\mathcal{C} \dots \otimes_\mathcal{C}
-        \mathit{lf}_p                                                         \\
-    \end{align*}
-
-    We now need to prove that $\eta$ and $\epsilon$ are natural transformations. This is trivial in the case of $\eta$, let us concentrate on $\epsilon$ : we need, for a monoidal functor
-    $F^\otimes :  \big<\mathcal{C},()_\mathcal{C},\otimes_\mathcal{C}\big> \rightarrow  \big<\mathcal{D},()_\mathcal{D},\otimes_\mathcal{D}\big>$
-    with an underlying functor $F : \mathcal{C} \rightarrow \mathcal{D}$, that
-    $$\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes_\mathcal{D}\big>\big) \Sigma U(F) =
-        F\epsilon\big(\big<\mathcal{C},()_\mathcal{C},\otimes_\mathcal{C}\big>\big) $$
-    This is true because :
-    \begin{align*}
-        F\epsilon\big(\big<\mathcal{C},()_\mathcal{C},\otimes\big>\big)
-        (l_1^o,\dots,l_n^o)
-         & = F(l_1\otimes_\mathcal{C}\dots \otimes_\mathcal{C} l_n)         \\
-         & \simeq F l_1 \otimes_\mathcal{D}\dots \otimes_\mathcal{D} F l_n  \\
-         & =\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
-        \big((Fl_1)^o,\dots, (Fl_n)^o\big)                                  \\
-         & = \epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
-        \big(F^o l_1^o,\dots, F^ol_n^o\big)                                 \\
-         & =\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
-        \Sigma (F^o) \big(l_1^o,\dots, _n^o\big)                            \\
-         & =\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
-        \Sigma U(F) (l_1,\dots l_n)
-    \end{align*}
-
-    To finish, we need to prove that
-    \begin{align*}
-        \mathit{Id}_{\Sigma\mathcal{C}}
-         & = \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C}) \\
-        \mathit{Id}_{U\mathcal{D}^\otimes}
-         & = U(\epsilon D^\otimes) \circ \eta_{U\mathcal{D}^\otimes}
-    \end{align*}
-    which is true because
-    \begin{align*}
-        \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C})
-        (c_1,\dots,c_n)
-         & = \epsilon_{\Sigma\mathcal{C}} \big((c_1)^o,\dots,(c_n)^o\big) \\
-         & = (c_1)\otimes\dots\otimes(c_n)                                \\
-         & = (c_1, \dots, c_n)                                            \\
-        U(\epsilon D^\otimes) \circ \eta_{U\mathcal{D}^\otimes} (l^o)
-         & =  U(\epsilon D^\otimes) ((l^o)^o)                             \\
-         & = l^o
-    \end{align*}
-\end{proof}
-
-\begin{defn}
-    Let $M = U\Sigma$. Then $M$ is a monad in the $\bf Cat$ category.
-\end{defn}
-
-
-
-We would like to find a monad from the functor category $\big[\_,Set\big]$ (see Definition \ref{funcCat}).
-
-
-\begin{tzcategory}{\caption{We want to define $S_\prodmon$}}
-    \node[scale=1.3] (a) at (0,0){
-        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjYAGEAviDGl0mXPkIoATOSq1GLNgFkAFJx78hDUWICUk6SAzY8BIgEZSi1fWatEIAMowck1TCgA5vBEoABmAE4QXEhkIDgQSA5qrlrmYZHRiLHxSMrJGu4eINQMdABGMAwACrI2CiDhWAF8PlLpUYnUOYh5LgWeAPqavmJAA
-        \begin{tikzcd}[column sep = 1.8em, row sep = 2.2em]
-            \mathcal{C}
-            \arrow[rr, "\eta_M(\mathcal{C})"]
-            \arrow[rdd, "S"',""{name=S, right}]
-            & & M(\mathcal{C})
-            \arrow[ldd, "S_\prodmon", ""{name=SP, left}] \\
-            &  \arrow[Rightarrow, from=S, to=SP, "\mathds{1}_S"]   &             \\
-            & Set &
-        \end{tikzcd}
-    };
-\end{tzcategory}
-
-% \begin{defn}
-%     Let $$\zeta_M(\mathcal{C}) : c \mapsto S(c) = S_\prodmon((c)^o)$$
-% \end{defn}
-
-\begin{tzcategory}{\caption{$S_\prodmon(f)$ is uniquely defined}}
-    \node[scale=1.3] (a) at (0,0){
-        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AFLAfWCycsYZJwCEyAIykwFcRQC+AZQAUAY15YAlCAWl0mXPkIoyAJiq1GLNqo3bd+kBmx4CRM6QvV6zVohA7AHJNHT0DV2MPcktfGwDOHn5BdmEAAlF2CWlZeWV1EIcFSxgoAHN4IlAAMwAnCABbJDIQHAgkaSs-NjRNEGoGOgAjGAYuQzcTEFqsMoALHEca+qbETrakTxBBkbGJqICZ+cWfa39AlWrQpZA6xqQAZmoNxC2487RCm7vVlpenrrxECXULJIQicRSGRyLKKb4rZrPdqvAbDUbjSLuQ6zBb9QHnVRXbScNRYWpqNK9LC6RRAA
-        \begin{tikzcd}[column sep = 2.5em, row sep = 3em]
-            {\Pi_{i\in[\![1,n]\!]}S(c_i)} \arrow[dd, "p_i"'] \arrow[rr, "{(S(f_i))_{i\in[\![1,n]\!]}}"] \arrow[rrdd, "S(f_i) \circ p_i"'] &  & {\Pi_{i\in [\![1,n]\!]}S(c'_i)} \arrow[dd, "p'_i"] \\
-            &  &                                                    \\
-            S(c_i) \arrow[rr, "S(f_i)"']
-            &  & S(c'_i)
-        \end{tikzcd}
-    };
-\end{tzcategory}
 
 \begin{prop}{\cite{wakamatsu1980note}}
     \label{fullSplitEpi}
@@ -790,9 +687,20 @@ We would like to find a monad from the functor category $\big[\_,Set\big]$ (see 
     %TODO : define split epi/mono
 \end{prop}
 
+\paragraph{Hypothesis on E}
+Let $T$ be a Lawvere theory and
+Let $E\in \bf E$.   Suppose there is a functor $F_E : \textbf{R}(E) \rightarrow T$ for every $E$. Then the basis of $E$ can be defined as $F^{-1}(\{1\})$.
+
+We want also that for every $\mathcal{C}$, there is a model  $M_{\mathcal{C}}\in Mod(T,\bf Set)$ of $T$ such that $M_\mathcal{C}(1) = \mathcal{C}_{Set}$.
+
+Let $e\in E$. We then have $\exists n \in \mathbb{N}  : F_E(e) = x^n$.  We also have $M_\mathcal{C}(n) = \mathcal{C}^n$.
+
+$M_\mathcal{C}F_E(e) = \mathcal{C}_{Set}^n$
+
+
 \begin{thm}
     Let $\textbf{E}$ be a category.
-    Let $\mathfrak{A} : \textbf{L}\dashv \textbf{R}$ be an adjunction such that $\textbf{L} : \textbf{Cat} \rightarrow \textbf{E}$, $R : \textbf{E} \rightarrow \textbf{Cat}$  such that $\bf L$ is fully faithful.
+    Let $\mathfrak{A} : \textbf{L}\dashv \textbf{R}$ be an adjunction such that $\textbf{L} : \textbf{Cat} \rightarrow \textbf{E}$, $R : \textbf{E} \rightarrow \textbf{Cat}$  such that $\bf L$ is faithful.
     %TODO define full/ faithful
 
     Then, $\mathfrak{A}$ induces a monad $(\_)^\mathfrak{A}$ on $[\_,\textbf{R}(E)]$, for $E \in \textbf{E}$.
@@ -951,6 +859,165 @@ We would like to find a monad from the functor category $\big[\_,Set\big]$ (see 
 
 
 \end{proof}
+
+
+\section{Monoidal monad}
+
+\begin{defn}[Monad]
+    A \textbf{monad} on the category $\mathcal{C}$ is an endofunctor $T : \mathcal{C}\rightarrow\mathcal{C}$ together with two natural transformations $\eta : 1_\mathcal{C}\rightarrow T$ and $\mu : T^2 \rightarrow T$ such that both diagrams in \hyperref[monad-coherence]{Figure \ref*{monad-coherence}} commute.
+
+
+    \begin{tzcategory}{\caption{The monad coherence conditions}
+            \label{monad-coherence}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRABUA9AZhAF9S6TLnyEUARnJVajFmy4AmfoJAZseAkTLjp9Zq0QdOSgUPWiikndT1zD7ZWZGaU3KTdkGOj1cI1jkABZSaxl9eR81ZwDgyg9w+2NIvwtXEN1PeSS+aRgoAHN4IlAAMwAnCABbJDIQHAgkSTC7DgAdVsqmH3Kqmup6pAV4lvbOgAIHagY6ACMYBgAFFJcQMqx8gAscborqxCG6hsQ3EGm5xeWxVfWtkGGvUa7TEB69poHjqdn5pfMVhhgJW29zYjx2vUQwUOSAArFMsGAvFAIEwZgC7iANjA6FA2JBERicHQsAw8QRWM9XkgAOz9I5w5oPDpdL7nX7RNhrTbbSm7JAANjpsJBhkeY3BeyhH1pp2+Fz+Vy5txFbVaMCJEqQUqOgsZoLVRIm-AofCAA
+            \begin{tikzcd}[column sep = 3em, row sep = 3em]
+                T^3 \arrow[r, "T\mu"] \arrow[d, "\mu T"'] & T^2 \arrow[d, "\mu"] &  & T \arrow[rd, equal] \arrow[d, "T\eta"'] \arrow[r, "\eta T"] & T^2 \arrow[d, "\mu "] \\
+                T^2 \arrow[r, "\mu"']                     & T                    &  & T^2 \arrow[r, "\mu"']                                                     & T
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+
+\end{defn}
+
+\begin{prop}
+    Let $F: \mathcal{C} \rightarrow \mathcal{D}$ and $\Sigma : \textbf{Cat}\rightarrow \textbf{StrictMonCat}$ where $\Sigma(\mathcal{C})$ is defined as described in \hyperref[strict-mon]{Definition \ref*{strict-mon}} and,
+    $\forall c = (c1,\dots,c_n)\in \Sigma(\mathcal{C}),
+        f = (f_1,\dots,f_n) \in Hom(c,d)$
+    \begin{align*}
+        \Sigma(F)(c) & = \big(F(c_1),\dots,F(c_n)\big) \\
+        \Sigma(F)(f) & = \big(F(f_1),\dots,F(f_n)\big)
+    \end{align*}
+    Then $\Sigma$ is a functor from $\textbf{Cat}$ to $\textbf{StrictMonCat}$
+\end{prop}
+
+\begin{proof}
+    We have to verify that $\Sigma$ complies with the coherence conditions of a functor, or in other words that $\Sigma(F)$ is a monoidal functor and that
+    $$\Sigma(F) \cdot \Sigma(G) = \Sigma(F\cdot G) $$
+    %TODO : well verify it please
+
+    Moreover, $\Sigma(F)$ has to be a monoidal functor :%TODO : define it
+    \begin{align*}
+        \Sigma(F)\big(()_{\Sigma(\mathcal{C})}\big)
+         & = ()_\mathcal{\Sigma{D}}                                   \\
+        \Sigma(F)(c\otimes c')
+         & = \Sigma(F) \big((c_1, \dots, c_n,c'_1, \dots, c'_m) \big) \\
+         & =  \big(F(c_1),\dots,F(c_n),F(c'_1),...F(c'_m)\big)        \\
+         & = \Sigma(F)(c) \otimes \Sigma(F)(c')
+    \end{align*}
+    %TODO I have to prove that this is enough for being a monoidal functor in the case where we only have strict monoidal functors.
+\end{proof}
+
+\begin{prop}
+    $\Sigma$ is a left adjunct of the forgetful functor $U : \textbf{StrictMonCat} \rightarrow \textbf{Cat}$ where
+    \begin{align*}
+        U\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)
+         & = \mathcal{C} \\
+        U\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)
+         & = \mathcal{C} \\
+    \end{align*}
+\end{prop}
+
+\begin{proof}
+    Let $l_1,...,l_p\in \big<\mathcal{C},()_{\mathcal{C}},\otimes\big>$ such that $\forall i \in  [\![1,n]\!], l_i = (c^i_1,\dots,c^i_{n_p})$, where $c^i_j \in \mathcal{C}$. Let also, for each $x\in \big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>$ define $x^o \in U\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)$ the corresponding object in the structure without the tensorial product, and $F^o = U(F)$.
+
+    Let us define the unit $\eta$ and the counit $\epsilon$ of the adjunction :
+    \begin{align*}
+        \eta(\mathcal{C})
+         & : \mathcal{C} \mapsto U\Sigma(\mathcal{C})                         \\
+         & : c \mapsto (c)^o                                                  \\
+         & : f \mapsto (f)^o                                                  \\
+        \epsilon\big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\big)
+         & : \Sigma U\Big(\big<\mathcal{C},()_{\mathcal{C}},\otimes\big>\Big)
+        \mapsto \big<\mathcal{C},()_{\mathcal{C}},\otimes\big>                \\
+         & : \big(l_1^o,\dots,l_p^o\big) \mapsto
+        l_1 \otimes_\mathcal{C} \dots \otimes_\mathcal{C} l_p                 \\
+         & : \big(\mathit{lf}_1^o,\dots, \mathit{lf}_p^o\big) \mapsto
+        \mathit{lf}_1 \otimes_\mathcal{C} \dots \otimes_\mathcal{C}
+        \mathit{lf}_p                                                         \\
+    \end{align*}
+
+    We now need to prove that $\eta$ and $\epsilon$ are natural transformations. This is trivial in the case of $\eta$, let us concentrate on $\epsilon$ : we need, for a monoidal functor
+    $F^\otimes :  \big<\mathcal{C},()_\mathcal{C},\otimes_\mathcal{C}\big> \rightarrow  \big<\mathcal{D},()_\mathcal{D},\otimes_\mathcal{D}\big>$
+    with an underlying functor $F : \mathcal{C} \rightarrow \mathcal{D}$, that
+    $$\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes_\mathcal{D}\big>\big) \Sigma U(F) =
+        F\epsilon\big(\big<\mathcal{C},()_\mathcal{C},\otimes_\mathcal{C}\big>\big) $$
+    This is true because :
+    \begin{align*}
+        F\epsilon\big(\big<\mathcal{C},()_\mathcal{C},\otimes\big>\big)
+        (l_1^o,\dots,l_n^o)
+         & = F(l_1\otimes_\mathcal{C}\dots \otimes_\mathcal{C} l_n)         \\
+         & \simeq F l_1 \otimes_\mathcal{D}\dots \otimes_\mathcal{D} F l_n  \\
+         & =\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
+        \big((Fl_1)^o,\dots, (Fl_n)^o\big)                                  \\
+         & = \epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
+        \big(F^o l_1^o,\dots, F^ol_n^o\big)                                 \\
+         & =\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
+        \Sigma (F^o) \big(l_1^o,\dots, _n^o\big)                            \\
+         & =\epsilon\big(\big<\mathcal{D},()_\mathcal{D},\otimes\big>\big)
+        \Sigma U(F) (l_1,\dots l_n)
+    \end{align*}
+
+    To finish, we need to prove that
+    \begin{align*}
+        \mathit{Id}_{\Sigma\mathcal{C}}
+         & = \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C}) \\
+        \mathit{Id}_{U\mathcal{D}^\otimes}
+         & = U(\epsilon D^\otimes) \circ \eta_{U\mathcal{D}^\otimes}
+    \end{align*}
+    which is true because
+    \begin{align*}
+        \epsilon_{\Sigma\mathcal{C}} \circ \Sigma (\eta_\mathcal{C})
+        (c_1,\dots,c_n)
+         & = \epsilon_{\Sigma\mathcal{C}} \big((c_1)^o,\dots,(c_n)^o\big) \\
+         & = (c_1)\otimes\dots\otimes(c_n)                                \\
+         & = (c_1, \dots, c_n)                                            \\
+        U(\epsilon D^\otimes) \circ \eta_{U\mathcal{D}^\otimes} (l^o)
+         & =  U(\epsilon D^\otimes) ((l^o)^o)                             \\
+         & = l^o
+    \end{align*}
+\end{proof}
+
+\begin{defn}
+    Let $M = U\Sigma$. Then $M$ is a monad in the $\bf Cat$ category.
+\end{defn}
+
+\begin{tzcategory}{\caption{$S_\prodmon(f)$ is uniquely defined}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AFLAfWCycsYZJwCEyAIykwFcRQC+AZQAUAY15YAlCAWl0mXPkIoyAJiq1GLNqo3bd+kBmx4CRM6QvV6zVohA7AHJNHT0DV2MPcktfGwDOHn5BdmEAAlF2CWlZeWV1EIcFSxgoAHN4IlAAMwAnCABbJDIQHAgkaSs-NjRNEGoGOgAjGAYuQzcTEFqsMoALHEca+qbETrakTxBBkbGJqICZ+cWfa39AlWrQpZA6xqQAZmoNxC2487RCm7vVlpenrrxECXULJIQicRSGRyLKKb4rZrPdqvAbDUbjSLuQ6zBb9QHnVRXbScNRYWpqNK9LC6RRAA
+        \begin{tikzcd}[column sep = 2.5em, row sep = 3em]
+            {\Pi_{i\in[\![1,n]\!]}S(c_i)} \arrow[dd, "p_i"'] \arrow[rr, "{(S(f_i))_{i\in[\![1,n]\!]}}"] \arrow[rrdd, "S(f_i) \circ p_i"'] &  & {\Pi_{i\in [\![1,n]\!]}S(c'_i)} \arrow[dd, "p'_i"] \\
+            &  &                                                    \\
+            S(c_i) \arrow[rr, "S(f_i)"']
+            &  & S(c'_i)
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+We would like to find a monad from the functor category $\big[\_,Set\big]$ (see Definition \ref{funcCat}).
+
+
+\begin{tzcategory}{\caption{We want to define $S_\prodmon$}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjYAGEAviDGl0mXPkIoATOSq1GLNgFkAFJx78hDUWICUk6SAzY8BIgEZSi1fWatEIAMowck1TCgA5vBEoABmAE4QXEhkIDgQSA5qrlrmYZHRiLHxSMrJGu4eINQMdABGMAwACrI2CiDhWAF8PlLpUYnUOYh5LgWeAPqavmJAA
+        \begin{tikzcd}[column sep = 1.8em, row sep = 2.2em]
+            \mathcal{C}
+            \arrow[rr, "\eta_M(\mathcal{C})"]
+            \arrow[rdd, "S"',""{name=S, right}]
+            & & M(\mathcal{C})
+            \arrow[ldd, "S_\prodmon", ""{name=SP, left}] \\
+            &  \arrow[Rightarrow, from=S, to=SP, "\mathds{1}_S"]   &             \\
+            & Set &
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+% \begin{defn}
+%     Let $$\zeta_M(\mathcal{C}) : c \mapsto S(c) = S_\prodmon((c)^o)$$
+% \end{defn}
+
+
+
 
 
 \begin{defn}[The monad $(\_)_\prodmon$]
