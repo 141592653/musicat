@@ -7,12 +7,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{dsfont}
 
-\usepackage{tikz}
-\usetikzlibrary{arrows,decorations.markings}
-\usetikzlibrary{cd}
-\usetikzlibrary{shapes.geometric,fit}
-
-
 \usepackage{etoolbox}
 \listadd{\pc}{$C$}
 \listadd{\pc}{$C\sharp$}
@@ -30,12 +24,38 @@
 
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=2.5cm]{geometry}
 \usepackage{caption}
-\usepackage{hyperref}
+%\usepackage[pageanchor]{hyperref}
 \captionsetup{margin=10pt,font=small,labelfont=bf}
 
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.markings}
+\usetikzlibrary{cd}
+\usetikzlibrary{shapes.geometric,fit}
 \input{fig_environments}
 
+% \usepackage[refpage]{nomencl}
+% \renewcommand{\pagedeclaration}[1]{%
+% 	\hspace*{\fill} \hyperlink{page.#1}{page \nobreakspace#1}}
+% \renewcommand{\nomname}{Notations}
+% \renewcommand{\nompreamble}{The next list describes several symbols that will be later used within the body of the document}
+% \makenomenclature
+
 \newcommand{\prodmon}{\Pi}
+
+\usepackage[refpage]{nomencl}
+\makeatletter
+\def\nomlabelref#1{\dotfill\nobreakspace page\ \pageref{#1}\nomentryend\endgroup}
+\def\@@@nomenclature[#1]#2#3#4{%
+ \def\@tempa{#2}\def\@tempb{#3}\def\@tempc{#4}%
+ \protected@write\@nomenclaturefile{}%
+  {\string\nomenclatureentry{#1\nom@verb\@tempa @[{\nom@verb\@tempa}]%
+      \begingroup\nom@verb\@tempb\protect\nomeqref{\theequation}%
+        |nomlabelref}{\@tempc}}%
+ \endgroup
+ \@esphack}
+\makeatother
+\usepackage[backref=page,pageanchor]{hyperref}
+\makenomenclature
 
 \begin{document}
 
@@ -45,6 +65,9 @@
 \author{Alice Rixte}
 \date{\today}
 \maketitle %\endgroup
+
+\input{notations}
+
 
 \chapter{Introduction}
 \input{intro}
@@ -61,8 +84,12 @@
 \chapter{Conclusion}
 \input{utility}
 
+\printnomenclature[2cm]
 
 \newpage
 \bibliography{bibliography}
 \bibliographystyle{ieeetr}
+
+
+
 \end{document}

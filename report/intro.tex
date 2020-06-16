@@ -2,7 +2,7 @@
 \begin{defn}
     A \textbf{pitch class} consists of all the pitches separated with a whole number of octaves.
 \end{defn}
-The set of all pitch classes comes naturally with a group structure, which is actually the group $\mathbb{Z}_{12}$. Indeed, we can associate $C$ to the pitch class $0$, $C\sharp$ to the pitch class $1$ and so on. We then have the possibillity to represent a $C$ major chord  from a geometrical point of vue (see \hyperref[Cmajor]{Figure \ref*{Cmajor}}).
+The set of all pitch classes comes naturally with a group structure, which is actually the group $\mathbb{Z}_{12}$\label{nomencl:Zn}. Indeed, we can associate $C$ to the pitch class $0$, $C\sharp$ to the pitch class $1$ and so on. We then have the possibillity to represent a $C$ major chord  from a geometrical point of vue (see \hyperref[Cmajor]{Figure \ref*{Cmajor}}).
 
 \newcounter{itemcount}
 \setcounter{itemcount}{450}
@@ -20,7 +20,7 @@ The set of all pitch classes comes naturally with a group structure, which is ac
     \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
 \end{tzfigure}
 
-The idea of Forte relies on the fact that a major chord will always have the same representation up to 12 rotations in this geometrical paradigm. In mathematics they are the 12 rotational symmetries of the regular dodecahedron.In music theory, these rotations are called \textbf{transpositions} and are named $T_i$ for $i\in[\![0,11]\!]$.
+The idea of Forte relies on the fact that a major chord will always have the same representation up to 12 rotations in this geometrical paradigm. In mathematics they are the 12 rotational symmetries of the regular dodecahedron.In music theory, these rotations are called \textbf{transpositions} and are named $T_i$\label{nomencl:Ti} for $i\in[\![0,11]\!]$.
 
 His intuition was that instead of considering triads (three notes chord) as the set of the notes that compose them, we should consider them as the set of the intervals between each note. As a result, every inversion of chord \footnote{the term inversion has to be taken here from a musical point of view, for instance the inversions of a C major chord are C-E-G, G-C-E, E-G-C. Later in this report, we will use inversion with another definition and we will stick to it.} will be in the same \textbf{pitch-class set}\cite{forte_1980}. This can be seen in the geometrical point of view where the simple fact  of representing the chord as a triangle allow to forget any order between the three note. Similarly, all the transpositions of the chord will be in the same pitch-class.
 
@@ -46,7 +46,7 @@ In  the 1980s, David Lewin developped a branch of music theory called transforma
 
 Klumpenhouwer networks, or K-nets, were then introduced by Henry Klumpenhouwer, former PhD student of Lewin, to formalize the relation between two chords\cite{lewin_1990}.
 
-We have seen that the rotations of the dodecahedron match with the notion of transposition. However, there another type of symmetry in the dodecahedron : the $12$ reflexion symmetries (see\hyperref[inversions]{Figure \ref*{inversions}}), called \textbf{inversions} in transformational music theory. Along with transposition, they form the $T/I$ group, otherwise known in mathematics as the \textbf{dihedral group} of a dodecahedron.
+We have seen that the rotations of the dodecahedron match with the notion of transposition. However, there another type of symmetry in the dodecahedron : the $12$ reflexion symmetries (see\hyperref[inversions]{Figure \ref*{inversions}}), called \textbf{inversions}\label{nomencl:Ii} in transformational music theory. Along with transposition, they form the $T/I$\label{nomencl:TI} group, otherwise known in mathematics as the \textbf{dihedral group} of a dodecahedron.
 
 \setcounter{itemcount}{450}
 
