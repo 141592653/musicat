@@ -5,7 +5,7 @@
 
 \begin{defn}[\bf Cat]
     \textbf{Cat}\label{nomencl:Cat} is the 2-category of all small categories.
-\end{defn} 
+\end{defn}
 \begin{defn}[\bf CAT]
     \textbf{CAT}\label{nomencl:CAT} is the 2-category of all locally small categories.
 \end{defn}
@@ -144,33 +144,55 @@
 
 Let us try to define PK-nets in this slice paradigm. Let $R$ be an object of $\textbf{CAT}\nnearrow\bf Set$.
 
-The definion \ref{def:lax-slice-2-cat} makes obvious the fact that arrows of the category $\textbf{CAT}\nnearrow\bf Set$ are PK-nets. Consequently, since the objects of the coslice category $R\sswarrow\big(\textbf{CAT}\nnearrow\bf Set\big)$ are the arrows of $\textbf{CAT}\nnearrow\bf Set$ with their domain in $R$, the objects of  $R\sswarrow\big(\textbf{CAT}\nnearrow\bf Set\big)$ are PK-nets of form $R$.
+The definion \ref{def:lax-slice-2-cat} makes obvious the fact that arrows of the category $\textbf{CAT}\nnearrow\bf Set$ are PK-nets. Consequently, since the objects of any coslice category $R/\big(\textbf{CAT}\nnearrow\bf Set\big)$ are the arrows of $\textbf{CAT}\nnearrow\bf Set$ with their domain in $R$, the objects of  $R/\big(\textbf{CAT}\nnearrow\bf Set\big)$ are PK-nets of form $R$. Let us study the cases of (op-)lax coslice 2-categories on $R$.
 
-Now a morphism from $\big<R,S,F,\phi\big>$ to  $\big<R,S',F',\phi'\big>$ in this new category is a pair $\big<M,\mu\big>$ where $M$ is an arrow  of $\textbf{CAT}\nnearrow\bf Set$, or, in other words, a PK-net $\big<S,S',N,\nu\big>$. $\mu : \big<F',\phi'\big>\Rightarrow \big<NF,(\nu F)\phi\big>$ is a 2-morphism of  $\textbf{CAT}\nnearrow\bf Set$ which then must be a natural transformation between $F'$ and $NF$ and must satisfy
-\begin{equation*}
-    (\nu F)\phi = (S'\mu)\phi'
-\end{equation*}
-
-%However, we do not cover all the $PK-nets$ : indeed in the definition 
 \begin{tzcategory}{\caption{PK-nets in the slice categories paradigm}
-        \label{laxSliceDef}}
-    \node[scale=1.3] (a) at (0,0){
-        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjYAGEAviDGl0mXPkIoAzOSq1GLNpx78hDYABEJUmdjwEiZRavrNWiDuwBGAMwAEAZRg5J0kBlPyRAAMpEHW6nYO2oLChgDkkqowUADm8ESgzgBOEFxIISA4EEgATNQ2GvYASiDUDHSOMAwACrJmCiBZWCl83sYg2blIZIXFiGVqtmzutSD1jS1tgfZdPX2+g3mIBUXD5RFsAGKz802tAeYr3b0+mTlbO2PKk5Ughwn9m0jPu+P7U-Z3Ak6g0zktLp1rt5qI0wFB8nUsGBInAIAwsPDPvc9qNvv9XgA5E6gxYXDqrG5iChiIA
-        \begin{tikzcd}[row sep = 3em,column sep = 3em]
-            \mathcal{D}' \arrow[rddd, "S'"',bend right=6,""{name=Sp}] & & & \\
-            & \mathcal{C}
-            \arrow[rr, "F"',""{name=F}]
-            \arrow[lu, "F'",""{name=Fp,right,near start}]
-            &  & \mathcal{D} \arrow[lldd, "S",""{name=S,left}]
-            \arrow[lllu, "N"',""{name=N,near start}] \\
-            & \arrow[Rightarrow,from=S,to=Sp,"\nu"' near start]
-            & \arrow[Rightarrow,from=Fp,to=N,"\mu" near start]
-            &  \\
-            & \bf Set
-            \arrow[from=uu, "R" near end,""{name=R},""{name=R2,left}, crossing over]
-            \arrow[Rightarrow,from=R,to=S,"\phi"',crossing over]
-            \arrow[Rightarrow,from=R2,to=Sp,"\phi'" near start]
-            &  &
-        \end{tikzcd}
-    };
+    \label{fig:slice-PKN}}
+\node[scale=1.3] (a) at (0,0){
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjYAGEAviDGl0mXPkIoAzOSq1GLNpx78hDYABEJUmdjwEiZRavrNWiDuwBGAMwAEAZRg5J0kBlPyRAAMpEHW6nYO2oLChgDkkqowUADm8ESgzgBOEFxIISA4EEgATNQ2GvYASiDUDHSOMAwACrJmCiBZWCl83sYg2blIZIXFiGVqtmzutSD1jS1tgfZdPX2+g3mIBUXD5RFsAGKz802tAeYr3b0+mTlbO2PKk5Ughwn9m0jPu+P7U-Z3Ak6g0zktLp1rt5qI0wFB8nUsGBInAIAwsPDPvc9qNvv9XgA5E6gxYXDqrG5iChiIA
+    \begin{tikzcd}[row sep = 3em,column sep = 3em]
+        \mathcal{D}' \arrow[rddd, "S'"',bend right=6,""{name=Sp}] & & & \\
+        & \mathcal{C}
+        \arrow[rr, "F"',""{name=F}]
+        \arrow[lu, "F'",""{name=Fp,right,near start}]
+        &  & \mathcal{D} \arrow[lldd, "S",""{name=S,left}]
+        \arrow[lllu, "N"',""{name=N,near start}] \\
+        & \arrow[Rightarrow,from=S,to=Sp,"\nu"' near start]
+        & \arrow[Rightarrow,to=Fp,from=N,"\mu" near start]
+        &  \\
+        & \bf Set
+        \arrow[from=uu, "R" near end,""{name=R},""{name=R2,left}, crossing over]
+        \arrow[Rightarrow,from=R,to=S,"\phi"',crossing over]
+        \arrow[Rightarrow,from=R2,to=Sp,"\phi'" near start]
+        &  &
+    \end{tikzcd}
+};
 \end{tzcategory}
+
+
+\begin{description}
+    \item[lax case] : A morphism from $\big<R,S,F,\phi\big>$ to  $\big<R,S',F',\phi'\big>$ in $R\sswarrow(\bf CAT\nnearrow Set)$ is a pair $\big<M,\mu\big>$ where
+          $M$ is a PK-net $\big<S,S',N,\nu\big>$  or, in other words, a PK-net $\big<S,S',N,\nu\big>$ (see Figure \ref{fig:slice-PKN}) and
+          $\mu : \big<NF,(\nu F)\phi\big> \Rightarrow \big<F',\phi'\big>$ is a 2-morphism of  $\textbf{CAT}\nnearrow\bf Set$ which then must be a natural transformation between $F'$ and $NF$ and must satisfy
+          \begin{equation}
+              \label{eq:lax-cond}
+              \phi' = \big(S'\mu\big)\big((\nu F)\phi\big)
+          \end{equation}
+    \item[op-lax case] : A morphism from $\big<R,S,F,\phi\big>$ to  $\big<R,S',F',\phi'\big>$ in $R\sswarrow(\bf CAT\nnearrow Set)$ is a pair $\big<M,\mu\big>$ where
+          $M$ is an arrow  of $\textbf{CAT}\nnearrow\bf Set$, and
+          $\mu : \big<F',\phi'\big>\Rightarrow \big<NF,(\nu F)\phi\big>$ is a natural transformation between $F'$ and $NF$ that satisfies
+          \begin{equation}
+              \label{eq:oplax-cond}
+              (\nu F)\phi = (S'\mu)\phi'
+          \end{equation}
+\end{description}
+
+In both cases, this gives rise to two notions of PK-homography and also allow to have 2-categories over PK-nets. Moreover, when we consider that $\mu$ is the identity we get from both equations (\ref{eq:lax-cond}) and (\ref{eq:oplax-cond}) the condition of a $\text{PKN}_R$ morphism : 
+$$\phi' = (\nu F)\phi)$$
+
+In fact, we just proved that
+\begin{thm}
+    $$\text{PKN}_R = R /^s (\bf CAT\nnearrow Set)$$
+\end{thm}
+
+
