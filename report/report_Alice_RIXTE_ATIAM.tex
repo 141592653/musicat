@@ -7,6 +7,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{dsfont}
 
+\usepackage[top=2.5cm, left=3cm, right=3cm, bottom=2.5cm]{geometry}
+\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
 \usepackage{etoolbox}
 \listadd{\pc}{$C$}
 \listadd{\pc}{$C\sharp$}
@@ -22,8 +27,6 @@
 \listadd{\pc}{$B$}
 \usepackage{calc}
 
-\usepackage[top=2.5cm, left=3cm, right=3cm, bottom=2.5cm]{geometry}
-\usepackage{caption}
 %\usepackage[pageanchor]{hyperref}
 \captionsetup{margin=10pt,font=small,labelfont=bf}
 
@@ -33,14 +36,11 @@
 \usetikzlibrary{shapes.geometric,fit}
 \input{fig_environments}
 
-% \usepackage[refpage]{nomencl}
-% \renewcommand{\pagedeclaration}[1]{%
-% 	\hspace*{\fill} \hyperlink{page.#1}{page \nobreakspace#1}}
-% \renewcommand{\nomname}{Notations}
-% \renewcommand{\nompreamble}{The next list describes several symbols that will be later used within the body of the document}
-% \makenomenclature
 
+\usepackage{ stmaryrd }
 \newcommand{\prodmon}{\Pi}
+\usepackage{mathtools}
+\newcommand{\phieq}{\stackrel{\mathclap{\normalfont\mbox{$\phi$}}}{\cong}}
 
 \usepackage[refpage]{nomencl}
 \makeatletter
@@ -55,7 +55,11 @@
  \@esphack}
 \makeatother
 \usepackage[backref=page,pageanchor]{hyperref}
+\renewcommand{\nomname}{Notations}
+\renewcommand{\nompreamble}{The next list describes several notations used throughout this document.}
 \makenomenclature
+
+
 
 \begin{document}
 
@@ -65,12 +69,16 @@
 \author{Alice Rixte}
 \date{\today}
 \maketitle %\endgroup
-
 \input{notations}
+
+\tableofcontents
+
+
 
 
 \chapter{Introduction}
 \input{intro}
+\input{PK_slice}
 
 \chapter{EK-nets}
 \input{EK_nets}

@@ -41,24 +41,24 @@ Let's study a particular class of PK-nets such that $\Delta$, $\mathcal{C}$, $R$
     \end{itemize}
 \end{defn}
 
-\begin{defn}[Slice category]
-    Let $\mathcal{C}$ be a category. The \textbf{slice category} $\mathcal{C}/c$ over the category $\mathcal{C}$  and an object $c \in \mathcal{C}$ is defined as follows :
-    \begin{itemize}
-        \item the objects of  $\mathcal{C}/c$ are the arrows $f\in \mathcal{C}$ such that the codomain of $f$ is precisely $c$
-        \item an arrow two objects $f : x \rightarrow c$ and $f' : x' \rightarrow d$ is an arrow $g : x\rightarrow x'$ such tha Figure \ref{sliceDef} commutes.
+% \begin{defn}[Slice category]
+%     Let $\mathcal{C}$ be a category. The \textbf{slice category} $\mathcal{C}/c$ over the category $\mathcal{C}$  and an object $c \in \mathcal{C}$ is defined as follows :
+%     \begin{itemize}
+%         \item the objects of  $\mathcal{C}/c$ are the arrows $f\in \mathcal{C}$ such that the codomain of $f$ is precisely $c$
+%         \item an arrow two objects $f : x \rightarrow c$ and $f' : x' \rightarrow d$ is an arrow $g : x\rightarrow x'$ such tha Figure \ref{sliceDef} commutes.
 
-    \end{itemize}
-    \begin{tzcategory}{\caption{Slice category morphisms definition}
-            \label{sliceDef}}
-        \node[scale=1.3] (a) at (0,0){
-            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAA8QBfU9TXfIRQBGclVqMWbdgHJuvEBmx4CRMsPH1mrRCADG3cTCgBzeEVAAzAE4QAtkjIgcEJACZqWqbsshqDOgAjGAYABX4VIRBrLBMACxx5K1sHRFFnV0QPCW02EySQG3tHahckdK8dEDjDLiA
-            \begin{tikzcd}[column sep = 2em, row sep = 2em]
-                x \arrow[d, "f"'] \arrow[r, "g"] & x' \arrow[ld, "f'"] \\
-                c                                &
-            \end{tikzcd}
-        };
-    \end{tzcategory}
-\end{defn}
+%     \end{itemize}
+%     \begin{tzcategory}{\caption{Slice category morphisms definition}
+%             \label{sliceDef}}
+%         \node[scale=1.3] (a) at (0,0){
+%             % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAA8QBfU9TXfIRQBGclVqMWbdgHJuvEBmx4CRMsPH1mrRCADG3cTCgBzeEVAAzAE4QAtkjIgcEJACZqWqbsshqDOgAjGAYABX4VIRBrLBMACxx5K1sHRFFnV0QPCW02EySQG3tHahckdK8dEDjDLiA
+%             \begin{tikzcd}[column sep = 2em, row sep = 2em]
+%                 x \arrow[d, "f"'] \arrow[r, "g"] & x' \arrow[ld, "f'"] \\
+%                 c                                &
+%             \end{tikzcd}
+%         };
+%     \end{tzcategory}
+%\end{defn}
 
 \begin{defn}[Coslice category]
     The notion of \textbf{coslice category} is the dual notion of slice category and will be denoted here as $c/\mathcal{C}$.
