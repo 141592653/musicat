@@ -114,28 +114,37 @@ The purpose of what will follows impose constraints on EK-nets so that we get in
 
 Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the (categorical) \textbf{pattern} of $F$ and $\mathcal{C}$ the \textbf{analysis category} of $F$.
 
-\begin{defn}[Constraint]
+\begin{defn}[Relational constraint]
     In $\text{EKN}_\mathcal{C}$, a \textbf{constraint} $\psi$ on a pattern $\Delta$ is a pair of family 
     $$\big<(\sigma_c)_{c\in\mathcal{C}},(\rho_f)_{f\in\bigcup_{(c,c')}Hom(c,c')}\big>$$
-     of mappings $\psi_c$ from $Obj(\Delta)$
-    to the powerset $\wp\big(\prod_{c'\in\mathcal{C}}Hom(c,c')\big)$.
+    of mappings $\sigma_c$ from $Obj(\Delta)$
+    to union of powersets
+    $$\bigcup_{c'\in\mathcal{C}}\wp\big(Hom(c,c')\big)$$.
 \end{defn}
 
 
-\begin{defn}[Constraint solving]
-    Let $\psi$ be a constraint of $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$.
-    Let us consider the subfamily $\psi_F = (\psi_{F(\delta)})_{\delta\in\Delta}$. Then, $solve(\psi,F)$ is the set of $F' \in \text{EKN}_\mathcal{C}$ such that there exists an arrow $\big< N, \nu\big> : F \rightarrow F'$ such that
-    $$\forall \delta \in \Delta, \nu_\delta \in \psi_F(\delta)$$.
+\begin{defn}[Relational constraint solving]
+    Let $\psi$ be a relational constraint of $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$.
+    Let us consider the subfamily $\psi_F = (\psi_{F(\delta)})_{\delta\in\Delta}$. Then, $solve(\psi,F)$ is the subcategory of 
+    $\text{EKN}_\mathcal{C}$ where
+    the objects of $solve(\psi,F)$ are the EK-nets $F' \in \text{EKN}_\mathcal{C}$ such that there exists an arrow $\big< N, \nu\big> : F \rightarrow F'$ such that
+    $$\forall \delta \in \Delta, \nu_\delta \in \psi_F(\delta)$$
+    which are exactly the arrows of $solve(\psi,F)$.
 \end{defn}
 
 Consequenyly, each constraint $\psi_\mathcal{C}$ on $\Delta$ induces a relation
-$\_\mathcal{R}_\psi \_$ where $F\mathcal{R}_\psi F'$ if and only if $F'\in solve(\psi,F)$.
+$\_\mathcal{R}_\psi \_$ where $F\mathcal{R}_\psi F'$ if and only if $F'$ is an object of $solve(\psi,F)$.
 
 
-\begin{defn}[Subconstraint]
-    Given a constraint $\psi$ in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$, a constraint$\psi'$ on the same pattern is a \textbf{subconstraint} of $\psi$ if and only if for all $c\in \mathcal{C}$ and $\delta\in\Delta$,
+\begin{defn}[Relational subconstraint]
+    Given a constraint $\psi$ in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$, a constraint $\psi'$ on the same pattern is a \textbf{subconstraint} of $\psi$ if and only if for all $c\in \mathcal{C}$ and $\delta\in\Delta$,
     $$\psi'_c(\delta)\subset\psi_c(\delta)$$
 \end{defn}
+
+\begin{prop}
+    If $\psi'$ is a relational subconstraint of $\psi$ , then for all EK-net $F$ on the same pattern as $\psi$ and $\psi'$, 
+    $$solve(\psi',F)\subset solve(\psi,F)$$
+\end{prop}
 
 \paragraph{Constraints representation}
 
