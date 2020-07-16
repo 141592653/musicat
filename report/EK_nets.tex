@@ -109,21 +109,24 @@ Intuitively, $\mathcal{C}$ will be the analysis tool we will keep throughout the
 \section{Constraints on EK-nets}
 
 
-
 The purpose of what will follows impose constraints on EK-nets so that we get interesting results musically.
 
 Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the (categorical) \textbf{pattern} of $F$ and $\mathcal{C}$ the \textbf{analysis category} of $F$.
 
-\begin{defn}[Constraint]
-    In $\text{EKN}_\mathcal{C}$, a \textbf{constraint} $\psi$ on a pattern $\Delta$ is a pair of family 
-    $$\big<(\sigma_c)_{c\in\mathcal{C}},(\rho_f)_{f\in\bigcup_{(c,c')}Hom(c,c')}\big>$$
-     of mappings $\psi_c$ from $Obj(\Delta)$
-    to the powerset $\wp\big(\prod_{c'\in\mathcal{C}}Hom(c,c')\big)$.
+\begin{defn}[Relational constraint]
+    In $\text{EKN}_\mathcal{C}$, a \textbf{relational constraint} $\rho$ on a pattern $\Delta$ is a family 
+    $(\rho_c)_{c\in\mathcal{C}}$
+    of mappings $\rho_c$ from $Obj(\Delta)$ to 
+    $\bigsqcup_{c'\in \mathcal{C}}\wp\big(Hom(c,c')\big)$, where $\bigsqcup$ represents the disjoint union \label{nomencl:sq-cup} and $\wp(s)$ is the powerset of the set $s$\label{nomencl:pow-set}.
 \end{defn}
 
 
 \begin{defn}[Constraint solving]
-    Let $\psi$ be a constraint of $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$.
+    Let $\rho$ be a constraint of $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$ and let $\big<N,\nu\big> : F \rightarrow F'$ be an EK-homography $\nu : F \rightarrow F'$ where the pattern of $F$ is $\Delta$.
+
+    
+
+
     Let us consider the subfamily $\psi_F = (\psi_{F(\delta)})_{\delta\in\Delta}$. Then, $solve(\psi,F)$ is the set of $F' \in \text{EKN}_\mathcal{C}$ such that there exists an arrow $\big< N, \nu\big> : F \rightarrow F'$ such that
     $$\forall \delta \in \Delta, \nu_\delta \in \psi_F(\delta)$$.
 \end{defn}
