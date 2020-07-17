@@ -1,0 +1,37 @@
+
+\paragraph{Can we adapt natural transformations to fit all K-net isographies}
+There are 48 automorphisms of the $T/I$ group. 24 are covered by $T/I$ acting on it self. How to get the 24 others?
+
+$$\circ : T/I \times T/I \rightarrow T/I$$
+
+\begin{itemize}
+    \item $T_i \circ T_j = T_{i + j}$
+    \item $T_i \circ I_j = I_{i + j}$
+    \item $I_i \circ T_j = I_{-i + j}$
+    \item $I_i \circ I_j = T_{-i + j}$
+\end{itemize}
+
+Let us define
+$$\star : T/I \times T/I \rightarrow T/I$$.
+
+Idea : add a multiplication (ie another group action).
+
+We want to use $T/I$ as a ring. BUT $T/I$ is not abelian. So we just use a wtf construction. Don't know if it's useful but still this is a category.
+\begin{itemize}
+    \item $T_i \star T_j = T_{5(i + j)}$
+    \item $I_i \star T_j = I_{5(i + j)}$
+    \item $I_i \star I_j = T_{7i + 5j}$
+    \item $T_i \star I_j = I_{7i + 5j}$
+\end{itemize}
+
+
+
+\begin{prop}
+    $a \star (b \circ c) = (a \star b) \circ (b \star c)) $
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item $T_i \star (T_j \circ T_k) = T_{i(j+k)} = T_{ij}\circ T{jk}$
+        \item $I_i \star (T_j \circ T_k) = I_{i(j+k)} = T_{ij}\circ T{jk}$
+    \end{itemize}
+\end{proof}

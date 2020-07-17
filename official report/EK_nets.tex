@@ -1,0 +1,474 @@
+The definition of a PK-net is very general and covers a lot of the concepts introduced, such as (TODO) transposition class, Lewin's GIS (TODO), Forte's (TODO) normal order class, , (TODO) K-nets, symmetric groups of permutations (TODO), Tonnetz...
+
+
+
+Let's study a particular class of PK-nets such that $\Delta$, $\mathcal{C}$, $R$ and $S$ are fixed. The only thing we are allowed to change is $F$.
+
+\begin{prop}
+    Let $F' : \Delta \rightarrow \mathcal{C}$ such that there exists a natural transformation $\psi : F \rightarrow F'$, then we get an obvious natural transformation $\phi' : R \rightarrow SF$
+\end{prop}
+% \begin{proof}
+%     Let $\phi'_A : R(A) \rightarrow SF'(A)$ such that, $\phi'_A = S\psi_A$. In other words, in the category of functors, $\phi' = Id_S\psi$ which is necessarily a natural transformation, due to the axioms of the category of functors.
+
+% \end{proof}
+
+\begin{tzcategory}{}
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}[column sep = small, row sep = 5.5ex]
+            \Delta
+            \arrow[bend left=40]{rr}[name=F,label=above:$F$]{}
+            \arrow[bend right=40]{rr}[name=F2,label=below:$F'$]{}
+            \ar[ddr, "R"',""{name=R,right}]
+            & &
+            \mathcal{C}
+            \arrow[shorten <=5pt,shorten >=0pt,Rightarrow,to path={(F) -- node[label=right:$\psi$] {} (F2)}]{}
+            \ar[ddl,"S",""{name=S,left}] \\
+            & & \\
+            & \textbf{Set}&
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+
+
+\section{Formal definition}
+
+% \begin{defn}[Lawvere theory]
+%     A \textbf{Lawvere theory}\cite{hyland2007category} $\mathcal{T}$ is a category with finite products with a distinguished object $x$ such that all objects in $T$ are isomorphic to a finite product $x^n = x \times ... \times x$.
+% \end{defn}
+
+\begin{defn}[EK-nets]
+    Let $\mathcal{C}$ be a small Lawvere theory. Then, $\bf \text{EKN}_\mathcal{C}$ \label{nomencl:EKN} is defined as the full subcategory of $\textbf{CAT}\nearrow \mathcal{C}$ (see Definition \ref{def:lax-slice-2-cat}) where for all $F\in \text{EKN}_\mathcal{C}$, $F$ is faithful. An object (i.e. a functor $F : \Delta \rightarrow \mathcal{C}$) of the category of the category $\text{EKN}_\mathcal{C}$ is called a $\mathcal{C}$ \textbf{EK-net} on  $\Delta$.
+\end{defn}
+
+\begin{rem}
+    Note that the functor component $N$ of an arrow between two EK-nets does not have to be faithful.
+\end{rem}
+
+For a category $\mathcal{D}$, there may not exist any $\mathcal{C}$ EK-Net of pattern $\mathcal{D}$.
+\begin{defn}[EK candidate]
+    A category $\Delta$ is an $\text{EKN}_{\mathcal{C}}$ \textbf{candidate} if there exists at least one $\mathcal{C}$ EK-net of pattern $\Delta$.
+\end{defn}
+
+\begin{note}
+    From now on, we will presuppose that all the categories named $\Delta$ are candidates for the EK-net category considered.
+\end{note}
+
+Intuitively, $\mathcal{C}$ will be the analysis tool we will keep throughout the whole analysis. For a particular EK-net $F : \Delta \rightarrow \mathcal{C}$, $\Delta$ is a pattern matched by the musical object being analysed and $F$ is the musical object analysed itself.
+
+
+
+
+% \begin{defn}[Model of a Lawvere theory]
+%     A \textbf{model} of a Lawvere theory $\mathcal{T}$ is a product preserving functor $S : \mathcal{T} \rightarrow \bf Set$.
+% \end{defn}
+
+% A particularity of models is that we get a distinguished set $m$  which is the image of the distinguished element $x$. This set can be interpreted as the set of objects the EK-net analyse.
+
+% \begin{defn}[EK-model]
+%     Let $F : \Delta \rightarrow \mathcal{C}$ an EK-net. Then an EK-model of $F$ on the model $S$ is the pair $\big<R,\phi\big>$ such that $R$ is full and  the diagram \ref{fig:EK-model-definition} commutes.
+
+%     \begin{tzcategory}{\caption{EK-model definition}
+%         \label{fig:EK-model-definition}}
+%          \node[scale=1.3] (a) at (0,0){
+%         \begin{tikzcd}[column sep=tiny]
+%             \Delta
+%             \ar[ddr, "R"',""{name=R,right}]
+%             \ar[rr,"F"]
+%             & &
+%             \mathcal{C}
+%             \ar[ddl,"S",""{name=S,left}] \\
+%             & \ar[Rightarrow,bend left=80,from=R, to=S, "\phi"']& \\
+%             & \bf Set &
+%         \end{tikzcd}
+%          };
+%     \end{tzcategory}
+% \end{defn}
+
+% In other words, an EK-model is a particular case of PK-net with two main differences : 
+% \begin{itemize}
+%     \item $\mathcal{C}$ is a Lawvere theory and $S$ is a model of it.
+%     \item $R$ is full.
+%     \item $F$ is faithfull. 
+% \end{itemize}
+
+% In fact, we just get the \textit{object} PK-net but we did not get at all the whole structure (which is the most important part) of PK-homographies and of the $\text{PKN}_{*}$ categories. However, we are not interested in recovering all of this structure. The whole point of the study is to restraint the persepective to get something more usable in practice.
+
+% We are especially insterested here in the set of EK-model that a certain EK-net can generate. The problem is that we have rapidly too many options for $R$ as a candidate
+
+% \begin{exmp}
+%     Let $\Delta$ be the category with one element and its identity arrow (we  will call it $*$\label{nomencl:star}). Let $\mathcal{C} = \mathbb{Z}_2$. A model of $\mathbb{Z}_2$ can send the object of $\mathcal{C}$ to any set with more than $2$ elements. Let us pick the case of the standard group action $R_2$ of $\mathbb{Z}_2$ on the set $[\![0,1]\!]$. There is exactly one obvious EK-net between those two categories.
+
+%     There as many functor as singletons betwee $*$  and $\bf Set$.
+%     These are our candidate to be EK-models. We still need a natural transformation for each of them. Each time, there is exactly one and is it obvious : the identity.
+
+%     As a conclusion, the class (it is not even a set) of EK-model of this functor has no structure and is hudge.
+% \end{exmp}
+
+
+\section{Constraints on EK-nets}
+
+
+The purpose of what will follows impose constraints on EK-nets so that we get interesting results musically.
+
+Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the (categorical) \textbf{pattern} of $F$ and $\mathcal{C}$ the \textbf{analysis category} of $F$.
+
+\begin{defn}[Structural constraints]
+    This definition is more general than the scope of EK-nets. Let
+\end{defn}
+
+\begin{defn}[Relational constraint]
+    In $\text{EKN}_\mathcal{C}$, a \textbf{relational constraint} $\rho$ on a pattern $\Delta$ is a family 
+    $(\rho_c)_{c\in\mathcal{C}}$
+    of mappings $\rho_c$ from $Obj(\Delta)$ to 
+    $\bigsqcup_{c'\in \mathcal{C}}\wp\big(Hom(c,c')\big)$, where $\bigsqcup$ represents the disjoint union \label{nomencl:sq-cup} and $\wp(s)$ is the powerset of the set $s$\label{nomencl:pow-set}.
+\end{defn}
+
+
+\begin{defn}[Relational constraint solving]
+    Let $\rho$ be a constraint of $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$. Then a solution to this constraint is a couple of EK-nets $(F,F')$ where $F$ is of pattern $\Delta$such that there exists an arrow $\big<N,\nu\big> : F\rightarrow F'$ such that 
+    $$\forall \delta \in \Delta, \nu_\delta \in \rho_{F(\delta)}(\delta)$$
+\end{defn}
+
+\begin{rem}
+    So far, we cannot say we defined a proper relation since we are probably dealing with proper classes.
+
+    TODO : deal with that.
+\end{rem}
+
+Consequenyly, each constraint $\psi_\mathcal{C}$ on $\Delta$ induces a relation
+$\_\mathcal{R}_\psi \_$ where $F\mathcal{R}_\psi F'$ if and only if $F'\in solve(\psi,F)$.
+
+
+\begin{defn}[Subconstraint]
+    Given a constraint $\psi$ in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$, a constraint$\psi'$ on the same pattern is a \textbf{subconstraint} of $\psi$ if and only if for all $c\in \mathcal{C}$ and $\delta\in\Delta$,
+    $$\psi'_c(\delta)\subset\psi_c(\delta)$$
+\end{defn}
+
+\paragraph{Constraints representation}
+
+A constraint on $\Delta$ can be represented as the category $\Delta$
+
+
+
+
+
+
+
+
+\section{How to encode musical objects in the EK-net paradigm}
+
+From now on, we will consider musical object as EK-nets. The fact is that it is not obvious to see how a chord or a picth class is an EK-net. An important part of our work here is to have the possibility to analyse the relations between this objects.
+
+One of the most simple musical object is a pitch class. In a well-tempered tuning, this can be considered as the group $\mathbb{Z}_n$ where $n$ is the number of pitch classes. We have seen that K-nets were a great paradigm to analyse well-tempered music by using the dihedral group and the work of  A. Popoff et al.\cite{PAAE2016} has made a great step toward using this group in music analysis.
+
+Consequently, we will study T/I EK-nets mainly in this report. The first question would then be : are there constraints on T/I EK-nets such that their  solution is exactly 12 (or $n$ in a momre general case).
+
+\subsection{EK pitch classes}
+
+To answer this question, let us first consider the shape the category $\Delta$ that we will be using.
+
+It can be empty, and the only arrow from $\Delta$ to $T/I$ could be interpreted as a timeless silence.
+
+%TODO : better proof
+\paragraph{$\Delta$ has only one arrow}
+Let us suppose that $\Delta$ as the category with ewacylty one element $\bullet$ and its identity arrow. Consequently, $\Delta$ is isomorphic to a subgroup of $T/I$. The set of the subgroups of $T/I$ is in one-to-one correspondance with the set of $T/I$ EK-Nets with $\Delta$ fixed.
+There is only one functor $F:\Delta \rightarrow T/I$ which maps $Id_\bullet$ to $T_0$.
+
+In other words, there exactly one EK-net of this $\Delta$. If we need a musical to be completely unique, we can encode it as a unique object with a unique arrow. It could be interpreted as a silence.
+
+
+%For instance, if track is using a certain key (e.g. Amin), we could map this key to this object so it acts as an anchor.
+
+\paragraph{$\Delta$ has two arrows}
+There are $13$ 2-elements subgroups of $T/I$ : $\{T_0,T_6\}$ and $\forall k\in[\![1,12]\!], \{T_0,I_k\}$. They are all obviously isomorphic to the group $\mathbb{Z}_2$, that we can safely choose as our $\Delta$. Consequently, we get $13$ parallel functors from $\mathbb{Z}_2$ to $T/I$.
+
+We also know that all (inner) automorphisms of T/I are natural transformations between endofunctors of $T/I$. Precisely, all the functors corresponding to the subgroups $\{T_0,I_k\}$ are isomorphic threw a positive automorphism.
+%TODO define positive isomorphisms
+
+However, since all automorphisms of T/I send transpositions on transpositions and inversions on inversions, there is no natural transformations for $\{T_0,T_6\}$ to any other functor.
+%TODO maybe name better those functors
+
+Consequently, we have two equivalence classes of EK-nets. This gives to the analyst two different tools to analyse a point with two arrows on it.
+
+It would be tempting to define our pitch-classes as the 12 functors with a maping like this :
+
+%TODO define f and everything
+
+\begin{eqnarray*}
+    C & \rightarrow (f \rightarrow I_0) \\
+    C\sharp &\rightarrow (f \rightarrow I_1) \\
+    &\vdots \\
+    B & \rightarrow (f \rightarrow I_{11})
+\end{eqnarray*}
+
+\begin{tzcategory}{\caption{Constraint with two arrows}
+        \label{fig:2-arrow-constr}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AjJhhmHCAC+VEDCgBzeEVAAzAE4QAtkjIgcEVdQYQIaIgEYAHGVmM4MUQzpcYDAAqZc+QohDysEgBaCRQoA
+        \begin{tikzcd}
+            \bullet \arrow["I\_"',loop, distance=2em, in=125, out=55]
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+Indeed, the constraint in Figure \ref{fig:2-arrow-constr} has 12 solutions, as we have seen above. So each of these EK-nets are a candidate to be a pitch-class.
+
+
+However, this would not be coherent with the interaction between two pitch-classes. Indeed, if we want to use two different pitch-classes, with an arrow between them, we are forced by the category constraints to have at least two morphisms between the pitch-classes, as we can see in Figure \ref{wrongPitchClass}.
+%TODO : finish paragraph
+
+\begin{tzcategory}{\caption{Wrong definition of pitch classes}
+        \label{wrongPitchClass}}
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}
+            {}
+            \bullet \arrow["I_i"', loop, distance=2em, in=125, out=55] &      \\
+            &      \\
+            \bullet \arrow["I_j"', loop, distance=2em, in=305, out=235] \arrow[uu, "I_y"', bend right] \arrow[uu, "T_x", bend left] &
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+
+\begin{prop}
+    By considering a pitch class as a single point with to reflexive arrows, we can use only half of the notes in practice.
+\end{prop}
+\begin{proof}
+    $i$ and $j$ are fixed.
+    \begin{eqnarray*}
+        I_i \circ T_x  = I_y \Rightarrow i - x = y \Rightarrow i = x + y\\
+        T_x \circ I_j = I_y \Rightarrow x + j = y \Rightarrow j = y - x\\
+    \end{eqnarray*}
+    So we get
+    $$\systeme*{2x = i - j, 2y = i + j}$$
+
+    This is possible iff $i$ and $j$ have the same parity. In other words, in a connex component of the category $\Delta$, we could only use 6 notes.
+
+
+\end{proof}
+
+This can be explained by the fact that here the theory considers the interval by going from one note to the other by the fastest path, which we are not used to do. It could be fun by the way to transform a sing in another by this consideration.
+
+A fix to this problem is to consider a pitch class constraint as a 2-objects EK-net (see Figure \ref{fig:constrPitchClass}).
+
+\begin{tzcategory}{\caption{Constraint for EK relative pitch classes}
+        \label{fig:constrPitchClass}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+        \begin{tikzcd}
+            {}
+            \bullet
+            \arrow["I\_"',loop, distance=2em, in=125, out=55]  & \\
+            &  \\
+            \bullet
+            \arrow[uu, bend right] \arrow[uu, bend left] &
+        \end{tikzcd}
+    };
+
+\end{tzcategory}
+
+\begin{prop}
+    The solutions for the constraint in Figure \ref{fig:constrPitchClass} are the EK-nets of the form described in Figure \ref{fig:solConstrPitch}.
+    \begin{tzcategory}{\caption{Constraint solution for EK relative pitch classes}
+            \label{fig:solConstrPitch}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+            \begin{tikzcd}
+                \bullet
+                \arrow["I_i"',loop, distance=2em, in=125, out=55]  & &\\
+                &    &  x + y = i\\
+                \bullet
+                \arrow[uu, "I_y"', bend right] \arrow[uu, "T_x", bend left] &&
+            \end{tikzcd}
+        };
+
+    \end{tzcategory}
+\end{prop}
+
+\begin{proof}
+    Since there are two different arrows between the objects, there must be one transposition and one inversion because the EK-net is faithful. This demonstrates the form of the solution in figure \ref{fig:solConstrPitch}.The functor requirements forces the following system to be satisfied : 
+    $$\systeme*{i-x = y,i-y = x }$$
+    which has the obvious solution $i = x + y$
+
+\end{proof}
+
+Elementary algebra tells us that for every $i$ possible, there are $12$ choices for $x$ and $y$. In other words, this constraint yields a $144 = 12^2$ elements solution set. We could interpret this set as a pair of every possible pitch-classes. Instead, we will call the object with only one arrow the root note and the one with two arrows as the pitch relative to the root note.
+
+\begin{defn}[Relative pitch-class]
+    A \textbf{relative pitch-class} is one of the solutions of the relative pitch-class constraint (see Figure \ref{fig:constrPitchClass}).
+\end{defn}
+
+We now have $12$ candidates for each pitch class, because for one relative pitch-class, we must fix a root note. The idea behind this construction is that we just need to transpose the root note to get the transposition of the whole EK-nets.
+
+Indeed, we did not yet use the whole power of EK-constraints
+
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoAmAXVJADcBDAGwFcYkQAVAfQGsQBfUuky58hFGWLU6TVu27EB0mFADm8IqABmAJwgBbJGRA4ISAIw0ARjDBQkAZmMMWbRJy4APAUJC6DRjSmFta29ogAtE40LnLu3ACeIDSM9DaMAAoieATsOliqABY4Ptp6hoiWJmaVKRAQaETmABxkWkxwMNKp6VnYOeIg+UUlMbJuIACSXPRK-EA
+\begin{tikzcd}
+    T_0 \arrow["I_a"', loop, distance=2em, in=125, out=55]          \\
+                                                                    \\
+    T_k \arrow[uu, "T_x", bend left] \arrow[uu, "T_y"', bend right]
+    \end{tikzcd}
+
+
+% \begin{tzcategory}{\caption{The k pitch-classes as PK-nets}
+%         \label{pitchClassDef}}
+%     \node[scale=1.3] (a) at (0,0){
+%         % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+%         \begin{tikzcd}
+%             {}
+%             X \arrow["I_{2i}"', loop, distance=2em, in=125, out=55] &      \\
+%             &      \\
+%             Y %\arrow["T_{k}"', loop, distance=2em, in=305, out=235] 
+%             \arrow[uu, "I_{i}"', bend right] \arrow[uu, "T_{i}", bend left] &
+%         \end{tikzcd}
+%     };
+
+% \end{tzcategory}
+
+\begin{prop}
+    By fixing $\Delta$ as shown in Figure% \ref{pitchClassDef}, we get an analysis set of 12 EK-Nets.
+\end{prop}
+
+\begin{proof}
+    A transposition of $j$ semi-tones of a pitch class $i$ is a natural transformation $$\psi = \systeme*{X\rightarrow T_j, Y\rightarrow T_0}$$
+
+    \begin{tzcategory}{\caption{The k pitch-classes as PK-nets}
+        }
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADEAKADQEoQAvqXSZc+QigBM5KrUYs27AOQ9+QkdjwEiZSbPrNWiDpwCaa4SAybxRaXuoGFx5WYsax2lGQDM++UYmfIKW1p4SyNJ+jgGKKsHqVqJaEWQArP6Gim4hHil2pBkxWS4q5oKyMFAA5vBEoABmAE4QALZIZCA4EEjSciUgAJIA+sCSWAIg1Ax0AEYwDAAKybbGTVjVABY4uSDNbR3U3UgAjMXOIAAqwwBWUyAz80srXg8wDTuJ++2IZ109iB850CIzGnCwAGobrxJtM5gtljZXgx3p9LN9ekcAUD+hdrnc4U9EeE2OstmjGi0fgAWLFIABswLY1yw90eCJeEhAZO2uwxiFp-yQaSZxmuxDZ8OeSK5KI+fKpwrpiAA7KKrqNITdYQ8pcT8sY5RS9orEIyhar1fjJUTOaSNryBBQBEA
+            \begin{tikzcd}
+                F(X) \arrow[dd, "I_{2i}"'] \arrow[rr, "T_j"]
+                &  & F'(X) \arrow[dd, "I_{2(i+j)}"]
+                &  & F(X) \arrow[dd, "T_i"'] \arrow[rr, "T_0"]
+                &  & F'(X) \arrow[dd, "T_{i+j}"]   \\
+                \\
+                F(Y) \arrow[rr, "T_j"']
+                &  & F'(Y)
+                &  & F(Y) \arrow[rr, "T_j"']
+                &  & F'(Y)
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+\end{proof}
+
+
+
+
+
+
+
+
+\subsection{EK-nets on monoids}
+In EK-nets, we are particularly interested in the case where $\mathcal{C} = T/I$. Since $T/I$ has only one element, all the functors $F:\Delta \rightarrow T/I$ send all the elements on the unique element of $T/I$. In the following, we will not recall the image of the elements of $\Delta$.
+
+EK-nets have particular properties when the category $\mathcal{C}$ has a single element. Let $\mathcal{M}$ be such a category and let us consider  an $\mathcal{M}$ EK-nets .
+
+If $\Delta$ has a single element, then the functors $[\Delta,\mathcal{M}]$ are in one-to-one correspondance with the monoid morphisms. Since EK-nets are faithful, we only get the injective morphisms. In other words, the set of $\text{EKN}_{\mathcal{M}}$ candidates is in one-to-one correspondence with the submonoids of $M$.
+
+\begin{prop}
+    The natural transformation components $\nu : F \rightarrow F'N$ of EK-homographies do not actually depend on $F$ when we consider $\mathcal{M}$ EK-nets.
+\end{prop}
+
+Indeed, since $\mathcal{M}$ has only one element $\bullet$, any mapping from $\Delta$'s elements to a reflexive arrows of $\bullet$ defines a set of endomorphisms from any $T/I$ EK-net on $\Delta$.
+%TODO define group action
+% Here, $S:\mathcal{C}\rightarrow \textbf{Set}$ is the action of $T/I$ on the set $Notes = \{C,C\sharp,D,E\flat,E,F,F\sharp,G\sharp,A,B\flat,B\}$.
+
+\subsection{EK-nets on groups}
+
+Let $F:\Delta\rightarrow G$ and $F':\Delta\rightarrow G$ be two parallel functors where $G\in \textbf{Grp}$. Let $X,Y\in\Delta$ and $f\in Hom(X,Y)$. We then get the following commutating diagram :
+
+\begin{tzcategory}{}
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}[column sep = small]
+            F(X) \arrow[dd, "F(f)"'] \arrow[rr, "\psi_X"] &  & F'(X) \arrow[dd, "F'(f)"] \\
+            &  &                           \\
+            F(Y) \arrow[rr, "\psi_Y"']                    &  & F'(Y)
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+
+This diagram corresponds to the equation :
+\begin{eqnarray*}
+    &\psi_Y\cdot F(f) &=   F'(f) \cdot \psi_X \\
+    \Leftrightarrow &
+    F'(f) &=   \psi_Y\cdot F(f) \cdot \psi_X^{-1}\\
+\end{eqnarray*}
+
+Hence, there is no constraint on the couple $(x,y)$, we juste need to choose $a = x$ and $b = y$, and we get our natural transformation.
+
+Though, $X$ and $Y$ are actually the same object and $f$ is a reflexive object, we get $a = b$, and consequently,
+$$y = b^{-1}\cdot x \cdot b $$
+
+In other words, $\psi$ is an \textbf{inner automorphism} of $G$.
+
+
+\subsection{Transposition generalization}
+
+\begin{defn}[EK pitch class]
+
+\end{defn}
+
+\begin{defn}[EK-anchor]
+    An \textbf{EK-anchor} is an object $a\in\Delta$  with only one reflexive arrow on $a$ in $\Delta$ (a.k.a $id_a$).
+\end{defn}
+
+Fundamentally, an anchor is a musical object that can be interpreted freely.
+
+\begin{prop}[EK-anchor properties]~
+    \begin{enumerate}
+        % \item Let $a$ be an EK-anchor. For any object $d \in \Delta$, there is at most one arrow $f:d\rightarrow a$.
+        \item For any $a\in \Delta$, if there exists an object $d\in \Delta$ such that $\textbf{card}([d,a]) = 1$, then $a$ is an EK-anchor.
+    \end{enumerate}
+    \label{anchorProp}
+\end{prop}
+
+\begin{proof}
+    \begin{enumerate}
+        %\item The unicity is immediate from the composition law of a category.
+        \item By absurd, if we suppose $a$ is not an anchor, then it has at least one reflexive arrow $r$ different from the identity. Let $f : d\rightarrow a$ the unique arrow between $d$ and $a$. Then we must have $r \circ f = f$ since $f$ is unique. So $r$ would have to be the identity.
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}[Generalization of transposition]
+    For any T/I EK-net $F$ on $\Delta$, a transposition $\tau$ is a mapping from $Obj(\Delta)$ to $ $
+\end{defn}
+
+
+\section{Constraints}
+
+\begin{defn}[EK-domain]
+    An $EKN_\mathcal{C}$ musical domain
+\end{defn}
+
+\begin{defn}
+
+\end{defn}
+
+
+\section{Recovering intervals}
+
+Let us study how to use PK-nets with a 2-objects category $\Delta$.
+
+
+
+
+% TODO  : what is the juxtaposition of two connected component (ie no morphism between them)
+
+
+\section{Recover Tonnetz}
+
+
+\begin{defn} The \textbf{category of elements} $el(F)$ of a functor $F : \mathcal{C}\rightarrow \textbf{Set}$ is defined as follows :
+    \begin{itemize}
+        \item its objects are the pairs $(c,x)$ where $c$ is an object of $\mathcal{C}$ and $x\in F(c)$
+        \item its morphisms $(c,x)\rightarrow (c',x')$ are morphisms $u : c\rightarrow c'$ such that $F(u)(x) = x'$
+    \end{itemize}
+\end{defn}
+\paragraph{}
+Now, what is the category of elements of the PLR-group action over \textbf{Set}? Let $S$ be the functor from the category PLR to the category \textbf{Set} such that $S$ associates to the only object of PLR a set $X$ of cardinality 24 and such that $S$ is a PLR-group action on $X$.
+
+$el(S)$ is then a category with $24$ objects. One can use it as a $\Delta$ category in a PK-net. The transformation $\phi$ gives us the musical interpretation, of each transformation triads.
+
+=> How to add more structure to eliminate arrow? Maybe take two generators
