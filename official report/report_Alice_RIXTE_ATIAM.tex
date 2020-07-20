@@ -1,0 +1,103 @@
+\documentclass{report}
+
+\input{ams_header}
+
+\usepackage{systeme}
+
+\usepackage[T1]{fontenc}
+\usepackage{dsfont}
+
+\usepackage[top=2.5cm, left=3cm, right=3cm, bottom=2.5cm]{geometry}
+\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{etoolbox}
+\listadd{\pc}{$C$}
+\listadd{\pc}{$C\sharp$}
+\listadd{\pc}{$D$}
+\listadd{\pc}{$E\flat$}
+\listadd{\pc}{$E$}
+\listadd{\pc}{$F$}
+\listadd{\pc}{$F\sharp$}
+\listadd{\pc}{$G$}
+\listadd{\pc}{$G\sharp$}
+\listadd{\pc}{$A$}
+\listadd{\pc}{$B\flat$}
+\listadd{\pc}{$B$}
+\usepackage{calc}
+
+%\usepackage[pageanchor]{hyperref}
+\captionsetup{margin=10pt,font=small,labelfont=bf}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.markings}
+\usetikzlibrary{cd}
+\usetikzlibrary{shapes.geometric,fit}
+\input{fig_environments}
+
+
+\usepackage{ stmaryrd }
+\newcommand{\prodmon}{\Pi}
+\usepackage{mathtools}
+\newcommand{\phieq}{\stackrel{\mathclap{\normalfont\mbox{$\phi$}}}{\cong}}
+
+\usepackage[refpage]{nomencl}
+\makeatletter
+\def\nomlabelref#1{\dotfill\nobreakspace page\ \pageref{#1}\nomentryend\endgroup}
+\def\@@@nomenclature[#1]#2#3#4{%
+ \def\@tempa{#2}\def\@tempb{#3}\def\@tempc{#4}%
+ \protected@write\@nomenclaturefile{}%
+  {\string\nomenclatureentry{#1\nom@verb\@tempa @[{\nom@verb\@tempa}]%
+      \begingroup\nom@verb\@tempb\protect\nomeqref{\theequation}%
+        |nomlabelref}{\@tempc}}%
+ \endgroup
+ \@esphack}
+\makeatother
+\usepackage[backref=page,pageanchor]{hyperref}
+\renewcommand{\nomname}{Notations}
+\renewcommand{\nompreamble}{The next list describes several notations used throughout this document.}
+\makenomenclature
+
+
+
+\begin{document}
+
+%\begingroup    
+
+\title{Categories and music}
+\author{Alice Rixte}
+\date{\today}
+\maketitle %\endgroup
+\input{notations}
+
+\tableofcontents
+
+
+
+
+\chapter{Introduction}
+\input{intro}
+\input{PK_slice}
+
+\chapter{EK-nets}
+\input{EK_nets}
+
+\chapter{Polyphony}
+\input{polyphony}
+
+\chapter{Implementation}
+\input{implementation}
+
+\chapter{Conclusion}
+\input{utility}
+
+\printnomenclature[2cm]
+
+\newpage
+\bibliography{bibliography}
+\bibliographystyle{ieeetr}
+
+
+
+\end{document}

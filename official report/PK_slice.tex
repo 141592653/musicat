@@ -1,0 +1,206 @@
+\section{PK-net definition via slice catagories}
+\begin{defn}[2-category]
+    %TODO
+\end{defn}
+
+\begin{defn}[\bf Cat]
+    \textbf{Cat}\label{nomencl:Cat} is the 2-category of all small categories.
+\end{defn}
+\begin{defn}[\bf CAT]
+    \textbf{CAT}\label{nomencl:CAT} is the 2-category of all locally small categories.
+\end{defn}
+
+\begin{defn}[Slice 2-category\cite{johnstone1993fibrations}]
+    \label{def:slice-2-cat}
+    Let $\mathcal{C}$ be a 2-category. The \textbf{slice 2-category} $\mathcal{C}/c$\label{nomencl:slice} over the category $\mathcal{C}$  and an object $c \in \mathcal{C}$ is defined as follows :
+    \begin{itemize}
+        \item the objects of  $\mathcal{C}/c$ are the arrows $f\in \mathcal{C}$ such that the codomain of $f$ is precisely $c$
+        \item an arrow $\big<g,\phi\big>$ between two objects $f : x \rightarrow c$ and $f' : x' \rightarrow d$ is a pair made of an arrow $g : x\rightarrow x'$ and a 2-isomophism $\phi : f \Rightarrow f'\circ g$ as shown in Figure \ref{fig:slice-def}.
+        \item a 2-arrow between $\big<g,\phi\big>$ and $\big<g',\phi'\big>$ (where both of these arrows send $f$ to $f'$) is a 2-arrow
+              $\lambda : g\Rightarrow g'$ between $g$ and $g'$ such that
+              $\phi' = \phi(f'\lambda)$
+        \item the identity of the object $f: x\rightarrow c$ is $(id_{\mathcal{C}/c})_f = \big<id_c, (id_\mathcal{C})_f\big>$
+        \item for three objects 
+        $f : c\rightarrow x $, 
+        $f' : c' \rightarrow x$ and 
+        $f'' :  c'' \rightarrow x$ and two arrows
+        $\big<g,\phi\big> : f \rightarrow f'$ and
+        $\big<g',\phi'\big> : f' \rightarrow f''$ , the composition is defined as follow :
+              $$\big<g',\phi'\big>\circ\big<g,\phi\big> = \big<g'g,(\phi' g)\phi\big>$$
+    \end{itemize}
+
+    \begin{tzcategory}{\caption{Slice category morphisms definition in
+                $\mathcal{C}/c$}
+            \label{fig:slice-def}}
+        \node[scale=1.3] (a) at (0,0){
+            \begin{tikzcd}[row sep=small]
+                x
+                \ar[dddr, "f"']
+                \ar[rr,"g"]
+                & &
+                x'
+                \ar[dddl,"f'"] \\
+                & \phieq& \\
+                & &\\
+                &  c &
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+\end{defn}
+
+\begin{defn}[Strict slice 2-category] 
+    \label{def:strict-slice-2-cat}
+    If the 2-isomorphism $\phi$ of the 1-morphism pair $\big<g,\phi\big>$ in the slice definition \ref{def:slice-2-cat} is in fact the 2-identity, we get the notion of \textbf{strict slice 2-category}, written as $\mathcal{C} /^s c$\label{nomencl:strict-slice}.
+\end{defn}
+
+\begin{defn}[Lax slice 2-category]
+    \label{def:lax-slice-2-cat}
+    If we consider that the 2-arrow component $\phi$ of the 1-morphism pair $\big<g,\phi\big>$ in the slice definition \ref{def:slice-2-cat} do not need to be isomorphic, we get the notion of \textbf{lax slice 2-category}, written as $\mathcal{C}\nnearrow c$\label{nomencl:lax-slice}
+    (see Figure \ref{fig:lax-slice-def}). When the 2-morphism $\phi$ points the other way, the category that results is called \textbf{op-lax slice 2-category} and is written as $c\sswarrow\mathcal{C}$\label{nomencl:oplax-slice}.
+\end{defn}
+
+\begin{rem}
+    For all the different slice notions, we get for free the dual notion of \textbf{coslice} category to which we will refer as $c/\mathcal{C}$\label{nomencl:coslice}, $c/^s\mathcal{C}$\label{nomencl:strict-coslice}, $c\nnearrow\mathcal{C}$\label{nomencl:lax-coslice} or $c\sswarrow\mathcal{C}$\label{nomencl:oplax-coslice}.
+\end{rem}
+
+
+\begin{figure*}[t!]
+    \centering
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}[column sep=small]
+                    x
+                    \ar[ddr, "f"',""{name=f,right}]
+                    \ar[rr,"g"]
+                    & &
+                    x'
+                    \ar[ddl,"f'",""{name=fp,left}] \\
+                    & \ar[Rightarrow,bend left=80,from=f, to=fp, "\phi"']& \\
+                    &  c &
+                \end{tikzcd}
+            };
+        \end{tikzpicture}
+        \caption{Lax slice category morphisms in $\mathcal{C}\nnearrow c$}
+        \label{fig:lax-slice-def}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}[column sep=small]
+                    x
+                    \ar[ddr, "f"',""{name=f,right}]
+                    \ar[rr,"g"]
+                    & &
+                    x'
+                    \ar[ddl,"f'",""{name=fp,left}] \\
+                    & \ar[Rightarrow,bend right=80,from=fp, to=f, "\phi"]& \\
+                    &  c &
+                \end{tikzcd}
+            };
+        \end{tikzpicture}
+        \caption{Op-lax slice category morphisms in %
+            $\mathcal{C}\sswarrow c$}
+        \label{fig:oplax-slice-def}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}[column sep=small]
+                    x
+                    \ar[from=ddr, "f",""{name=f,right}]
+                    \ar[rr,"g"]
+                    & &
+                    x'
+                    \ar[from=ddl,"f'"',""{name=fp,left}] \\
+                    & \ar[Rightarrow,bend left=80,from=f, to=fp, "\phi"']& \\
+                    &  c &
+                \end{tikzcd}
+            };
+        \end{tikzpicture}
+        \caption{Lax coslice category morphisms in $c\nnearrow\mathcal{C}$}
+        \label{fig:lax-coslice-def}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}[column sep=small]
+                    x
+                    \ar[from=ddr, "f",""{name=f,right}]
+                    \ar[rr,"g"]
+                    & &
+                    x'
+                    \ar[from=ddl,"f'"',""{name=fp,left}] \\
+                    & \ar[Rightarrow,bend right=80,from=fp, to=f, "\phi"]& \\
+                    &  c &
+                \end{tikzcd}
+            };
+        \end{tikzpicture}
+        \caption{Op-lax coslice category morphisms in
+            $c \sswarrow \mathcal{C}$}
+        \label{fig:oplax-coslice-def}
+    \end{subfigure}
+    \caption{Lax slice category morphisms definition}
+    \label{fig:all-lax-slice-def}
+\end{figure*}
+
+Let us try to define PK-nets in this slice paradigm. Let $R$ be an object of $\textbf{CAT}\nnearrow\bf Set$.
+
+The definion \ref{def:lax-slice-2-cat} makes obvious the fact that arrows of the category $\textbf{CAT}\nnearrow\bf Set$ are PK-nets. Consequently, since the objects of any coslice category $R/\big(\textbf{CAT}\nnearrow\bf Set\big)$ are the arrows of $\textbf{CAT}\nnearrow\bf Set$ with their domain in $R$, the objects of  $R/\big(\textbf{CAT}\nnearrow\bf Set\big)$ are PK-nets of form $R$. Let us study the cases of (op-)lax coslice 2-categories on $R$.
+
+\begin{tzcategory}{\caption{PK-nets in the slice categories paradigm}
+        \label{fig:slice-PKN}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBpiBdUkANwEMAbAVxiRAB12BbOnACwDGjYAGEAviDGl0mXPkIoAzOSq1GLNpx78hDYABEJUmdjwEiZRavrNWiDuwBGAMwAEAZRg5J0kBlPyRAAMpEHW6nYO2oLChgDkkqowUADm8ESgzgBOEFxIISA4EEgATNQ2GvYASiDUDHSOMAwACrJmCiBZWCl83sYg2blIZIXFiGVqtmzutSD1jS1tgfZdPX2+g3mIBUXD5RFsAGKz802tAeYr3b0+mTlbO2PKk5Ughwn9m0jPu+P7U-Z3Ak6g0zktLp1rt5qI0wFB8nUsGBInAIAwsPDPvc9qNvv9XgA5E6gxYXDqrG5iChiIA
+        \begin{tikzcd}[row sep = 3em,column sep = 3em]
+            \mathcal{D}' \arrow[rddd, "S'"',bend right=6,""{name=Sp}] & & & \\
+            & \mathcal{C}
+            \arrow[rr, "F"',""{name=F}]
+            \arrow[lu, "F'",""{name=Fp,right,near start}]
+            &  & \mathcal{D} \arrow[lldd, "S",""{name=S,left}]
+            \arrow[lllu, "N"',""{name=N,near start}] \\
+            & \arrow[Rightarrow,from=S,to=Sp,"\nu"' near start]
+            & \arrow[Rightarrow,to=Fp,from=N,"\mu" near start]
+            &  \\
+            & \bf Set
+            \arrow[from=uu, "R" near end,""{name=R},""{name=R2,left}, crossing over]
+            \arrow[Rightarrow,from=R,to=S,"\phi"',crossing over]
+            \arrow[Rightarrow,from=R2,to=Sp,"\phi'" near start]
+            &  &
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+
+\begin{description}
+    \item[lax case] : A morphism from $\big<R,S,F,\phi\big>$ to  $\big<R,S',F',\phi'\big>$ in $R\sswarrow(\bf CAT\nnearrow Set)$ is a pair $\big<M,\mu\big>$ where
+          $M$ is a PK-net $\big<S,S',N,\nu\big>$  or, in other words, a PK-net $\big<S,S',N,\nu\big>$ (see Figure \ref{fig:slice-PKN}) and
+          $\mu : \big<NF,(\nu F)\phi\big> \Rightarrow \big<F',\phi'\big>$ is a 2-morphism of  $\textbf{CAT}\nnearrow\bf Set$ which then must be a natural transformation between $F'$ and $NF$ and must satisfy
+          \begin{equation}
+              \label{eq:lax-cond}
+              \phi' = \big(S'\mu\big)\big((\nu F)\phi\big)
+          \end{equation}
+    \item[op-lax case] : A morphism from $\big<R,S,F,\phi\big>$ to  $\big<R,S',F',\phi'\big>$ in $R\sswarrow(\bf CAT\nnearrow Set)$ is a pair $\big<M,\mu\big>$ where
+          $M$ is an arrow  of $\textbf{CAT}\nnearrow\bf Set$, and
+          $\mu : \big<F',\phi'\big>\Rightarrow \big<NF,(\nu F)\phi\big>$ is a natural transformation between $F'$ and $NF$ that satisfies
+          \begin{equation}
+              \label{eq:oplax-cond}
+              (\nu F)\phi = (S'\mu)\phi'
+          \end{equation}
+\end{description}
+
+In both cases, this gives rise to two notions of PK-homography and also allow to have 2-categories over PK-nets. Moreover, when we consider that $\mu$ is the identity we get from both equations (\ref{eq:lax-cond}) and (\ref{eq:oplax-cond}) the condition of a $\text{PKN}_R$ morphism :
+$$\phi' = (\nu F)\phi$$
+
+In fact, we just proved that
+\begin{thm}
+    $$\text{PKN}_R = R /^s (\bf CAT\nnearrow Set)$$
+\end{thm}
+
+

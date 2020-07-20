@@ -45,9 +45,9 @@ Let's study a particular class of PK-nets such that $\Delta$, $\mathcal{C}$, $R$
     Note that the functor component $N$ of an arrow between two EK-nets does not have to be faithful.
 \end{rem}
 
-For a category $\mathcal{D}$, there may not exist any $\mathcal{C}$ EK-Net on  $\mathcal{D}$.
+For a category $\mathcal{D}$, there may not exist any $\mathcal{C}$ EK-Net of pattern $\mathcal{D}$.
 \begin{defn}[EK candidate]
-    A category $\Delta$ is an $\text{EKN}_{\mathcal{C}}$ \textbf{candidate} if there exists at least one $\mathcal{C}$ EK-net on $\Delta$.
+    A category $\Delta$ is an $\text{EKN}_{\mathcal{C}}$ \textbf{candidate} if there exists at least one $\mathcal{C}$ EK-net of pattern $\Delta$.
 \end{defn}
 
 \begin{note}
@@ -113,6 +113,10 @@ The purpose of what will follows impose constraints on EK-nets so that we get in
 
 Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the (categorical) \textbf{pattern} of $F$ and $\mathcal{C}$ the \textbf{analysis category} of $F$.
 
+\begin{defn}[Structural constraints]
+    This definition is more general than the scope of EK-nets. Let
+\end{defn}
+
 \begin{defn}[Relational constraint]
     In $\text{EKN}_\mathcal{C}$, a \textbf{relational constraint} $\rho$ on a pattern $\Delta$ is a family 
     $(\rho_c)_{c\in\mathcal{C}}$
@@ -121,29 +125,25 @@ Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the
 \end{defn}
 
 
-\begin{defn}[Constraint solving]
-    Let $\rho$ be a constraint of $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$ and let $\big<N,\nu\big> : F \rightarrow F'$ be an EK-homography $\nu : F \rightarrow F'$ where the pattern of $F$ is $\Delta$.
-
-    
-
-
-    Let us consider the subfamily $\psi_F = (\psi_{F(\delta)})_{\delta\in\Delta}$. Then, $solve(\psi,F)$ is the set of $F' \in \text{EKN}_\mathcal{C}$ such that there exists an arrow $\big< N, \nu\big> : F \rightarrow F'$ such that
-    $$\forall \delta \in \Delta, \nu_\delta \in \psi_F(\delta)$$.
+\begin{defn}[Relational constraint solving]
+    Let $\rho$ be a constraint of $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$. Then a solution to this constraint is a couple of EK-nets $(F,F')$ where $F$ is of pattern $\Delta$such that there exists an arrow $\big<N,\nu\big> : F\rightarrow F'$ such that 
+    $$\forall \delta \in \Delta, \nu_\delta \in \rho_{F(\delta)}(\delta)$$
 \end{defn}
+
+\begin{rem}
+    So far, we cannot say we defined a proper relation since we are probably dealing with proper classes.
+
+    TODO : deal with that.
+\end{rem}
 
 Consequenyly, each constraint $\psi_\mathcal{C}$ on $\Delta$ induces a relation
-$\_\mathcal{R}_\psi \_$ where $F\mathcal{R}_\psi F'$ if and only if $F'$ is an object of $solve(\psi,F)$.
+$\_\mathcal{R}_\psi \_$ where $F\mathcal{R}_\psi F'$ if and only if $F'\in solve(\psi,F)$.
 
 
-\begin{defn}[Relational subconstraint]
-    Given a constraint $\psi$ in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$, a constraint $\psi'$ on the same pattern is a \textbf{subconstraint} of $\psi$ if and only if for all $c\in \mathcal{C}$ and $\delta\in\Delta$,
+\begin{defn}[Subconstraint]
+    Given a constraint $\psi$ in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$, a constraint$\psi'$ on the same pattern is a \textbf{subconstraint} of $\psi$ if and only if for all $c\in \mathcal{C}$ and $\delta\in\Delta$,
     $$\psi'_c(\delta)\subset\psi_c(\delta)$$
 \end{defn}
-
-\begin{prop}
-    If $\psi'$ is a relational subconstraint of $\psi$ , then for all EK-net $F$ on the same pattern as $\psi$ and $\psi'$, 
-    $$solve(\psi',F)\subset solve(\psi,F)$$
-\end{prop}
 
 \paragraph{Constraints representation}
 
