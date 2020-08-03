@@ -1,16 +1,10 @@
-\paragraph{Transpositional theory}
-\paragraph{Constraint in music}
-
-\section{Presentation of Allen Forte's work}
-\begin{defn}
-    A \textbf{pitch class} consists of all the pitches separated with a whole number of octaves.
-\end{defn}
-The set of all pitch classes comes naturally with a group structure, which is actually the group $\mathbb{Z}_{12}$\label{nomencl:Zn}. Indeed, we can associate $C$ to the pitch class $0$, $C\sharp$ to the pitch class $1$ and so on. We then have the possibillity to represent a $C$ major chord  from a geometrical point of vue (see \hyperref[Cmajor]{Figure \ref*{Cmajor}}).
+Transformational music theory is a way to analyse music by focusing on the transformations between musical object rather than on the objects themselves. It was mainly developped by David Lewins in 1980's \cite{rahn_lewin_1987}. His work relied on algebra, and particularly on group theory. Indeed, by using well temperament, we obtain a 12 element dodecahedron, with each vertex corresponding to one of the 12 semi-tones. There are then 12 rotational symmetries and 12 axial symmetries of this dodecahedron (called  respectively \textbf{transpositions} and \textbf{inversions} and written $T_i$ and $I_i$ for $i\in [\![1,12]\!]$ by music theorists).
 
 \newcounter{itemcount}
 \setcounter{itemcount}{450}
 \renewcommand*{\do}[1]{
-    \filldraw [black]  (\number\value{itemcount}:3cm) circle (1.5pt)
+    \filldraw [black](\number\value{itemcount}:3cm) 
+    circle (1.5pt)
     node[anchor={\number\value{itemcount}-180}]
         {#1\addtocounter{itemcount}{-30}};
 }
@@ -22,6 +16,38 @@ The set of all pitch classes comes naturally with a group structure, which is ac
     \draw[fill=blue!20] (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
     \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
 \end{tzfigure}
+
+
+
+\paragraph{Constraint in music}
+
+
+
+
+\section{Presentation of Allen Forte's work}
+\begin{defn}
+    A \textbf{pitch class} consists of all the pitches separated with a whole number of octaves.
+\end{defn}
+
+\newcounter{itemcount}
+\setcounter{itemcount}{450}
+\renewcommand*{\do}[1]{
+    \filldraw [black](\number\value{itemcount}:3cm) 
+    circle (1.5pt)
+    node[anchor={\number\value{itemcount}-180}]
+        {#1\addtocounter{itemcount}{-30}};
+}
+\begin{tzfigure}{
+        \caption{The C Major chord in the chromatic circle}
+        \label{Cmajor}
+    }
+    \dolistloop{\pc}
+    \draw[fill=blue!20] (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
+    \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
+\end{tzfigure}
+
+The set of all pitch classes comes naturally with a group structure, which is actually the group $\mathbb{Z}_{12}$\label{nomencl:Zn}. Indeed, we can associate $C$ to the pitch class $0$, $C\sharp$ to the pitch class $1$ and so on. We then have the possibillity to represent a $C$ major chord  from a geometrical point of vue (see \hyperref[Cmajor]{Figure \ref*{Cmajor}}).
+
 
 The idea of Forte relies on the fact that a major chord will always have the same representation up to 12 rotations in this geometrical paradigm. In mathematics they are the 12 rotational symmetries of the regular dodecahedron.In music theory, these rotations are called \textbf{transpositions} and are named $T_i$\label{nomencl:Ti} for $i\in[\![0,11]\!]$.
 
