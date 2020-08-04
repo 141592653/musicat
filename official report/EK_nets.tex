@@ -114,7 +114,7 @@ The purpose of what will follows impose constraints on EK-nets so that we get in
 Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the (categorical) \textbf{pattern} of $F$ and $\mathcal{C}$ the \textbf{analysis category} of $F$.
 
 \begin{defn}[Structural constraints]
-    This definition is more general than the scope of EK-nets. Let
+    Let $F : \Delta \rightarrow\mathcal{C}$ an EK-net. Let $K: \Delta \rightarrow  [\mathcal{C}, \_]$.
 \end{defn}
 
 \begin{defn}[Relational constraint]
@@ -123,6 +123,8 @@ Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the
     of mappings $\rho_c$ from $Obj(\Delta)$ to 
     $\bigsqcup_{c'\in \mathcal{C}}\wp\big(Hom(c,c')\big)$, where $\bigsqcup$ represents the disjoint union \label{nomencl:sq-cup} and $\wp(s)$ is the powerset of the set $s$\label{nomencl:pow-set}.
 \end{defn}
+
+TODO Is this union a set?? => only if 
 
 
 \begin{defn}[Relational constraint solving]
@@ -136,8 +138,8 @@ Let $F : \Delta \rightarrow \mathcal{C}$ be an EK-net. Then we call $\Delta$ the
     TODO : deal with that.
 \end{rem}
 
-Consequenyly, each constraint $\psi_\mathcal{C}$ on $\Delta$ induces a relation
-$\_\mathcal{R}_\psi \_$ where $F\mathcal{R}_\psi F'$ if and only if $F'\in solve(\psi,F)$.
+% Consequenyly, each constraint $\psi_\mathcal{C}$ on $\Delta$ induces a relation
+% $\_\mathcal{R}_\psi \_$ where $F\mathcal{R}_\psi F'$ if and only if $F'\in solve(\psi,F)$.
 
 
 \begin{defn}[Subconstraint]
@@ -277,9 +279,9 @@ A fix to this problem is to consider a pitch class constraint as a 2-objects EK-
             \begin{tikzcd}
                 \bullet
                 \arrow["I_i"',loop, distance=2em, in=125, out=55]  & &\\
-                &    &  x + y = i\\
+                &    &  \\
                 \bullet
-                \arrow[uu, "I_y"', bend right] \arrow[uu, "T_x", bend left] &&
+                \arrow[uu, "I_{i-x}"', bend right] \arrow[uu, "T_x", bend left] &&
             \end{tikzcd}
         };
 
@@ -289,42 +291,29 @@ A fix to this problem is to consider a pitch class constraint as a 2-objects EK-
 \begin{proof}
     Since there are two different arrows between the objects, there must be one transposition and one inversion because the EK-net is faithful. This demonstrates the form of the solution in figure \ref{fig:solConstrPitch}.The functor requirements forces the following system to be satisfied : 
     $$\systeme*{i-x = y,i-y = x }$$
-    which has the obvious solution $i = x + y$
+    which has the obvious solution $y = x - i$
 
 \end{proof}
 
-Elementary algebra tells us that for every $i$ possible, there are $12$ choices for $x$ and $y$. In other words, this constraint yields a $144 = 12^2$ elements solution set. We could interpret this set as a pair of every possible pitch-classes. Instead, we will call the object with only one arrow the root note and the one with two arrows as the pitch relative to the root note.
+This constraint then yields a $144 = 12^2$ elements solution set. We could interpret this set as the the set of the pairs of every possible pitch-classes. Instead, we will call the object with only one arrow the root note and the one with two arrows as the pitch relative to the root note. 
 
 \begin{defn}[Relative pitch-class]
     A \textbf{relative pitch-class} is one of the solutions of the relative pitch-class constraint (see Figure \ref{fig:constrPitchClass}).
 \end{defn}
 
+
 We now have $12$ candidates for each pitch class, because for one relative pitch-class, we must fix a root note. The idea behind this construction is that we just need to transpose the root note to get the transposition of the whole EK-nets.
+
+\begin{defn}[Pitch-class]
+    The $k^{th}$ \textbf{pitch-class} where $k\in[\![0,n-1]\!]]$ is the relative pitch-class where $x = k$ in the constraint schown in Figure \ref{fig:constrPitchClass}
+\end{defn}
+
+Therefore, the $12$ pitch-classes are the solutions of $12$ similar constraints.
 
 Indeed, we did not yet use the whole power of EK-constraints
 
-% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoAmAXVJADcBDAGwFcYkQAVAfQGsQBfUuky58hFGWLU6TVu27EB0mFADm8IqABmAJwgBbJGRA4ISAIw0ARjDBQkAZmMMWbRJy4APAUJC6DRjSmFta29ogAtE40LnLu3ACeIDSM9DaMAAoieATsOliqABY4Ptp6hoiWJmaVKRAQaETmABxkWkxwMNKp6VnYOeIg+UUlMbJuIACSXPRK-EA
-\begin{tikzcd}
-    T_0 \arrow["I_a"', loop, distance=2em, in=125, out=55]          \\
-                                                                    \\
-    T_k \arrow[uu, "T_x", bend left] \arrow[uu, "T_y"', bend right]
-    \end{tikzcd}
 
 
-% \begin{tzcategory}{\caption{The k pitch-classes as PK-nets}
-%         \label{pitchClassDef}}
-%     \node[scale=1.3] (a) at (0,0){
-%         % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
-%         \begin{tikzcd}
-%             {}
-%             X \arrow["I_{2i}"', loop, distance=2em, in=125, out=55] &      \\
-%             &      \\
-%             Y %\arrow["T_{k}"', loop, distance=2em, in=305, out=235] 
-%             \arrow[uu, "I_{i}"', bend right] \arrow[uu, "T_{i}", bend left] &
-%         \end{tikzcd}
-%     };
-
-% \end{tzcategory}
 
 \begin{prop}
     By fixing $\Delta$ as shown in Figure% \ref{pitchClassDef}, we get an analysis set of 12 EK-Nets.
