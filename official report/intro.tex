@@ -1,22 +1,95 @@
 Transformational music theory is a way to analyse music by focusing on the transformations between musical object rather than on the objects themselves. It was mainly developped by David Lewins in 1980's \cite{rahn_lewin_1987}. His work relied on algebra, and particularly on group theory. Indeed, by using well temperament, we obtain a 12 element dodecahedron, with each vertex corresponding to one of the 12 semi-tones. There are then 12 rotational symmetries and 12 axial symmetries of this dodecahedron (called  respectively \textbf{transpositions} and \textbf{inversions} and written $T_i$ and $I_i$ for $i\in [\![1,12]\!]$ by music theorists).
 
-\newcounter{itemcount}
-\setcounter{itemcount}{450}
-\renewcommand*{\do}[1]{
-    \filldraw [black](\number\value{itemcount}:3cm) 
-    circle (1.5pt)
-    node[anchor={\number\value{itemcount}-180}]
-        {#1\addtocounter{itemcount}{-30}};
-}
-\begin{tzfigure}{
+
+
+\begin{figure}
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \newcounter{itemcount}
+        \setcounter{itemcount}{450}
+        \renewcommand*{\do}[1]{
+            \filldraw [black](\number\value{itemcount}:3cm)
+            circle (1.5pt)
+            node[anchor={\number\value{itemcount}-180}]
+                {#1\addtocounter{itemcount}{-30}};}
+        \begin{tikzpicture}[scale=0.55]
+            \dolistloop{\pc}
+            \draw[fill=blue!20] (90:3cm) -- (60:3cm) -- (30:3cm) -- (0:3cm) --  (330:3cm) -- (300:3cm) -- (270:3cm) -- (240:3cm) -- (210:3cm) -- (180 :3cm) -- (150:3cm) -- (120:3cm) -- cycle;
+        \end{tikzpicture}
         \caption{The C Major chord in the chromatic circle}
         \label{Cmajor}
-    }
-    \dolistloop{\pc}
-    \draw[fill=blue!20] (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
-    \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
-\end{tzfigure}
+    \end{subfigure}%
+    {\LARGE$\xRightarrow{T_2}$}%
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \setcounter{itemcount}{510}
+        \renewcommand*{\do}[1]{
+            \filldraw [black](\number\value{itemcount}:3cm)
+            circle (1.5pt)
+            node[anchor={\number\value{itemcount}-180}]
+                {#1\addtocounter{itemcount}{-30}};}
+        \begin{tikzpicture}[scale=0.55]
+            \dolistloop{\pc}
+            \draw[fill=blue!20] (90:3cm) -- (60:3cm) -- (30:3cm) -- (0:3cm) --  (330:3cm) -- (300:3cm) -- (270:3cm) -- (240:3cm) -- (210:3cm) -- (180 :3cm) -- (150:3cm) -- (120:3cm) -- cycle;
+        \end{tikzpicture}
+        \caption{The C Major chord in the chromatic circle}
+        \label{Cmajor}
+    \end{subfigure}%
+    {\LARGE$\xRightarrow{I_4}$}%
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \setcounter{itemcount}{510}
+        \renewcommand*{\do}[1]{
+        \filldraw [black](\number\value{itemcount}:3cm)
+        circle (1.5pt)
+        node[anchor={\number\value{itemcount}-180}]
+            {#1\addtocounter{itemcount}{30}};}
+        \begin{tikzpicture}[scale=0.55]
 
+            \dolistloop{\pc}
+            \draw[fill=blue!20] (90:3cm) -- (60:3cm) -- (30:3cm) -- (0:3cm) --  (330:3cm) -- (300:3cm) -- (270:3cm) -- (240:3cm) -- (210:3cm) -- (180 :3cm) -- (150:3cm) -- (120:3cm) -- cycle;
+            \draw[purple,dashed] (150:3cm) -- (330:3cm);
+        \end{tikzpicture}
+        \caption{The C Major chord in the chromatic circle}
+        \label{Cmajor}
+    \end{subfigure}%
+    \caption{plots of....}
+    \label{fig:fig}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[remember picture,every
+        node/.style={draw,circle,fill=blue,minimum width=4pt}]
+        \node[label=135:C1] (C1) {};
+        \node[below=0.7cm of C1,label=135:C2] (C2){};
+        \node[right=0.8cm of C1,label=45:C3] (C3){};
+        \node[right=0.8cm of C2,label=45:C4] (C4){};
+        \node[below=0.7cm of C4,label=-45:C5] (C5){};
+        \node[right=0.8cm of C4,label=-90:C6] (C6){};
+        \draw (C4) -- (C5) -- (C6) -- (C2) -- (C3) -- (C1) -- (C2) -- (C4) -- (C1) --
+        (C3) -- (C4);
+        \node[draw=none,fill=none,rectangle,above=0.5cm of C1,xshift=-1cm,anchor=south west]{Substrate Graph G};
+        \path (current bounding box.north east) --
+        (current bounding box.south east) coordinate[midway] (2BL);
+    \end{tikzpicture}
+    \hspace*{3cm}%
+    \begin{tikzpicture}[remember picture,every
+        node/.style={draw,circle,fill=red,minimum width=4pt}]
+        \node[label=-90:R1] (R1) {};
+        \node[below=0.7cm of R1,xshift=2cm,label=135:R2] (R2){};
+        \node[draw=none,fill=none,rectangle,above=0.5cm of R1,xshift=-1cm,anchor=south
+            west]{Reaction Graph $L_\mathrm{real}(G)$};
+        \coordinate[below=2.5cm of R1] (X);
+        \draw[white](X)--++(1cm,0);
+        \path (current bounding box.north west) --
+        (current bounding box.south west) coordinate[midway] (2BR);
+    \end{tikzpicture}
+\end{figure}
+\tikz[overlay,remember picture]{\draw[-latex,thick] (2BL) -- (2BL-|2BR)
+    node[midway,below,text width=2.5cm]{Physical Line Graph Transformation};}
+
+%
 
 
 \paragraph{Constraint in music}
@@ -32,10 +105,10 @@ Transformational music theory is a way to analyse music by focusing on the trans
 \newcounter{itemcount2}
 \setcounter{itemcount2}{450}
 \renewcommand*{\do}[1]{
-    \filldraw [black](\number\value{itemcount2}:3cm) 
+    \filldraw [black](\number\value{itemcount2}:3cm)
     circle (1.5pt)
     node[anchor={\number\value{itemcount2}-180}]
-        {#1\addtocounter{itemcount2}{-30}};
+        {#1\addtocounter{itemcount2}{-30}};}
 
 \begin{tzfigure}{
         \caption{The C Major chord in the chromatic circle}
@@ -147,16 +220,17 @@ The group action can be defined as a functor between the category T/I and the ca
 
 We still need to know how to select some sets to be musical objects to analyse. For this, we use a category $\Delta$ where every object of $\Delta$ represents a musical object and the arrows between them their interactions. We then send  $\Delta$ on $\bf Set$ via a functor $R$ to have knowledge about the components of each musical object. But these interactions between objects are not defined either. So we need also a functor $F$ from $\Delta$ to $T/I$ which will exhibit how musical objects are related to each other.
 
-To finish, we need to send each musical object seen as a set to the set of pitch-classes. This is the role of the natural transformation $\phi$. More formally,  as 
+To finish, we need to send each musical object seen as a set to the set of pitch-classes. This is the role of the natural transformation $\phi$. More formally,  as
+
 
 \begin{defn}[PK-net\cite{popoff2015categorical}]
     \label{def:pk-net}
-    For any category $\mathcal{C}$ and any functor $S:\mathcal{C} \rightarrow \Delta$ with non empty values (i.e. $\forall c \in \mathcal{C}, S(c) \neq \emptyset$), we can define a PK-net as follow : 
+    For any category $\mathcal{C}$ and any functor $S:\mathcal{C} \rightarrow \Delta$ with non empty values (i.e. $\forall c \in \mathcal{C}, S(c) \neq \emptyset$), we can define a PK-net as follow :
 
     Let $\Delta$ be a small category and $R : \Delta \rightarrow \bf Set$ a functor with non empty values. Then a \textbf{PK-net} of form $R$ and with support $S$ is a tuple $\big<R,S,F,\phi\big>$ where $\phi : R \rightarrow SF$ is a natural transformation from $R$ to $SF$ (see Figure\ref{fig:PK-definition})
 
     \begin{tzcategory}{\caption{PK-net definition}
-        \label{fig:PK-definition}}
+            \label{fig:PK-definition}}
         % \node[scale=1.3] (a) at (0,0){
         \begin{tikzcd}[column sep=tiny]
             \Delta
@@ -175,8 +249,9 @@ To finish, we need to send each musical object seen as a set to the set of pitch
 
 As in the K-nets definition, we would like to transform a PK-net into another. However, we are forced here to have composition between homographies, since we are in a categorical paradigm.
 
+
 \begin{defn}[Category of PK-nets\cite{popoff2015categorical}]
-    For a fixed functor $R: \Delta \rightarrow \bf Set$, we can define the category $ \text{PKN}_R$ of PK-nets of form $R$ such that : 
+    For a fixed functor $R: \Delta \rightarrow \bf Set$, we can define the category $ \text{PKN}_R$ of PK-nets of form $R$ such that :
     \begin{itemize}
         \item the objects of $\text{PKN}_R$\label{nomencl:PKNR} are the PK-nets $\big<R,S,F,\phi\big>$ as defined in Definition \ref{def:pk-net}
         \item the morphisms between $\big<R,S,F,\phi\big>$ and $\big<R,S',F',\phi'\big>$ are pairs $\big< N,\nu\big>$ such that $N : \mathcal{C} \rightarrow \mathcal{C}'$ is a functor and $\nu : S \rightarrow S'N$ is a natural transfomation such that $\phi' = (\nu F)\circ \phi$.
@@ -184,7 +259,7 @@ As in the K-nets definition, we would like to transform a PK-net into another. H
 \end{defn}
 
 \begin{note}
-    The morphisms between PK-nets are called \textbf{PK-homographies}. 
+    The morphisms between PK-nets are called \textbf{PK-homographies}.
 \end{note}
 
 
