@@ -1,9 +1,10 @@
-Transformational music theory is a way to analyse music by focusing on the transformations between musical object rather than on the objects themselves. It was mainly developped by David Lewins in 1980's \cite{rahn_lewin_1987}. His work relied on algebra, and particularly on group theory. Indeed, by using well temperament, we obtain a 12 element dodecahedron, with each vertex corresponding to one of the 12 semi-tones. There are then 12 rotational symmetries and 12 axial symmetries of this dodecahedron (called  respectively \textbf{transpositions} and \textbf{inversions} and written $T_i$ and $I_i$ for $i\in [\![1,12]\!]$ by music theorists).
+Transformational music theory is a way to analyse music by focusing on the transformations between musical object rather than on the objects themselves. It was mainly developped by David Lewins in 1980's \cite{rahn_lewin_1987}. His work relied on algebra, and particularly on group theory. Indeed, by using well temperament, we obtain a 12 element dodecahedron, with each vertex corresponding to one of the 12 semi-tones. Each vertex of this dodecahedron is called a \textbf{pitch class}(see Figure\ref{fig:dode-id}).
 
+There are then 12 rotational symmetries and 12 axial symmetries of this dodecahedron (called  respectively \textbf{transpositions} and \textbf{inversions} and written $T_i$\label{nomencl:Ti} (see Figure \ref{fig:dode-T2}) and $I_i$\label{nomencl:Ii} (see Figure \ref{fig:dode-I4}) for $i\in [\![1,12]\!]$ by music theorists). If we only consider the transpositions, we actually a group isomorphic to the group $\mathbb{Z}_{12}$\label{nomencl:Zn}. The group composed of composed of the transpositions and the inversions is well known by mathematicians as the dihedral group but called by musicologists
+$T/I$ \label{nomencl:TI} (see Figure \ref{fig:dode-TI}).
 
-
-\begin{figure}
-    \begin{subfigure}{.3\textwidth}
+\begin{figure}[ht]
+    \begin{subfigure}{.29\textwidth}
         \centering
         \newcounter{itemcount}
         \setcounter{itemcount}{450}
@@ -16,8 +17,8 @@ Transformational music theory is a way to analyse music by focusing on the trans
             \dolistloop{\pc}
             \draw[fill=blue!20] (90:3cm) -- (60:3cm) -- (30:3cm) -- (0:3cm) --  (330:3cm) -- (300:3cm) -- (270:3cm) -- (240:3cm) -- (210:3cm) -- (180 :3cm) -- (150:3cm) -- (120:3cm) -- cycle;
         \end{tikzpicture}
-        \caption{The C Major chord in the chromatic circle}
-        \label{Cmajor}
+        \caption{The 12 pitch-classes dodecahedron}
+        \label{fig:dode-id}
     \end{subfigure}%
     {\LARGE$\xRightarrow{T_2}$}%
     \begin{subfigure}{.3\textwidth}
@@ -32,76 +33,33 @@ Transformational music theory is a way to analyse music by focusing on the trans
             \dolistloop{\pc}
             \draw[fill=blue!20] (90:3cm) -- (60:3cm) -- (30:3cm) -- (0:3cm) --  (330:3cm) -- (300:3cm) -- (270:3cm) -- (240:3cm) -- (210:3cm) -- (180 :3cm) -- (150:3cm) -- (120:3cm) -- cycle;
         \end{tikzpicture}
-        \caption{The C Major chord in the chromatic circle}
-        \label{Cmajor}
+        \caption{Transposition of 2 semi-tones (Rotation)}
+        \label{fig:dode-T2}
     \end{subfigure}%
     {\LARGE$\xRightarrow{I_4}$}%
     \begin{subfigure}{.3\textwidth}
         \centering
         \setcounter{itemcount}{510}
         \renewcommand*{\do}[1]{
-        \filldraw [black](\number\value{itemcount}:3cm)
-        circle (1.5pt)
-        node[anchor={\number\value{itemcount}-180}]
-            {#1\addtocounter{itemcount}{30}};}
+            \filldraw [black](\number\value{itemcount}:3cm)
+            circle (1.5pt)
+            node[anchor={\number\value{itemcount}-180}]
+                {#1\addtocounter{itemcount}{30}};}
         \begin{tikzpicture}[scale=0.55]
 
             \dolistloop{\pc}
             \draw[fill=blue!20] (90:3cm) -- (60:3cm) -- (30:3cm) -- (0:3cm) --  (330:3cm) -- (300:3cm) -- (270:3cm) -- (240:3cm) -- (210:3cm) -- (180 :3cm) -- (150:3cm) -- (120:3cm) -- cycle;
             \draw[purple,dashed] (150:3cm) -- (330:3cm);
         \end{tikzpicture}
-        \caption{The C Major chord in the chromatic circle}
-        \label{Cmajor}
+        \caption{$4^{th}$ inversion  (Symmetry)}
+        \label{fig:dode-I4}
     \end{subfigure}%
-    \caption{plots of....}
-    \label{fig:fig}
+    \caption{Transpositions and inversions in a dodecahedron}
+    \label{fig:dode-TI}
 \end{figure}
 
-\begin{figure}[h!]
-    \centering
-    \begin{tikzpicture}[remember picture,every
-        node/.style={draw,circle,fill=blue,minimum width=4pt}]
-        \node[label=135:C1] (C1) {};
-        \node[below=0.7cm of C1,label=135:C2] (C2){};
-        \node[right=0.8cm of C1,label=45:C3] (C3){};
-        \node[right=0.8cm of C2,label=45:C4] (C4){};
-        \node[below=0.7cm of C4,label=-45:C5] (C5){};
-        \node[right=0.8cm of C4,label=-90:C6] (C6){};
-        \draw (C4) -- (C5) -- (C6) -- (C2) -- (C3) -- (C1) -- (C2) -- (C4) -- (C1) --
-        (C3) -- (C4);
-        \node[draw=none,fill=none,rectangle,above=0.5cm of C1,xshift=-1cm,anchor=south west]{Substrate Graph G};
-        \path (current bounding box.north east) --
-        (current bounding box.south east) coordinate[midway] (2BL);
-    \end{tikzpicture}
-    \hspace*{3cm}%
-    \begin{tikzpicture}[remember picture,every
-        node/.style={draw,circle,fill=red,minimum width=4pt}]
-        \node[label=-90:R1] (R1) {};
-        \node[below=0.7cm of R1,xshift=2cm,label=135:R2] (R2){};
-        \node[draw=none,fill=none,rectangle,above=0.5cm of R1,xshift=-1cm,anchor=south
-            west]{Reaction Graph $L_\mathrm{real}(G)$};
-        \coordinate[below=2.5cm of R1] (X);
-        \draw[white](X)--++(1cm,0);
-        \path (current bounding box.north west) --
-        (current bounding box.south west) coordinate[midway] (2BR);
-    \end{tikzpicture}
-\end{figure}
-\tikz[overlay,remember picture]{\draw[-latex,thick] (2BL) -- (2BL-|2BR)
-    node[midway,below,text width=2.5cm]{Physical Line Graph Transformation};}
 
-%
-
-
-\paragraph{Constraint in music}
-
-
-
-
-\section{Presentation of Allen Forte's work}
-\begin{defn}
-    A \textbf{pitch class} consists of all the pitches separated with a whole number of octaves.
-\end{defn}
-
+This $T/I$ paradigm could then be applied to musical object. Indeed, we can represent a C major chord (see Figure \ref{fig:Cmajor})inside the dodecahedron (to make the figure more readable, we changed the dodecahedron into a circle).
 \newcounter{itemcount2}
 \setcounter{itemcount2}{450}
 \renewcommand*{\do}[1]{
@@ -112,60 +70,21 @@ Transformational music theory is a way to analyse music by focusing on the trans
 
 \begin{tzfigure}{
         \caption{The C Major chord in the chromatic circle}
-        \label{Cmajor}
+        \label{fig:Cmajor}
     }
     \dolistloop{\pc}
     \draw[fill=blue!20] (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
     \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
 \end{tzfigure}
 
-The set of all pitch classes comes naturally with a group structure, which is actually the group $\mathbb{Z}_{12}$\label{nomencl:Zn}. Indeed, we can associate $C$ to the pitch class $0$, $C\sharp$ to the pitch class $1$ and so on. We then have the possibillity to represent a $C$ major chord  from a geometrical point of vue (see \hyperref[Cmajor]{Figure \ref*{Cmajor}}).
 
 
-The idea of Forte relies on the fact that a major chord will always have the same representation up to 12 rotations in this geometrical paradigm. In mathematics they are the 12 rotational symmetries of the regular dodecahedron.In music theory, these rotations are called \textbf{transpositions} and are named $T_i$\label{nomencl:Ti} for $i\in[\![0,11]\!]$.
 
-His intuition was that instead of considering triads (three notes chord) as the set of the notes that compose them, we should consider them as the set of the intervals between each note. As a result, every inversion of chord \footnote{the term inversion has to be taken here from a musical point of view, for instance the inversions of a C major chord are C-E-G, G-C-E, E-G-C. Later in this report, we will use inversion with another definition and we will stick to it.} will be in the same \textbf{pitch-class set}\cite{forte_1980}. This can be seen in the geometrical point of view where the simple fact  of representing the chord as a triangle allow to forget any order between the three note. Similarly, all the transpositions of the chord will be in the same pitch-class.
-
-\paragraph{Contribution (sort of)}
-From another point of view, the work of Forte can be seen as networks, as in \hyperref[transpose_net]{Figure \ref*{transpose_net}}. Nonetheless, this representation does not allow for the moment to embed the notion of pitch-class set of Forte. For this we have to introduce the Klumpenhouwer networks.
-\begin{tzcategory}{
-        \caption{Transpositional network}
-        \label{transpose_net}
-    }
-    \node[scale=1.3] (a) at (0,0){
-        \begin{tikzcd}
-            G                                                            \\
-            E \arrow[u, "T_3", bend left]                                \\
-            C \arrow[u, "T_4", bend left] \arrow[uu, "T_7"', bend right]
-        \end{tikzcd}};
-\end{tzcategory}
-
+The intuition of Allen Forte was that instead of considering triads (three notes chord) as the set of the notes that compose them, we should consider them as the set of the intervals between each note. As a result, every inversion of chord \footnote{the term inversion has to be taken here from a musical point of view, for instance the inversions of a C major chord are C-E-G, G-C-E, E-G-C. Later in this report, we will use inversion as a member of the $T/I$ group and we will stick to it} will be in the same \textbf{pitch-class set}\cite{forte_1980}. This can be seen in the geometrical point of view where the simple fact  of representing the chord as a triangle allow to forget any order between the three note. Similarly, all the transpositions of the chord will be in the same pitch-class.
 
 
 \section{Presentation of Klumpenhouwer's networks}
-In  the 1980s, David Lewin developped a branch of music theory called transformational theory\cite{rahn_lewin_1987}. It consists of, rather than looking the musical objects for themselves but instead to mathematically study the relation between them.
-%TODO read rahn_lewin_1987
-
 Klumpenhouwer networks, or K-nets, were then introduced by Henry Klumpenhouwer, former PhD student of Lewin, to formalize the relation between two chords\cite{lewin_1990}.
-
-We have seen that the rotations of the dodecahedron match with the notion of transposition. However, there another type of symmetry in the dodecahedron : the $12$ reflexion symmetries (see\hyperref[inversions]{Figure \ref*{inversions}}), called \textbf{inversions}\label{nomencl:Ii} in transformational music theory. Along with transposition, they form the $T/I$\label{nomencl:TI} group, otherwise known in mathematics as the \textbf{dihedral group} of a dodecahedron.
-
-\setcounter{itemcount}{450}
-
-\begin{tzfigure}{
-        \caption{The $I_0$ inversion}
-        \label{inversions}
-    }
-    \tikzset{myptr/.style={decoration={markings,mark=at position 1 with
-                            {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}}}
-    \dolistloop{\pc}
-    \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
-    \draw [dashed,purple] (90:3cm) -- (270:3cm);
-    \foreach \i in {1,...,5}{
-            \draw [<->, >=stealth, thick, purple] (90 + \i*30:3cm) -- (90-\i*30:3cm) ;
-        }
-\end{tzfigure}
-
 
 The idea behind K-nets is that instead of analyse chords transformations threw transposition only, which is not very rich, we could use also inversions.
 
@@ -182,20 +101,101 @@ The idea behind K-nets is that instead of analyse chords transformations threw t
     \end{itemize}
 \end{defn}
 
+\begin{prop}[\cite{lewin_1990}]
+    The T/I automorphisms are exactly the $F\big<u,j\big>$ such that $u\in\{1,5,7,11\}$ and $j\in\mathbb{Z}_{12}$ where
+    \begin{align*}
+        F\big<u,j\big>(T_n) & = T_{un}   \\
+        F\big<u,j\big>(I_n) & = I_{un+j}
+    \end{align*}
+\end{prop}
+
+
+\begin{note}
+    The T/I automorphisms such that $u = 1$ (resp. $u = 11$) are called \textbf{positive automorphisms} (resp. \textbf{negative automorphisms}).
+\end{note}
+
+
+\begin{exmp}
+    To represent a triad, Klumpenhouwer uses 3 pitch classes and 3 arrows of the form we can see in Figure \ref{fig:KCmajor}.
+    Geometrically, we can see in Figure \ref{fig:Rtransf} that the inversion $I_4$ would transform our C major triangle into a A minor triangle (we swap C and E and G becomes A).
+    \begin{tzfigure}{
+            \caption{The $I_4$ inversion on the C major chord}
+            \label{fig:Rtransf}
+        }
+        \dolistloop{\pc}
+        \draw[fill=purple!20,opacity=0.7] (90:3cm) -- (330:3cm) -- (180:3cm) -- cycle;
+        \draw[fill=blue!55, fill opacity=0.6] (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
+        \draw (90:3cm) -- (330:3cm) -- (240:3cm) -- cycle;
+        \draw [dashed, thick, purple, opacity=1] (30:3cm) -- (210:3cm);
+        \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
+    \end{tzfigure}
+
+    Actually, positive (resp. negative) isographies and transposition  (resp. inversions) are in one to one correspondance :
+    \begin{align*}
+        T_j & \mapsto F(1,j)  \\
+        I_j & \mapsto F(11,j) \\
+    \end{align*}
+    This correspondance might seem hazardous but we will see that in EK-paradigm it is extremely accurate. If we follow this corresponence, we get an isography between two K-nets representing respectively C major and A minor (see Figure \ref{fig:Kisography}).
+    \begin{figure}[h]
+
+        \begin{subfigure}{.29\textwidth}
+            \centering            
+            \begin{tikzpicture}
+                % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoAmAXVJADcBDAGwFcYkQBhEAX1PU1z5CKMgEZqdJq3YBRHnxAZseAkTLEJDFm0QgA4jwkwoAc3hFQAMwBOEALZIyIHBCSiaAIxhgoSAMxOWtK6ACoA+gAs8la2Dojuzq6I5J7evogBNEE6IOF+0SA29o40LkgpIF4+SAC0mc70WIzskGBsNHAAFliWOCUgjPRejAAKAirCINZYJp19WVI5AJJhAOyG3EA
+                \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}
+                    G                                                            \\
+                    E \arrow[u, "T_3", bend left]                                \\
+                    C \arrow[u, "T_4", bend left] \arrow[uu, "I_7"',leftrightarrow,  bend right]
+                \end{tikzcd}
+                };
+            \end{tikzpicture}
+                        \caption{A Klumpenhouwer network for the C major chord}
+            \label{fig:KCmajor}
+        \end{subfigure}%
+        {\LARGE$\xRightarrow{F\big<11,4\big>}$}%
+        \begin{subfigure}{.29\textwidth}
+            \centering
+           
+            \begin{tikzpicture}
+
+                % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoAmAXVJADcBDAGwFcYkQBhEAX1PU1z5CKMgEZqdJq3YBRHnxAZseAkTLEJDFm0QgA4jwkwoAc3hFQAMwBOEALZIyIHBCSiaAIxhgoSAMxOWtK6ACoA+gAs8la2Dojuzq6I5J7evogBNEE6IOF+0SA29o40LkgpIF4+SAC0mc70WIzskGBsNHAAFliWOCUgjPRejAAKAirCINZYJp19WVI5AJJhAOyG3EA
+                \node[scale=1.3] (a) at (0,0){
+                \begin{tikzcd}
+                    A                                                            \\
+                    C \arrow[u, "T_9", bend left]                                \\
+                    E \arrow[u, "T_8", bend left] \arrow[uu, "I_2"',leftrightarrow,  bend right]
+                \end{tikzcd}
+                };
+            \end{tikzpicture}
+            \caption{A Klumpenhouwer network for A minor chord}
+            \label{fig:KAminor}
+        \end{subfigure}
+        \caption{C major and A minor are isogrphic}
+        \label{fig:Kisography}
+    \end{figure}
+\end{exmp}
+
 
 
 
 \section{Presentation of PK-nets}
-Klumpenhouwer networks propose many ways to analyse music but they are quite a rigid framework which does not let room for other ways to see music. However, we can get inspiration from them to create a more flexible framework inside the category theory. PK-nets\cite{PAAE2016} are a generalization of K-nets. They are defined in the paradigm of category theory. Let's first present informally category theory.
-Categories rely on graph, which means we are not so far from Klumpenhouwer's concept. However, one of the main goal of representing threw mathematics is to point some patterns or ways of construction usually used in music creation. So we would like to have a general enough mathematic construction so it encompasses the more musical concepts but restricted enough so that we are not overwhelmed by too many possible interpretation of the same piece of music.
-In fact categories are one of the best ways to get a structured system without losing to many generalities.
+Klumpenhouwer networks propose many ways to analyse music but they do not allow to compare graphs of different form : if we want to compare a 3-note and a 4-note chord, there is no way there is an isography between K-nets representing them.
 
+PK-nets\cite{PAAE2016} where introduced by Alexandre Popoff in 2015\cite{popoff2015categorical} and are a generalization of K-nets that allows comparison between any type of objects. They are defined in the paradigm of category theory. Let's first present informally category theory.
+
+A category is a particular case of multigraph (i.e. a graph where there can be multiple arrows between to vertices), which means we are not so far from Klumpenhouwer's concept. However, one of the main goal of representing threw mathematics is to point some patterns or ways of construction usually used in music creation. So we would like to have a general enough mathematic construction so it encompasses as many musical concepts possible but restricted enough so that we are not overwhelmed by too many possible interpretation of the same piece of music.
+
+In fact categories are one of the best framework to get a structured system without losing to many generalities.
 One of the more important concept behind category theory is compositionality. Musically, it also seems a basic concept : if I can go from $C$ to $D$ and from $D$ to $E$, I would expect I can go from $C$ to $E$. This is in fact the whole concept of a scale : if from $C$, I can hit $D$, $E$, $F$, $G$, $A$, $B$ and finally to $C$ again, then, implicitely, I can go from any of the pitchs of the scale to another pitch of the scale.
 
 A category is in fact a graph such that the composition of two arrows always exists and that for each vertex (called an object in category theory), there is an arrow on itself called the identity. This is a minimal structure that we want to use to go further than the K-net analysis.
 
 \begin{defn}\textbf{Set}\label{nomencl:Set} is the category where objects are the sets and morphisms are functions between sets.
 \end{defn}
+
+This is a non trivial definition, because we could face the Russell paradox. We will not go deeper in the size problems in category. We will just point at the fact that we might have problem of size at some points.
+
 
 % \begin{tzfigure}
 %     \foreach[count=\i] \lseti/\lsetmi in {A/{$a$,$b$,$c$},B/{5,6,$z$}} {
@@ -231,18 +231,18 @@ To finish, we need to send each musical object seen as a set to the set of pitch
 
     \begin{tzcategory}{\caption{PK-net definition}
             \label{fig:PK-definition}}
-        % \node[scale=1.3] (a) at (0,0){
-        \begin{tikzcd}[column sep=tiny]
-            \Delta
-            \ar[ddr, "R"',""{name=R,right}]
-            \ar[rr,"F"]
-            & &
-            \mathcal{C}
-            \ar[ddl,"S",""{name=S,left}] \\
-            & \ar[Rightarrow,bend left=80,from=R, to=S, "\phi"']& \\
-            & \bf Set &
-        \end{tikzcd}
-        % };
+        \node[scale=1.3] (a) at (0,0){
+            \begin{tikzcd}[column sep=tiny]
+                \Delta
+                \ar[ddr, "R"',""{name=R,right}]
+                \ar[rr,"F"]
+                & &
+                \mathcal{C}
+                \ar[ddl,"S",""{name=S,left}] \\
+                & \ar[Rightarrow,bend left=80,from=R, to=S, "\phi"']& \\
+                & \bf Set &
+            \end{tikzcd}
+        };
     \end{tzcategory}
 
 \end{defn}
@@ -261,5 +261,7 @@ As in the K-nets definition, we would like to transform a PK-net into another. H
 \begin{note}
     The morphisms between PK-nets are called \textbf{PK-homographies}.
 \end{note}
+
+
 
 
