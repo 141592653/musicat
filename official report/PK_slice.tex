@@ -6,7 +6,7 @@ The problem with this approach is that one PK-net represents the interactions be
 The main idea of this work is then to find a way to represent musical objects in such a way that we can build constraints such that the solution set of the constraint makes sense musically. To do this we first constructed the category $PKN_R$ via slice categories. The initial definition in \cite{popoff2015categorical} is handy to easily create alternative definitions such as in \cite{popoff2016relational}. Though it can be easily constructed block by block with slice categories.
 
 
-\begin{defn}[Strict 2-category]
+\begin{defn}[2-category]
     A \textbf{2-category} $\mathcal{C}$ is composed on :
     \begin{itemize}
         \item a class of objects
@@ -15,54 +15,62 @@ The main idea of this work is then to find a way to represent musical objects in
         \item we get two ways of composing 2-morphisms $\phi : f\Rightarrow f'$
               and $\psi : g\Rightarrow g'$ where $f,f',g,g' \in \mathcal{C}(c_1,c_2)$
               \begin{itemize}
-                  \item $\psi\circ_h\phi = gf\Rightarrow g'f'$. This is called \textbf{horizontal composition}.
-                  \item If $f' = g$, we can use the composition of $\mathcal{C}(c_1,c_2)$ and then get $\psi\circ\phi$. This is called \textbf{vertical composition}.
+                  \item $\psi\circ_h\phi = gf\Rightarrow g'f'$. This is called \textbf{horizontal composition}  (see Figure \ref{fig:2-hcomp}).
+                  \item If $f' = g$, we can use the composition of $\mathcal{C}(c_1,c_2)$ and then get $\psi\circ\phi$. This is called \textbf{vertical composition} (see Figure \ref{fig:2-vcomp}).
               \end{itemize}
 
+              \begin{figure}[h]
+                  \centering
+                  \begin{subtzcategory}{\caption{Horizontal composition in a 2-category}
+                          \label{fig:2-hcomp}}{0.45\textwidth}
+                      \node[scale=2] (a) at (0,0){
+                          % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AjJhhmHCAC+pdJlz5CKAIzkqtRizacefAcNEgM2PASIAmOdXrNWiDt179BQ+TCgBzeEVAAzAE4QAtkjIgcEEiyIFwwYFBIAMx+Jkrmrhpunj6IwQFIhiFhEYjRxopmIA6JIB7evtTpqdSh4UgAtHkgDHShDAAK4rpSIO5YDgAWgvmmbK4A5CVlKWmBiJm1OY0xBWwOk9QtbZ06kmx9gzYUQkA
+                          \begin{tikzcd}
+                              \bullet
+                              \arrow[r, "f", ""{name=f,right}, bend left]
+                              \arrow[r, "f'"',""{name=f2,right}, bend right]
+                              \arrow["\phi"',from=f,to=f2, Rightarrow] &
+                              \bullet
+                              \arrow[r, "g", bend left,""{name=g,right}]
+                              \arrow[r, "g'"', bend right,""{name=g2,right}]
+                              \arrow["\psi"',from=g,to=g2, Rightarrow] &
+                              \bullet
+                          \end{tikzcd}
+                      };
+                  \end{subtzcategory}%
+                  \begin{subtzcategory}{\caption{Vertical composition in a 2-category}
+                          \label{fig:2-vcomp}}{0.45\textwidth}
+                      \node[scale=2] (a) at (0,0){
+                          % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AjJhhmHCAC+pdJlz5CKAIzkqtRizacefAcPkwoAc3hFQAMwBOEALZIyIHBCSyQXGGChIALAE5q9Zq0QgDw0T8Tc0RLa1tPRR8-AHIAw2CLanDEOwcnJABad2oGOgcGAAVxPAI2IyxtAAtBSO82bTihCiEgA
+                          \begin{tikzcd}[column sep=huge]
+                              \bullet
+                              \arrow[r, bend left=65, "f"{name=f}]
+                              \arrow[r, "f'=g"{inner sep=0,fill=white,anchor=center,name=f2}]
+                              \arrow[r, bend right=65, "g'"{name=g2, swap}]
+                              \arrow[from=f.south-|f2,to=f2,Rightarrow,shorten=2pt,"\phi"]
+                              \arrow[from=f2,to=g2.north-|f2,Rightarrow,shorten=2pt,"\psi"] &
+                              \bullet
+                          \end{tikzcd}
+                      };
+                  \end{subtzcategory}
+
+                  \caption{Composition of 2-arrows in a 2-category}
+                  \label{fig:2-comp}
+              \end{figure}
+        \item
+        \item The order of composition between horizontal and vertical composition does not matter : 
+            $$(\phi\circ\phi')\circ_h(\psi\circ\psi') = (\phi\circ_h\psi)\circ(\phi'\circ_h\psi')$$
     \end{itemize}
 \end{defn}
 
-% \begin{tzcategory}{\caption{Horizontal composition in a strict 2-category}
-%         \label{fig:slice-def}}
-%     \node[scale=2] (a) at (0,0){
-%         % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AjJhhmHCAC+pdJlz5CKAIzkqtRizacefAcNEgM2PASIAmOdXrNWiDt179BQ+TCgBzeEVAAzAE4QAtkjIgcEEiyIFwwYFBIAMx+Jkrmrhpunj6IwQFIhiFhEYjRxopmIA6JIB7evtTpqdSh4UgAtHkgDHShDAAK4rpSIO5YDgAWgvmmbK4A5CVlKWmBiJm1OY0xBWwOk9QtbZ06kmx9gzYUQkA
-%         \begin{tikzcd}
-%             \bullet
-%             \arrow[r, "f", ""{name=f,right}, bend left]
-%             \arrow[r, "f'"',""{name=f2,right}, bend right]
-%             \arrow["\phi"',from=f,to=f2, Rightarrow] &
-%             \bullet
-%             \arrow[r, "g", bend left,""{name=g,right}]
-%             \arrow[r, "g'"', bend right,""{name=g2,right}]
-%             \arrow["\psi"',from=g,to=g2, Rightarrow] &
-%             \bullet
-%         \end{tikzcd}
-%     };
-% \end{tzcategory}
 
-
-% \begin{tzcategory}{\caption{Horizontal composition in a strict 2-category}
-%     \label{fig:slice-def}}
-% \node[scale=2] (a) at (0,0){
-%     % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AjJhhmHCAC+pdJlz5CKAIzkqtRizacefAcPkwoAc3hFQAMwBOEALZIyIHBCSyQXGGChIALAE5q9Zq0QgDw0T8Tc0RLa1tPRR8-AHIAw2CLanDEOwcnJABad2oGOgcGAAVxPAI2IyxtAAtBSO82bTihCiEgA
-%     \begin{tikzcd}[column sep=huge]
-%         \bullet
-%         \arrow[r, bend left=65, "f"{name=f}]
-%         \arrow[r, "f'"{inner sep=0,fill=white,anchor=center,name=f2}]
-%         \arrow[r, bend right=65, "g'"{name=g2, swap}]
-%         \arrow[from=f.south-|f2,to=f2,Rightarrow,shorten=2pt,"\phi"]
-%         \arrow[from=f2,to=g2.north-|f2,Rightarrow,shorten=2pt,"\psi"] &
-%         \bullet
-%     \end{tikzcd}
-%     };
-% \end{tzcategory}
 
 
 \begin{defn}[\bf Cat]
-    \textbf{Cat}\label{nomencl:Cat} is the 2-category of all small categories.
+    \textbf{Cat}\label{nomencl:Cat} is the 2-category of all small categories where 1-arrows are functors and 2-arrows are natural transformations.
 \end{defn}
 \begin{defn}[\bf CAT]
-    \textbf{CAT}\label{nomencl:CAT} is the 2-category of all locally small categories.
+    \textbf{CAT}\label{nomencl:CAT} is the 2-category of all locally small categories where 1-arrows are functors and 2-arrows are natural transformations.
 \end{defn}
 
 \begin{defn}[Slice 2-category\cite{johnstone1993fibrations}]
@@ -112,6 +120,91 @@ The main idea of this work is then to find a way to represent musical objects in
     \label{def:lax-slice-2-cat}
     If we consider that the 2-arrow component $\phi$ of the 1-morphism pair $\big<g,\phi\big>$ in the slice definition \ref{def:slice-2-cat} do not need to be isomorphic, we get the notion of \textbf{lax slice 2-category}, written as $\mathcal{C}\nnearrow c$\label{nomencl:lax-slice}
     (see Figure \ref{fig:lax-slice-def}). When the 2-morphism $\phi$ points the other way, the category that results is called \textbf{op-lax slice 2-category} and is written as $c\sswarrow\mathcal{C}$\label{nomencl:oplax-slice}.
+    \begin{figure}[t!]
+        \centering
+        \begin{subfigure}[t]{0.47\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \node[scale=1.3] (a) at (0,0){
+                    \begin{tikzcd}[column sep=small]
+                        x
+                        \ar[ddr, "f"',""{name=f,right}]
+                        \ar[rr,"g"]
+                        & &
+                        x'
+                        \ar[ddl,"f'",""{name=fp,left}] \\
+                        & \ar[Rightarrow,bend left=80,from=f, to=fp, "\phi"']& \\
+                        &  c &
+                    \end{tikzcd}
+                };
+            \end{tikzpicture}
+            \caption{Lax slice category morphisms in $\mathcal{C}\nnearrow c$}
+            \label{fig:lax-slice-def}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[t]{0.47\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \node[scale=1.3] (a) at (0,0){
+                    \begin{tikzcd}[column sep=small]
+                        x
+                        \ar[ddr, "f"',""{name=f,right}]
+                        \ar[rr,"g"]
+                        & &
+                        x'
+                        \ar[ddl,"f'",""{name=fp,left}] \\
+                        & \ar[Rightarrow,bend right=80,from=fp, to=f, "\phi"]& \\
+                        &  c &
+                    \end{tikzcd}
+                };
+            \end{tikzpicture}
+            \caption{Op-lax slice category morphisms in %
+                $\mathcal{C}\sswarrow c$}
+            \label{fig:oplax-slice-def}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.47\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \node[scale=1.3] (a) at (0,0){
+                    \begin{tikzcd}[column sep=small]
+                        x
+                        \ar[from=ddr, "f",""{name=f,right}]
+                        \ar[rr,"g"]
+                        & &
+                        x'
+                        \ar[from=ddl,"f'"',""{name=fp,left}] \\
+                        & \ar[Rightarrow,bend left=80,from=f, to=fp, "\phi"']& \\
+                        &  c &
+                    \end{tikzcd}
+                };
+            \end{tikzpicture}
+            \caption{Lax coslice category morphisms in $c\nnearrow\mathcal{C}$}
+            \label{fig:lax-coslice-def}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[t]{0.47\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \node[scale=1.3] (a) at (0,0){
+                    \begin{tikzcd}[column sep=small]
+                        x
+                        \ar[from=ddr, "f",""{name=f,right}]
+                        \ar[rr,"g"]
+                        & &
+                        x'
+                        \ar[from=ddl,"f'"',""{name=fp,left}] \\
+                        & \ar[Rightarrow,bend right=80,from=fp, to=f, "\phi"]& \\
+                        &  c &
+                    \end{tikzcd}
+                };
+            \end{tikzpicture}
+            \caption{Op-lax coslice category morphisms in
+                $c \sswarrow \mathcal{C}$}
+            \label{fig:oplax-coslice-def}
+        \end{subfigure}
+        \caption{Lax slice category morphisms definition}
+        \label{fig:all-lax-slice-def}
+    \end{figure}
 \end{defn}
 
 \begin{rem}
