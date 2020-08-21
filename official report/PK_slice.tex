@@ -3,11 +3,13 @@ In this internship, I realised that PK-nets, initially used for analysis, could 
 
 The problem with this approach is that one PK-net represents the interactions between musical objects and not the musical object itself.
 
-The main idea of this work is then to find a way to represent musical objects in such a way that we can build constraints such that the solution set of the constraint makes sense musically. To do this we first constructed the category $PKN_R$ via slice categories. The initial definition in \cite{popoff2015categorical} is handy to easily create alternative definitions such as in \cite{popoff2016relational}. Though it can be easily constructed block by block with slice categories.
+
+
+The main idea of this work is then to find a way to represent musical objects in such a way that we can build constraints such that the solution set of the constraint makes sense musically. To do this we first constructed the category $\text{PKN}_R$ via slice categories. The initial definition in \cite{popoff2015categorical} is handy to easily create alternative definitions such as in \cite{popoff2016relational}. Though it can be easily constructed block by block with slice categories.
 
 
 \begin{defn}[2-category]
-    A \textbf{2-category} $\mathcal{C}$ is composed on :
+    A \textbf{2-category}\cite{kelly1974review} $\mathcal{C}$ is composed on :
     \begin{itemize}
         \item a class of objects
         \item for every pair of objects $(c,c')$, there is a category $\mathcal{C}(c,c')$ where its objects $f,g\in \mathcal{C}(c,c')$ are called \textbf{1-morphisms} and its morphisms $\phi : f\Rightarrow g$ are called \textbf{2-morphisms}
@@ -18,6 +20,7 @@ The main idea of this work is then to find a way to represent musical objects in
                   \item $\psi\circ_h\phi = gf\Rightarrow g'f'$. This is called \textbf{horizontal composition}  (see Figure \ref{fig:2-hcomp}).
                   \item If $f' = g$, we can use the composition of $\mathcal{C}(c_1,c_2)$ and then get $\psi\circ\phi$. This is called \textbf{vertical composition} (see Figure \ref{fig:2-vcomp}).
               \end{itemize}
+              Both of these composition have to be associative and unital.
 
               \begin{figure}[h]
                   \centering
@@ -57,7 +60,6 @@ The main idea of this work is then to find a way to represent musical objects in
                   \caption{Composition of 2-arrows in a 2-category}
                   \label{fig:2-comp}
               \end{figure}
-        \item
         \item The order of composition between horizontal and vertical composition does not matter : 
             $$(\phi\circ\phi')\circ_h(\psi\circ\psi') = (\phi\circ_h\psi)\circ(\phi'\circ_h\psi')$$
     \end{itemize}
@@ -343,7 +345,7 @@ The definion \ref{def:lax-slice-2-cat} makes obvious the fact that arrows of the
           \end{equation}
 \end{description}
 
-In both cases, this gives rise to two notions of PK-homography and also allow to have 2-categories over PK-nets. Moreover, when we consider that $\mu$ is the identity we get from both equations (\ref{eq:lax-cond}) and (\ref{eq:oplax-cond}) the condition of a $\text{PKN}_R$ morphism :
+In both cases, this gives rise to two notions of PK-homography and also allow to have 2-categories over PK-nets. Moreover, when we consider that $\mu$ is the identity we get from both equations (\ref{eq:lax-cond}) and (\ref{eq:oplax-cond}) (because $S'\mu$ is also the identity) the condition of a $\text{PKN}_R$ morphism :
 $$\phi' = (\nu F)\phi$$
 
 In fact, we just proved that

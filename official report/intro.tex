@@ -59,7 +59,7 @@ $T/I$ \label{nomencl:TI} (see Figure \ref{fig:dode-TI}).
 \end{figure}
 
 
-This $T/I$ paradigm could then be applied to musical object. Indeed, we can represent a C major chord (see Figure \ref{fig:Cmajor})inside the dodecahedron (to make the figure more readable, we changed the dodecahedron into a circle).
+This $T/I$ paradigm could then be applied to musical object. Indeed, we can represent a C major chord (see Figure \ref{fig:Cmajor}) inside the dodecahedron (to make the figure more readable, we changed the dodecahedron into a circle).
 \newcounter{itemcount2}
 \setcounter{itemcount2}{450}
 \renewcommand*{\do}[1]{
@@ -186,37 +186,20 @@ PK-nets\cite{PAAE2016} where introduced by Alexandre Popoff in 2015\cite{popoff2
 
 A category is a particular case of multigraph (i.e. a graph where there can be multiple arrows between to vertices), which means we are not so far from Klumpenhouwer's concept. However, one of the main goal of representing threw mathematics is to point some patterns or ways of construction usually used in music creation. So we would like to have a general enough mathematic construction so it encompasses as many musical concepts possible but restricted enough so that we are not overwhelmed by too many possible interpretation of the same piece of music.
 
-In fact categories are one of the best framework to get a structured system without losing to many generalities.
+In fact categories are one of the best framework to get a structured system without losing too many generalities.
 One of the more important concept behind category theory is compositionality. Musically, it also seems a basic concept : if I can go from $C$ to $D$ and from $D$ to $E$, I would expect I can go from $C$ to $E$. This is in fact the whole concept of a scale : if from $C$, I can hit $D$, $E$, $F$, $G$, $A$, $B$ and finally to $C$ again, then, implicitely, I can go from any of the pitchs of the scale to another pitch of the scale.
 
-A category is in fact a graph such that the composition of two arrows always exists and that for each vertex (called an object in category theory), there is an arrow on itself called the identity. This is a minimal structure that we want to use to go further than the K-net analysis.
+A category is in fact a graph such that the composition of two arrows always exists and that for each vertex (called an object in category theory), there is an arrow on itself called the identity of this object. This is a minimal structure that we want to use to go further than the K-net analysis.
 
 \begin{defn}\textbf{Set}\label{nomencl:Set} is the category where objects are the sets and morphisms are functions between sets.
 \end{defn}
 
-This is a non trivial definition, because we could face the Russell paradox. We will not go deeper in the size problems in category. We will just point at the fact that we might have problem of size at some points.
-
-
-% \begin{tzfigure}
-%     \foreach[count=\i] \lseti/\lsetmi in {A/{$a$,$b$,$c$},B/{5,6,$z$}} {
-%         \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
-%         \foreach[count=\j] \lj in \lsetmi {
-%             \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
-%         }
-%         \end{scope}
-%         \node[ellipse, draw, fit=(\lseti), 
-%         label={[name=l-\lseti]above:$\lseti$}] {};
-%     }
-%     \draw[->] (n-1-A) -- (n-1-B);
-%     \draw[->] (n-2-A) -- (n-2-B);
-%     \draw[->] (n-3-A) -- (n-3-B);
-%     \draw[->] (l-A) -- node[above]{$f$}(l-A.center-|l-B.west);
-% \end{tzfigure}
+This is a non trivial definition, because we could face the Russell paradox. We will not go deeper in size problems in category. We will just point at the fact that we might have problem of size at some points.
 
 
 The idea behind PK-nets is to lean on the category $\bf Set$ in such a way that musical objects are sets and relation between them are arrows. However, we need to add a frame to this principle. First of all, if we use the example of K-nets, we would like to use the group T/I to act on a 12 elements set. In fact, a group can be defined as a single-object category where the elements of the group are the reflexive arrows of this object and the group operation corresponds to the composition of two arrows.
 
-The group action can be defined as a functor between the category T/I and the category $Set$ which associates the unique object of T/I to a 12 elements set and the arrows to functions on this set. Indeed, functors in category theory are defined in such a way that they preserve identity and compositions, which makes every functor from a group to $\bf Set$ an action of this group on some set. So we have defined the set of pitch classes and how we want to analyse it.
+The group action can be defined as a functor between the category T/I and the category $\bf Set$ which associates the unique object of T/I to a 12 elements set and the arrows to functions on this set. Indeed, functors in category theory are defined in such a way that they preserve identity and compositions, which makes every functor from a group to $\bf Set$ an action of this group on some set. So we have defined the set of pitch classes and how we want to analyse it.
 
 We still need to know how to select some sets to be musical objects to analyse. For this, we use a category $\Delta$ where every object of $\Delta$ represents a musical object and the arrows between them their interactions. We then send  $\Delta$ on $\bf Set$ via a functor $R$ to have knowledge about the components of each musical object. But these interactions between objects are not defined either. So we need also a functor $F$ from $\Delta$ to $T/I$ which will exhibit how musical objects are related to each other.
 
