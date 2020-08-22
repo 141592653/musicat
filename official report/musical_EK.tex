@@ -1,0 +1,232 @@
+
+
+From now on, we will consider musical object as EK-nets. The fact is that it is not obvious to see how a chord or a picth class is an EK-net. An important part of our work here is to have the possibility to analyse the relations between this objects.
+
+One of the most simple musical object is a pitch class. In a well-tempered tuning, this can be considered as the group $\mathbb{Z}_n$ where $n$ is the number of pitch classes. We have seen that K-nets were a great paradigm to analyse well-tempered music by using the dihedral group and the work of  A. Popoff et al.\cite{PAAE2016} has made a great step toward using this group in music analysis.
+
+Consequently, according to  we will study T/I EK-nets mainly in this section.
+
+The first question that we want to tackle : are there (structural or relational) constraints on T/I EK-nets such that their solution is exactly 12 (or $n$ in a more general case).
+
+\section{EK pitch classes}
+
+To answer this question, let us first consider the shape the category $\Delta$ that we should be using. It can be empty, and the only arrow from $\Delta$ to $T/I$ could be interpreted as a timeless silence.
+
+%TODO : better proof
+\paragraph{$\Delta$ has one object and one arrow}
+Let us suppose that $\Delta$ as the category with exactly one element $\bullet$ and its identity arrow. Consequently, $\Delta$ is isomorphic to a subgroup of $T/I$. The set of the subgroups of $T/I$ is in one-to-one correspondance with the set of $T/I$ EK-Nets with $\Delta$ fixed.
+There is only one functor $F:\Delta \rightarrow T/I$ which maps $Id_\bullet$ to $T_0$.
+
+In other words, there exactly one EK-net of this $\Delta$. If we need a musical to be completely unique, we can encode it as a unique object with a unique arrow. It could be interpreted as an anchor to build upon, a little bit like an anchor or a landmark that has only one interpretation.
+
+
+%For instance, if track is using a certain key (e.g. Amin), we could map this key to this object so it acts as an anchor.
+
+\paragraph{$\Delta$ has one object two arrows}
+There are $13$ 2-elements subgroups of $T/I$ : $\{T_0,T_6\}$ and $\forall k\in[\![1,12]\!], \{T_0,I_k\}$. They are all obviously isomorphic to the group $\mathbb{Z}_2$, that we can safely choose as our $\Delta$. Consequently, according to Proposition \ref{prop:submon} we get $13$ parallel functors from $\mathbb{Z}_2$ to $T/I$.
+
+We also know that all inner automorphisms of T/I are natural transformations between endofunctors of $T/I$ \ref{prop:inner-auto}. Precisely, all the functors corresponding to the subgroups $\{T_0,I_k\}$ are isomorphic threw a positive automorphism.
+%TODO define positive isomorphisms
+
+However, since all automorphisms of T/I send transpositions on transpositions and inversions on inversions, there is no natural transformations for $\{T_0,T_6\}$ to any other functor.
+%TODO maybe name better those functors
+
+Consequently, we have two equivalence classes of EK-nets. This gives to the analyst two different tools to analyse a point with two arrows on it.
+
+It would be tempting to define our pitch-classes as the 12 functors with a maping like this :
+
+%TODO define f and everything
+
+\begin{eqnarray*}
+    C & \rightarrow (f \rightarrow I_0) \\
+    C\sharp &\rightarrow (f \rightarrow I_1) \\
+    &\vdots \\
+    B & \rightarrow (f \rightarrow I_{11})
+\end{eqnarray*}
+
+\begin{tzcategory}{\caption{Structural constraint with 12 solutions}
+        \label{fig:2-arrow-constr}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12AjJhhmHCAC+VEDCgBzeEVAAzAE4QAtkjIgcEVdQYQIaIgEYAHGVmM4MUQzpcYDAAqZc+QohDysEgBaCRQoA
+        \begin{tikzcd}
+            \bullet \arrow["I\_"',loop, distance=2em, in=125, out=55]
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+Indeed, the constraint in Figure \ref{fig:2-arrow-constr} has 12 solutions, as we have seen above. So each of these EK-nets are a candidate to be a pitch-class.
+
+
+However, we would also like that there exists some relational constraint to express intervals. Indeed, if we want to use two different pitch-classes, with an arrow between them, we are forced by the category constraints to have at least two morphisms between the pitch-classes, as we can see in Figure \ref{wrongPitchClass}.
+%TODO : finish paragraph
+
+\begin{tzcategory}{\caption{Wrong definition of pitch classes}
+        \label{wrongPitchClass}}
+    \node[scale=1.3] (a) at (0,0){
+        \begin{tikzcd}
+            {}
+            \bullet \arrow["I_i"', loop, distance=2em, in=125, out=55] &      \\
+            &      \\
+            \bullet \arrow["I_j"', loop, distance=2em, in=305, out=235] \arrow[uu, "I_y"', bend right] \arrow[uu, "T_x", bend left] &
+        \end{tikzcd}
+    };
+\end{tzcategory}
+
+
+\begin{prop}
+    By considering a pitch class as a single point with two reflexive arrows, we can use only half of the notes in practice.
+\end{prop}
+\begin{proof}
+    $i$ and $j$ are fixed.
+    \begin{eqnarray*}
+        I_i \circ T_x  = I_y \Rightarrow i - x = y \Rightarrow i = x + y\\
+        T_x \circ I_j = I_y \Rightarrow x + j = y \Rightarrow j = y - x\\
+    \end{eqnarray*}
+    So we get
+    $$\systeme*{2x = i - j, 2y = i + j}$$
+
+    This is possible iff $i$ and $j$ have the same parity. In other words, in a connex component of the category $\Delta$, we could only use 6 notes, even with the broader constraint we can use.
+\end{proof}
+
+This can be explained by the fact that here the theory considers the interval by going from one note to the other without having a direction of rotation, using a kind of absolute value : $11$ becomes $1$, $10$ becomes $2$, etc. This has already been observed by \cite{forte_1980}.
+
+A fix to this problem is to consider a pitch class constraint as a 2-objects EK-net (see Figure \ref{fig:constrPitchClass}).
+
+\begin{tzcategory}{\caption{Structural constraint for EK relative pitch classes}
+        \label{fig:constrRelPitchClass}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+        \begin{tikzcd}
+            {}
+            \bullet
+            \arrow["I\_"',loop, distance=2em, in=125, out=55]  & \\
+            &  \\
+            \bullet
+            \arrow[uu, bend right] \arrow[uu, bend left] &
+        \end{tikzcd}
+    };
+
+\end{tzcategory}
+
+\begin{prop}
+    The solutions for the structural constraint in Figure \ref{fig:constrRelPitchClass} are the EK-nets of the form described in Figure \ref{fig:solConstrRelPitch}.
+    \begin{tzcategory}{\caption{Solution to \ref{fig:constrRelPitchClass} (called EK relative pitch classes)}
+            \label{fig:solConstrRelPitch}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+            \begin{tikzcd}
+                \bullet
+                \arrow["I_i"',loop, distance=2em, in=125, out=55]  & &\\
+                &    &  \\
+                \bullet
+                \arrow[uu, "I_{y}"', bend right] \arrow[uu, "T_{y+i}", bend left] &&
+            \end{tikzcd}
+        };
+
+    \end{tzcategory}
+\end{prop}
+
+\begin{proof}
+    Since there are two different arrows between the objects, there must be one transposition and one inversion because the EK-net is faithful. This demonstrates the form of the solution in figure \ref{fig:solConstrRelPitch}. By fixing to $T_x$ the left arrow and $I_y$ the right one, the functor requirements forces the following system to be satisfied :
+    $$\systeme*{i-x = y,i-y = x }$$
+    which has the obvious solution $y = x - i$, which is equivalent to $x = y + i$
+
+\end{proof}
+
+This constraint then yields a $144 = 12^2$ elements solution set. We could interpret this set as the the set of the pairs of every possible pitch-classes. Instead, we will call the object with only one arrow the root note and the one with two arrows as the pitch relative to the root note.
+
+\begin{defn}[Relative pitch-class]
+    A \textbf{relative pitch-class} is one of the solutions of the relative pitch-class constraint (see Figure \ref{fig:constrRelPitchClass})illustrated in
+\end{defn}
+
+
+
+
+This illustrates a problem which, in our knowledge has not been tackled : if the pitch classes are a group, how do we choose the neutral element of the group. We could choose C but there is no reason we wouldn't choose another one.
+This is similar to a change of referential in mecanics : if we want a car to move, we can either ask someone to drive the car moving and observing it moving or just walk a bit, the car will still be moving in our referential.
+
+
+
+
+
+We now have $12$ candidates for each pitch class, because for one relative pitch-class, we must fix a root note. The idea behind this construction is that we just need to transpose the root note to get the transposition of the whole EK-nets.
+
+\begin{defn}[Pitch-class]
+    The $k^{th}$ \textbf{pitch-class} is the solution of the subconstraint of the constraint in Figure \ref{fig:constrPitchClass} illustrated by Figure \ref{fig:constrPitchClass}
+
+    \begin{tzcategory}{\caption{Structural constraint for the $k^{th}$ pitch classes}
+            \label{fig:constrPitchClass}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+            \begin{tikzcd}
+                {}
+                \bullet
+                \arrow["I\_"',loop, distance=2em, in=125, out=55]  & \\
+                &  \\
+                \bullet
+                \arrow[uu, bend right,"I_k"'] \arrow[uu, bend left] &
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+\end{defn}
+
+
+This allows us to propose a new approach to transposition, instead of saying that transposing a track is transposing each note after the other, we just use relative pitch-class whose anchor $y$ is fixed. To transpose the track we then just have to transpose the anchor and all the relative pitch classes will follow automatically.
+
+
+%Indeed, we did not yet use the whole power of EK-constraints
+
+
+
+\section{Transposition generalization}
+
+\begin{defn}[EK-anchor]
+    An \textbf{EK-anchor} is an object $a\in\Delta$  with only one reflexive arrow on $a$ in $\Delta$ (a.k.a $id_a$).
+\end{defn}
+
+Fundamentally, an anchor is a musical object that can be interpreted freely.
+
+\begin{prop}[EK-anchor properties]~
+    \begin{enumerate}
+        % \item Let $a$ be an EK-anchor. For any object $d \in \Delta$, there is at most one arrow $f:d\rightarrow a$.
+        \item For any $a\in \Delta$, if there exists an object $d\in \Delta$ such that $\textbf{card}([d,a]) = 1$, then $a$ is an EK-anchor.
+    \end{enumerate}
+    \label{anchorProp}
+\end{prop}
+
+\begin{proof}
+    \begin{enumerate}
+        %\item The unicity is immediate from the composition law of a category.
+        \item By absurd, if we suppose $a$ is not an anchor, then it has at least one reflexive arrow $r$ different from the identity. Let $f : d\rightarrow a$ the unique arrow between $d$ and $a$. Then we must have $r \circ f = f$ since $f$ is unique. So $r$ would have to be the identity.
+    \end{enumerate}
+\end{proof}
+
+\begin{proof}
+    A transposition of $j$ semi-tones of a pitch class $i$ is a natural transformation $$\psi = \systeme*{X\rightarrow T_j, Y\rightarrow T_0}$$
+
+    \begin{tzcategory}{\caption{The k pitch-classes as PK-nets}
+        }
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADEAKADQEoQAvqXSZc+QigBM5KrUYs27AOQ9+QkdjwEiZSbPrNWiDpwCaa4SAybxRaXuoGFx5WYsax2lGQDM++UYmfIKW1p4SyNJ+jgGKKsHqVqJaEWQArP6Gim4hHil2pBkxWS4q5oKyMFAA5vBEoABmAE4QALZIZCA4EEjSciUgAJIA+sCSWAIg1Ax0AEYwDAAKybbGTVjVABY4uSDNbR3U3UgAjMXOIAAqwwBWUyAz80srXg8wDTuJ++2IZ109iB850CIzGnCwAGobrxJtM5gtljZXgx3p9LN9ekcAUD+hdrnc4U9EeE2OstmjGi0fgAWLFIABswLY1yw90eCJeEhAZO2uwxiFp-yQaSZxmuxDZ8OeSK5KI+fKpwrpiAA7KKrqNITdYQ8pcT8sY5RS9orEIyhar1fjJUTOaSNryBBQBEA
+            \begin{tikzcd}
+                F(X) \arrow[dd, "I_{2i}"'] \arrow[rr, "T_j"]
+                &  & F'(X) \arrow[dd, "I_{2(i+j)}"]
+                &  & F(X) \arrow[dd, "T_i"'] \arrow[rr, "T_0"]
+                &  & F'(X) \arrow[dd, "T_{i+j}"]   \\
+                \\
+                F(Y) \arrow[rr, "T_j"']
+                &  & F'(Y)
+                &  & F(Y) \arrow[rr, "T_j"']
+                &  & F'(Y)
+            \end{tikzcd}
+        };
+    \end{tzcategory}
+\end{proof}
+
+\begin{defn}[Generalization of transposition]
+    For any T/I EK-net $F$ on $\Delta$, a transposition $\tau$ is a mapping from $Obj(\Delta)$ to $ $
+\end{defn}
+
+
+
+

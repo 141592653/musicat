@@ -1,10 +1,9 @@
-\section{From PK-net to EK-nets : slice categories}
-In this internship, I realised that PK-nets, initially used for analysis, could be used as constraints. Indeed, a constraint could be all the PK-nets isographic to a specific initial PK-net.
+In this internship, I realised that PK-nets, initially used for analysis, could be used to generate new PK-nets from a  specific initial PK-net using some constraint on the way to generate it.
 
 The problem with this approach is that one PK-net represents the interactions between musical objects and not the musical object itself.
 
 
-
+\section{2-categories}
 The main idea of this work is then to find a way to represent musical objects in such a way that we can build constraints such that the solution set of the constraint makes sense musically. To do this we first constructed the category $\text{PKN}_R$ via slice categories. The initial definition in \cite{popoff2015categorical} is handy to easily create alternative definitions such as in \cite{popoff2016relational}. Though it can be easily constructed block by block with slice categories.
 
 
@@ -74,6 +73,8 @@ The main idea of this work is then to find a way to represent musical objects in
 \begin{defn}[\bf CAT]
     \textbf{CAT}\label{nomencl:CAT} is the 2-category of all locally small categories where 1-arrows are functors and 2-arrows are natural transformations.
 \end{defn}
+
+\section{Slice categories}
 
 \begin{defn}[Slice 2-category\cite{johnstone1993fibrations}]
     \label{def:slice-2-cat}
@@ -299,6 +300,7 @@ The main idea of this work is then to find a way to represent musical objects in
 %     \caption{Lax slice category morphisms definition}
 %     \label{fig:all-lax-slice-def}
 % \end{figure*}
+\section{PK-nets as slice categories}
 
 Let us try to define PK-nets in this slice paradigm. Let $R$ be an object of $\textbf{CAT}\nnearrow\bf Set$.
 
