@@ -1,6 +1,6 @@
-Transformational music theory is a way to analyse music by focusing on the transformations between musical object rather than on the objects themselves. It was mainly developped by David Lewins in 1980's \cite{rahn_lewin_1987}. His work relied on algebra, and particularly on group theory. Indeed, by using well temperament, we obtain a 12 element dodecahedron, with each vertex corresponding to one of the 12 semi-tones. Each vertex of this dodecahedron is called a \textbf{pitch class}(see Figure\ref{fig:dode-id}).
+Transformational music theory is a way to analyse music by focusing on the transformations between musical object rather than on the objects themselves. It was mainly developped by David Lewins in 1980's \cite{rahn_lewin_1987}. His work relied on algebra, and particularly on group theory. Indeed, by using well temperament, we obtain a 12 vertices dodecahedron, with each vertex corresponding to one of the 12 semi-tones. Each vertex of this dodecahedron is called a \textbf{pitch class}(see Figure\ref{fig:dode-id}).
 
-There are then 12 rotational symmetries and 12 axial symmetries of this dodecahedron (called  respectively \textbf{transpositions} and \textbf{inversions} and written $T_i$\label{nomencl:Ti} (see Figure \ref{fig:dode-T2}) and $I_i$\label{nomencl:Ii} (see Figure \ref{fig:dode-I4}) for $i\in [\![1,12]\!]$ by music theorists). If we only consider the transpositions, we actually a group isomorphic to the group $\mathbb{Z}_{12}$\label{nomencl:Zn}. The group composed of composed of the transpositions and the inversions is well known by mathematicians as the dihedral group but called by musicologists
+There are then 12 rotational symmetries and 12 axial symmetries of this dodecahedron (called  respectively \textbf{transpositions} and \textbf{inversions} and written $T_i$\label{nomencl:Ti} (see Figure \ref{fig:dode-T2}) and $I_i$\label{nomencl:Ii} (see Figure \ref{fig:dode-I4}) for $i\in [\![1,12]\!]$ by music theorists). If we only consider the transpositions, we actually a group isomorphic to the group $\mathbb{Z}_{12}$\label{nomencl:Zn}. The group  composed of the transpositions and the inversions is well known by mathematicians as the dihedral group but called by musicologists
 $T/I$ \label{nomencl:TI} (see Figure \ref{fig:dode-TI}).
 
 \begin{figure}[ht]
@@ -59,14 +59,14 @@ $T/I$ \label{nomencl:TI} (see Figure \ref{fig:dode-TI}).
 \end{figure}
 
 
-This $T/I$ paradigm could then be applied to musical object. Indeed, we can represent a C major chord (see Figure \ref{fig:Cmajor}) inside the dodecahedron (to make the figure more readable, we changed the dodecahedron into a circle).
-\newcounter{itemcount2}
-\setcounter{itemcount2}{450}
+This $T/I$ paradigm could then be applied to musical object. Chords can also be represented inside the dodecahredron : for instance , we can represent a C major chord as a triangle(see Figure \ref{fig:Cmajor} ; to make the figure more readable, we changed the dodecahedron into a circle).
+
+\setcounter{itemcount}{450}
 \renewcommand*{\do}[1]{
-    \filldraw [black](\number\value{itemcount2}:3cm)
+    \filldraw [black](\number\value{itemcount}:3cm)
     circle (1.5pt)
-    node[anchor={\number\value{itemcount2}-180}]
-        {#1\addtocounter{itemcount2}{-30}};}
+    node[anchor={\number\value{itemcount}-180}]
+        {#1\addtocounter{itemcount}{-30}};}
 
 \begin{tzfigure}{
         \caption{The C Major chord in the chromatic circle}
@@ -84,9 +84,9 @@ This $T/I$ paradigm could then be applied to musical object. Indeed, we can repr
 
 
 \section{Presentation of Klumpenhouwer's networks}
-Klumpenhouwer networks, or K-nets, were then introduced by Henry Klumpenhouwer, former PhD student of Lewin, to formalize the relation between two chords\cite{lewin_1990}.
+Klumpenhouwer networks, or K-nets, were introduced by Henry Klumpenhouwer, former PhD student of Lewin, to formalize the relation between two chords\cite{lewin_1990}.
 
-The idea behind K-nets is that instead of analyse chords transformations threw transposition only, which is not very rich, we could use also inversions.
+The idea behind K-nets is that instead of analysing chords transformations threw transposition only, which is not very rich, we could use also inversions.
 
 \begin{defn}
     A Klumpenhouwer network is a graph (also called a network) where objects are pitch classes and arrows between objects are labeled by an element of the group $T/I$.
@@ -130,13 +130,13 @@ The idea behind K-nets is that instead of analyse chords transformations threw t
         \draw [domain=0:360,samples=60] plot ({3*cos(\x)}, {3*sin(\x)});
     \end{tzfigure}
 
-    Actually, positive (resp. negative) isographies and transposition  (resp. inversions) are in one to one correspondance :
+    Actually, positive (resp. negative) isographies and transpositions  (resp. inversions) are in one to one correspondance :
     \begin{align*}
-        T_j & \mapsto F(1,j)  \\
-        I_j & \mapsto F(11,j) \\
+        T_j & \mapsto F\big<1,j\big>  \\
+        I_j & \mapsto F\big<11,j\big> \\
     \end{align*}
     This correspondance might seem hazardous but we will see that in EK-paradigm it is extremely accurate. If we follow this corresponence, we get an isography between two K-nets representing respectively C major and A minor (see Figure \ref{fig:Kisography}).
-    \begin{figure}[h]
+    \begin{figure}[ht]
 
         \begin{subfigure}{.29\textwidth}
             \centering            
@@ -180,16 +180,16 @@ The idea behind K-nets is that instead of analyse chords transformations threw t
 
 
 \section{Presentation of PK-nets}
-Klumpenhouwer networks propose many ways to analyse music but they do not allow to compare graphs of different form : if we want to compare a 3-note and a 4-note chord, there is no way there is an isography between K-nets representing them.
+Klumpenhouwer networks propose many ways to analyse music but they do not allow to compare graphs of different form : if we want to compare a 3-note and a 4-note chord, there is no way there there can exist an isography between K-nets representing them.
 
-PK-nets\cite{PAAE2016} where introduced by Alexandre Popoff in 2015\cite{popoff2015categorical} and are a generalization of K-nets that allows comparison between any type of objects. They are defined in the paradigm of category theory. Let's first present informally category theory.
+Poly Kumpenhouwer Networks\cite{PAAE2016} (shortened as PK-nets) were introduced by Alexandre Popoff in 2015\cite{popoff2015categorical} and are a generalization of K-nets that allows comparison between any type of objects. They are defined in the paradigm of category theory. Let's first present informally category theory.
 
-A category is a particular case of multigraph (i.e. a graph where there can be multiple arrows between to vertices), which means we are not so far from Klumpenhouwer's concept. However, one of the main goal of representing threw mathematics is to point some patterns or ways of construction usually used in music creation. So we would like to have a general enough mathematic construction so it encompasses as many musical concepts possible but restricted enough so that we are not overwhelmed by too many possible interpretation of the same piece of music.
+A category is a particular case of multigraph (i.e. a graph where there can be multiple arrows between two identical vertices), which means we are not so far from Klumpenhouwer's concept. However, one of the main goal of representing threw mathematics is to point some patterns or ways of construction usually used in music creation. So we would like to have a general enough mathematic construction so it encompasses as many musical concepts possible but restricted enough so that we are not overwhelmed by too many possible interpretations of the same piece of music.
 
 In fact categories are one of the best framework to get a structured system without losing too many generalities.
 One of the more important concept behind category theory is compositionality. Musically, it also seems a basic concept : if I can go from $C$ to $D$ and from $D$ to $E$, I would expect I can go from $C$ to $E$. This is in fact the whole concept of a scale : if from $C$, I can hit $D$, $E$, $F$, $G$, $A$, $B$ and finally to $C$ again, then, implicitely, I can go from any of the pitchs of the scale to another pitch of the scale.
 
-A category is in fact a graph such that the composition of two arrows always exists and that for each vertex (called an object in category theory), there is an arrow on itself called the identity of this object. This is a minimal structure that we want to use to go further than the K-net analysis.
+A category is in fact a multigraph such that the composition of two arrows always exists and that for each vertex (called an object in category theory), there is an arrow on itself called the identity of this object. This is a minimal structure that we want to use to go further than the K-net analysis.
 
 \begin{defn}\textbf{Set}\label{nomencl:Set} is the category where objects are the sets and morphisms are functions between sets.
 \end{defn}
@@ -203,7 +203,7 @@ The group action can be defined as a functor between the category T/I and the ca
 
 We still need to know how to select some sets to be musical objects to analyse. For this, we use a category $\Delta$ where every object of $\Delta$ represents a musical object and the arrows between them their interactions. We then send  $\Delta$ on $\bf Set$ via a functor $R$ to have knowledge about the components of each musical object. But these interactions between objects are not defined either. So we need also a functor $F$ from $\Delta$ to $T/I$ which will exhibit how musical objects are related to each other.
 
-To finish, we need to send each musical object seen as a set to the set of pitch-classes. This is the role of the natural transformation $\phi$. More formally,  as
+To finish, we need to send each musical object seen as a set of pitch-classes. This is the role of the natural transformation $\phi$. 
 
 
 \begin{defn}[PK-net\cite{popoff2015categorical}]
