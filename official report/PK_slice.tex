@@ -1,25 +1,25 @@
-In this internship, I realised that PK-nets, initially used for analysis, could be used to generate new PK-nets from a  specific initial PK-net using some constraint on the way to generate it.
+In this internship, I realised that PK-nets, initially used for music analysis, could be used to generate new PK-nets from a  specific initial PK-net using some constraint on the way to generate it.
 
-The problem with this approach is that one PK-net represents the interactions between musical objects and not the musical object itself.
+The problem with this approach is that one PK-net represents the interactions between musical objects and not the musical object itself. The main idea of this work is then to find a representation of musical objects such that we can build constraints whith solutions that makes sense musically. 
 
 
 \section{2-categories}
-The main idea of this work is then to find a way to represent musical objects in such a way that we can build constraints such that the solution set of the constraint makes sense musically. To do this we first constructed the category $\text{PKN}_R$ via slice categories. The initial definition in \cite{popoff2015categorical} is handy to easily create alternative definitions such as in \cite{popoff2016relational}. Though it can be easily constructed block by block with slice categories.
+To do this we first constructed again the category $\text{PKN}_R$ via slice categories. The initial definition in \cite{popoff2015categorical} is handy to easily create alternative definitions such as in \cite{popoff2016relational}. Though it can be constructed block by block with slice categories.
 
 
 \begin{defn}[2-category]
-    A \textbf{2-category}\cite{kelly1974review} $\mathcal{C}$ is composed on :
+    A \textbf{2-category}\cite{kelly1974review} $\mathcal{C}$ is composed of :
     \begin{itemize}
         \item a class of objects
         \item for every pair of objects $(c,c')$, there is a category $\mathcal{C}(c,c')$ where its objects $f,g\in \mathcal{C}(c,c')$ are called \textbf{1-morphisms} and its morphisms $\phi : f\Rightarrow g$ are called \textbf{2-morphisms}
-        \item for all object of the 2-category, there is particular object $id_c\in \mathcal{C}(c,c)$ called the identity of $c$. It comes naturally with an identity $Id_{id_c}$ : the identity of  $\mathcal{C}(c,c)$
+        \item for all object of the 2-category, there is particular object $id_c\in \mathcal{C}(c,c)$ called the identity of $c$. It comes naturally with an 2-arrow identity $Id_{id_c}$ : the identity of  $\mathcal{C}(c,c)$
         \item we get two ways of composing 2-morphisms $\phi : f\Rightarrow f'$
               and $\psi : g\Rightarrow g'$ where $f,f',g,g' \in \mathcal{C}(c_1,c_2)$
               \begin{itemize}
                   \item $\psi\circ_h\phi = gf\Rightarrow g'f'$. This is called \textbf{horizontal composition}  (see Figure \ref{fig:2-hcomp}).
                   \item If $f' = g$, we can use the composition of $\mathcal{C}(c_1,c_2)$ and then get $\psi\circ\phi$. This is called \textbf{vertical composition} (see Figure \ref{fig:2-vcomp}).
               \end{itemize}
-              Both of these composition have to be associative and unital.
+              Both of these compositions have to be associative and unital.
 
               \begin{figure}[h]
                   \centering
@@ -347,7 +347,7 @@ The definion \ref{def:lax-slice-2-cat} makes obvious the fact that arrows of the
           \end{equation}
 \end{description}
 
-In both cases, this gives rise to two notions of PK-homography and also allow to have 2-categories over PK-nets. Moreover, when we consider that $\mu$ is the identity we get from both equations (\ref{eq:lax-cond}) and (\ref{eq:oplax-cond}) (because $S'\mu$ is also the identity) the condition of a $\text{PKN}_R$ morphism :
+In both cases, this gives rise to two notions of PK-homography and also allow to have 2-categories over PK-nets. Moreover, when we consider that $\mu$ is the identity on $F'$, we get from both equations (\ref{eq:lax-cond}) and (\ref{eq:oplax-cond}) (because $S'\mu$ is also the identity) the condition of a $\text{PKN}_R$ morphism :
 $$\phi' = (\nu F)\phi$$
 
 In fact, we just proved that
