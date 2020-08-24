@@ -1,7 +1,7 @@
 
 The definition of a PK-net is very general but is more useful to find relation between musical objects that we already have got than to create new objects. As I am a musician and not an analyst, I would like a paradigm where I have one musical object and where category theory "proposes" some other object "similar" to it that I can use instead of the first when I compose.
 
-To do this, we will first define what is a musical object in category in a first place and then use constraints that can be easily solved such that the all musical objects complying with the constraint are related in a musical matter.
+To do this, we will first define what is a musical object in category in a first place and then use constraints that can be easily solved such that all musical objects complying with the constraint are related in a musical manner.
 
 
 
@@ -17,6 +17,9 @@ To do this, we will first define what is a musical object in category in a first
      Then, $\bf \text{EKN}_\mathcal{C}$ \label{nomencl:EKN} is defined as the full subcategory of $\textbf{Cat}\nearrow \mathcal{C}$ (see Definition \ref{def:lax-slice-2-cat}) where for all $F\in \text{EKN}_\mathcal{C}$, $F$ is faithful. An object (i.e. a functor $F : \Delta \rightarrow \mathcal{C}$) of the category of the category $\text{EKN}_\mathcal{C}$ is called a $\mathcal{C}$ \textbf{EK-net} on  $\Delta$ and an arrow is called a $\text{EKN}_\mathcal{C}$ homomorphism.
 \end{defn}
 
+Intuitively, for a particular EK-net $F : \Delta \rightarrow \mathcal{C}$, $\Delta$ will be the global form (that we will call \textbf{pattern}) of the musical object, $\mathcal{C}$ tells us how the musical objects can evolve and interact between them (we will call it the \textbf{prism} of the EK-net) and  $F$ is the musical object itself.
+
+
 \begin{rem}
     Note that for an EK-homography $\big<N,\nu\big>$, $N$ does not have to be faithful.
 \end{rem}
@@ -26,7 +29,7 @@ To do this, we will first define what is a musical object in category in a first
 % \end{defn}
 
 \begin{rem}
-    For a category $\mathcal{D}$, there may not exist any $\mathcal{C}$ EK-Net of pattern $\mathcal{D}$.
+    For a category $\mathcal{D}$, there may not exist any $\mathcal{C}$ EK-net of pattern $\mathcal{D}$.
 \end{rem}
 
 \begin{defn}[EK candidate]
@@ -37,7 +40,6 @@ To do this, we will first define what is a musical object in category in a first
     From now on, we will presuppose that all the categories named $\Delta$ are candidates for the EK-net category considered.
 \end{note}
 
-Intuitively, for a particular EK-net $F : \Delta \rightarrow \mathcal{C}$, $\Delta$ will be the global form (that we will call \textbf{pattern}) of the musical object, $\mathcal{C}$ tells us how the musical objects can evolve and interact between them (we will call it the \textbf{prism} of the category) and  $F$ is the musical object itself.
 
 
 
@@ -134,12 +136,12 @@ Now we have defined a musical object, we would like ways to either generate simi
 
 \begin{defn}[Structural subconstraint]
     Given a constraint $\kappa$ in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$, a constraint $\kappa'$ on the same pattern is a \textbf{structural subconstraint} of $\kappa$ if and only if for all $f\in Hom_\Delta$ and $\delta\in\Delta$,
-    $$\kappa(\delta)\subset\kappa(\delta)$$
+    $$\kappa'(\delta)\subseteq\kappa(\delta)$$
 \end{defn}
 
 \begin{defn}[Relational subconstraint]
     Given a constraint $\rho$ in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$, a constraint $\rho'$ on the same pattern is a \textbf{relational subconstraint} of $\rho$ if and only if for all $c\in \mathcal{C}$ and $\delta\in\Delta$,
-    $$\rho'_c(\delta)\subset\rho_c(\delta)$$
+    $$\rho'_c(\delta)\subseteq\rho_c(\delta)$$
 \end{defn}
 
 
@@ -150,9 +152,9 @@ Now we have defined a musical object, we would like ways to either generate simi
 \subsection{EK-nets with monoids as prism}
 In EK-nets, we are particularly interested in the case where $\mathcal{C} = T/I$. Since $T/I$ has only one element, all the functors $F:\Delta \rightarrow T/I$ send all the elements on the unique element of $T/I$. In the following, we will not recall the image of the elements of $\Delta$.
 
-EK-nets have particular properties when the category $\mathcal{C}$ has a single element. Let $\mathcal{M}$ be such a category and let us consider  an $\mathcal{M}$ EK-nets .
+EK-nets have particular properties when the category $\mathcal{C}$ has a single element. Let $\mathcal{M}$ be such a category and let us consider  an $\mathcal{M}$ EK-nets . Then the set $M$ of the arrows of the object of $\mathcal{M}$ is a monoid (because of identity and associtivity laws in a category).
 
-If $\Delta$ has a single element, then the functors $[\Delta,\mathcal{M}]$ are in one-to-one correspondance with the monoid morphisms. Since EK-nets are faithful, we only get the injective morphisms. In other words, 
+If $\Delta$ has a single element, then the functors from $\Delta$ to $\mathcal{M}$ are monoid morphisms from the monoid $D$ formed of the arrows in $\Delta$. Since EK-nets are faithful, we only get the injective morphisms. In other words, 
 
 \begin{prop}
     \label{prop:submon}
@@ -161,9 +163,9 @@ If $\Delta$ has a single element, then the functors $[\Delta,\mathcal{M}]$ are i
 
 \subsection{EK-nets with groups as prism}
 
-Let $F:\Delta\rightarrow \mathcal{G}$ and $F':\Delta\rightarrow \mathcal{G}$ be two parallel functors where $G\in \textbf{Grp}$. Let $X,Y\in\Delta$ and $f\in Hom(X,Y)$. We then get the following commutating diagram :
+Let $F:\Delta\rightarrow \mathcal{G}$ and $F':\Delta\rightarrow \mathcal{G}$ be two parallel functors where $G\in \textbf{Grp}$. Let $X,Y\in\Delta$ and $f\in Hom(X,Y)$. We then get the commutating diagram in Figure \ref{fig:inner-proof}
 
-\begin{tzcategory}{}
+\begin{tzcategory}{\caption{Natural transformation commutation diagram}\label{fig:inner-proof}}
     \node[scale=1.3] (a) at (0,0){
         \begin{tikzcd}[column sep = small]
             F(X) \arrow[dd, "F(f)"'] \arrow[rr, "\psi_X"] &  & F'(X) \arrow[dd, "F'(f)"] \\
@@ -192,6 +194,9 @@ We just proved that
     For a group $G$ and $\mathcal{G}$ the one-object category corresponding to it, $\Delta$ a one-objec category, for any two parallel functors  $F:\Delta\rightarrow \mathcal{G}$ and $F':\Delta\rightarrow \mathcal{G}$, the natural transformations between $F$ and $F'$ are in one-to-one correspondance with the inner automorphisms of $G$. 
 \end{prop}
 
-But more importantly
+% But more importantly
 
+% \begin{theorem}
+%     For any EK-net $F : \Delta \rightarrow  \mathcal{G} $
+% \end{theorem}
 

@@ -116,10 +116,10 @@ A fix to this problem is to consider a pitch class constraint as a 2-objects EK-
             % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
             \begin{tikzcd}
                 \bullet
-                \arrow["I_i"',loop, distance=2em, in=125, out=55]  & &\\
+                \arrow["I_{i+2y}"',loop, distance=2em, in=125, out=55]  & &\\
                 &    &  \\
                 \bullet
-                \arrow[uu, "I_{y}"', bend right] \arrow[uu, "T_{y+i}", bend left] &&
+                \arrow[uu, "I_{y}"', bend right] \arrow[uu, "T_{i+y}", bend left] &&
             \end{tikzcd}
         };
 
@@ -136,7 +136,7 @@ A fix to this problem is to consider a pitch class constraint as a 2-objects EK-
 This constraint then yields a $144 = 12^2$ elements solution set. We could interpret this set as the the set of the pairs of every possible pitch-classes. Instead, we will call the object with only one arrow the root note and the one with two arrows as the pitch relative to the root note.
 
 \begin{defn}[Relative pitch-class]
-    A \textbf{relative pitch-class} is one of the solutions of the relative pitch-class constraint (see Figure \ref{fig:constrRelPitchClass})illustrated in
+    A \textbf{relative pitch-class} is one of the solutions of the relative pitch-class constraint (see Figure \ref{fig:constrRelPitchClass}) illustrated in
 \end{defn}
 
 
@@ -181,51 +181,134 @@ This allows us to propose a new approach to transposition, instead of saying tha
 \section{Transposition generalization}
 
 \begin{defn}[EK-anchor]
-    An \textbf{EK-anchor} is an object $a\in\Delta$  with only one reflexive arrow on $a$ in $\Delta$ (a.k.a $id_a$).
+    An \textbf{EK-anchor} is an object $a\in\Delta$  with only one reflexive arrow (which must be $id_a$).
 \end{defn}
 
-Fundamentally, an anchor is a musical object that can be interpreted freely.
+Fundamentally, an anchor is a landmark on the dodecahedron.
 
-\begin{prop}[EK-anchor properties]~
-    \begin{enumerate}
-        % \item Let $a$ be an EK-anchor. For any object $d \in \Delta$, there is at most one arrow $f:d\rightarrow a$.
-        \item For any $a\in \Delta$, if there exists an object $d\in \Delta$ such that $\textbf{card}([d,a]) = 1$, then $a$ is an EK-anchor.
-    \end{enumerate}
-    \label{anchorProp}
-\end{prop}
+% \begin{prop}[EK-anchor properties]~
+%     \begin{enumerate}
+%         % \item Let $a$ be an EK-anchor. For any object $d \in \Delta$, there is at most one arrow $f:d\rightarrow a$.
+%         \item For any $a\in \Delta$, if there exists an object $d\in \Delta$ such that $\textbf{card}([d,a]) = 1$, then $a$ is an EK-anchor.
+%     \end{enumerate}
+%     \label{anchorProp}
+% \end{prop}
 
-\begin{proof}
-    \begin{enumerate}
-        %\item The unicity is immediate from the composition law of a category.
-        \item By absurd, if we suppose $a$ is not an anchor, then it has at least one reflexive arrow $r$ different from the identity. Let $f : d\rightarrow a$ the unique arrow between $d$ and $a$. Then we must have $r \circ f = f$ since $f$ is unique. So $r$ would have to be the identity.
-    \end{enumerate}
-\end{proof}
+% \begin{proof}
+%     \begin{enumerate}
+%         %\item The unicity is immediate from the composition law of a category.
+%         \item By absurd, if we suppose $a$ is not an anchor, then it has at least one reflexive arrow $r$ different from the identity. Let $f : d\rightarrow a$ the unique arrow between $d$ and $a$. Then we must have $r \circ f = f$ since $f$ is unique. So $r$ would have to be the identity.
+%     \end{enumerate}
+% \end{proof}
 
-\begin{proof}
-    A transposition of $j$ semi-tones of a pitch class $i$ is a natural transformation $$\psi = \systeme*{X\rightarrow T_j, Y\rightarrow T_0}$$
+% \begin{proof}
+%     A transposition of $j$ semi-tones of a pitch class $i$ is a natural transformation $$\psi = \systeme*{X\rightarrow T_j, Y\rightarrow T_0}$$
 
-    \begin{tzcategory}{\caption{The k pitch-classes as PK-nets}
-        }
-        \node[scale=1.3] (a) at (0,0){
-            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADEAKADQEoQAvqXSZc+QigBM5KrUYs27AOQ9+QkdjwEiZSbPrNWiDpwCaa4SAybxRaXuoGFx5WYsax2lGQDM++UYmfIKW1p4SyNJ+jgGKKsHqVqJaEWQArP6Gim4hHil2pBkxWS4q5oKyMFAA5vBEoABmAE4QALZIZCA4EEjSciUgAJIA+sCSWAIg1Ax0AEYwDAAKybbGTVjVABY4uSDNbR3U3UgAjMXOIAAqwwBWUyAz80srXg8wDTuJ++2IZ109iB850CIzGnCwAGobrxJtM5gtljZXgx3p9LN9ekcAUD+hdrnc4U9EeE2OstmjGi0fgAWLFIABswLY1yw90eCJeEhAZO2uwxiFp-yQaSZxmuxDZ8OeSK5KI+fKpwrpiAA7KKrqNITdYQ8pcT8sY5RS9orEIyhar1fjJUTOaSNryBBQBEA
-            \begin{tikzcd}
-                F(X) \arrow[dd, "I_{2i}"'] \arrow[rr, "T_j"]
-                &  & F'(X) \arrow[dd, "I_{2(i+j)}"]
-                &  & F(X) \arrow[dd, "T_i"'] \arrow[rr, "T_0"]
-                &  & F'(X) \arrow[dd, "T_{i+j}"]   \\
-                \\
-                F(Y) \arrow[rr, "T_j"']
-                &  & F'(Y)
-                &  & F(Y) \arrow[rr, "T_j"']
-                &  & F'(Y)
-            \end{tikzcd}
-        };
-    \end{tzcategory}
-\end{proof}
+%     \begin{tzcategory}{\caption{The k pitch-classes as PK-nets}
+%         }
+%         \node[scale=1.3] (a) at (0,0){
+%             % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADEAKADQEoQAvqXSZc+QigBM5KrUYs27AOQ9+QkdjwEiZSbPrNWiDpwCaa4SAybxRaXuoGFx5WYsax2lGQDM++UYmfIKW1p4SyNJ+jgGKKsHqVqJaEWQArP6Gim4hHil2pBkxWS4q5oKyMFAA5vBEoABmAE4QALZIZCA4EEjSciUgAJIA+sCSWAIg1Ax0AEYwDAAKybbGTVjVABY4uSDNbR3U3UgAjMXOIAAqwwBWUyAz80srXg8wDTuJ++2IZ109iB850CIzGnCwAGobrxJtM5gtljZXgx3p9LN9ekcAUD+hdrnc4U9EeE2OstmjGi0fgAWLFIABswLY1yw90eCJeEhAZO2uwxiFp-yQaSZxmuxDZ8OeSK5KI+fKpwrpiAA7KKrqNITdYQ8pcT8sY5RS9orEIyhar1fjJUTOaSNryBBQBEA
+%             \begin{tikzcd}
+%                 F(X) \arrow[dd, "I_{2i}"'] \arrow[rr, "T_j"]
+%                 &  & F'(X) \arrow[dd, "I_{2(i+j)}"]
+%                 &  & F(X) \arrow[dd, "T_i"'] \arrow[rr, "T_0"]
+%                 &  & F'(X) \arrow[dd, "T_{i+j}"]   \\
+%                 \\
+%                 F(Y) \arrow[rr, "T_j"']
+%                 &  & F'(Y)
+%                 &  & F(Y) \arrow[rr, "T_j"']
+%                 &  & F'(Y)
+%             \end{tikzcd}
+%         };
+%     \end{tzcategory}
+% \end{proof}
 
 \begin{defn}[Generalization of transposition]
-    For any T/I EK-net $F$ on $\Delta$, a transposition $\tau$ is a mapping from $Obj(\Delta)$ to $ $
+    Let $\tau^k$ be a relational constraint in $\text{EKN}_\mathcal{C}$ on a pattern $\Delta$ such that, for every $c\in\mathcal{C}$
+    \begin{itemize}
+        \item for every anchor $a$ in $\Delta$, $\tau^k_c(a) = \{T_{k}\}$
+        \item for all the other objects $d$ of $\Delta$, $\tau^k_c(d) = \{T_0\}
+              $
+    \end{itemize}
+    Then $\tau$ is called the transposition constraint.
 \end{defn}
+
+\begin{exmp}
+    \begin{tzcategory}{\caption{The 12 EK-nets corresponding to F}
+            \label{fig:solF}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+            \begin{tikzcd}
+                r\arrow["I_{i+10}"',loop, distance=2em, in=125, out=55]  & &\\
+                &    &  \\
+                a \arrow[uu, "I_{5}"', bend right]
+                \arrow[uu, "T_{i+5}", bend left] &&
+            \end{tikzcd}
+        };
+
+    \end{tzcategory}
+    Let us see how to get the transposition of 8 semitones of the note F. We know that the note $C$ is the solution to the structural constraint of Figure \ref{fig:constrPitchClass}. Therefore, it is the set of all EK-nets with $i\in[\![0,11]\!]$ presented in Figure \ref{fig:solF}.
+
+    We know that $\tau_\bullet^4(a) = T_4$ where $\bullet$ is the only element of T/I and $\tau_\bullet^4(r) = T_0$. To solve the constraint we just have to solve commutative squares. This way we will construct new EK-nets. If we call $F_i$ the $i^th$ solution of the F pitch class structural constraint. Let us suppose there is an EK-net $X$ such that $(F_i,X)$ is a solution of $\tau$. Then the squares in Figure \ref{fig:commute-sqr} must commute.
+
+    \begin{tzcategory}{\caption{Commutative square equations}
+            \label{fig:commute-sqr}}
+        \node[scale=1.3] (a) at (0,0){
+            % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoA2AXVJADcBDAGwFcYkR6QBfU9TXfIRQAWCtTpNW7ADrSARs0aMYObrxAZseAkVEAOcQxZtEIWQqUq1fLYKJkDNI1NOceNgTpQAGUgFZDSRMOaw1+bSFkXwBmQON2ACdQzU9IgCZ-OJczeUVlVXcw2y9kDNinIJlcywL1FIiiaNJvLOCkwvq7FCa01sTk8K7kP2a+03M8qw7BkpHeivjx6vyB4siR8olFnIsV6bWiEYCF7Ima1dTG0k3nNouG7syT4Lc6mcjfFuf+-cufUnmW2y7TeBxQGUBtyquymoL+pVG3yWMIK4hgUAA5vAiKAAGYJCAAWyQTRAOAgSF8QOCABUAPreEA0Rj0OQwRgABXe7GUuNqeIJxMQpPJSAy1PY9OETJALLZnO5pl5-JA+KJlJoosQZAlpiloTVQvFWp1UNMAA0ABT07wASgNgqQojJFMQI1lrPZXLBspgfJlZpA9OAWAA1H4uA71YhnVryEig3TpczPQqfQksBiABYqw1Id1agDsKfl3r+IAz2dUCZtUaF8ZdSGLupAVuDYYj9sKecQAE5Na69AmAJJ0kOh4jeSMlr2KiuZnN1pBDxvaqmB-Xdx19gdIYimyp6pNL7U6k3rw+ty2j8eTrj2mdp8uVxdb6PEAuu4jOwOjvwyuVZ3TBdc23b9d21cUNwZE9iBFL8oMvK0-wfD1SznF9QPfT891JQCnweecqwDS9N3UHtiAbE1+xbMiBXfZsTQbaDGTfIViEYr8V2g6U2L3FdqITNsGS7SguCAA
+            \begin{tikzcd}
+                r \arrow[rr, "T_0"]  & &
+                \bullet &
+                r \arrow[rr, "T_0"] & &
+                \bullet\\
+                & & & & & \\
+                r \arrow[uu, "T^r_0"] \arrow[rr, "T_0"]& &
+                \bullet \arrow[uu, "X(T^r_0)"] &
+                r \arrow[uu, "I_{i+10}"'] \arrow[rr, "T_0"] & &
+                \bullet \arrow[uu, "X(I_{i+10})"'] \\
+                r \arrow[rr, "T_0"'] & & \bullet &
+                r \arrow[rr, "T_0"'] & & \bullet \\
+                & & & & & \\
+                a \arrow[uu, "T_{i+5}"] \arrow[rr, "T_4"'] & &
+                \bullet \arrow[uu, "X(T_{i+5})"] &
+                a \arrow[uu, "I_5"'] \arrow[rr, "T_4"']     & &
+                \bullet \arrow[uu, "X(I_5)"']      \\
+                & a \arrow[rrr, "T_4"] & & &
+                \bullet & \\
+                & & & &\\
+                & a \arrow[uu, "T^a_0"] \arrow[rrr, "T_4"'] & & &
+                \bullet \arrow[uu, "X(T^a_0)"'] &
+            \end{tikzcd}
+        };
+
+    \end{tzcategory}
+
+    All these square have a unique solution : 
+    \begin{align*}
+        X(T^r_0) &= T_0 &\\
+        X(I_{i+10}) &= I_{i+10} &= I_{j+6} \\
+        X(T_{i+5}) &= T_{i+1}& = T_{j+9}\\
+        X(I_5) &= I_9\\
+        X(T^a_0) &= T_0
+    \end{align*}
+
+    We can notice that if we define $j = i - 4$, $X$ is  one of the solutions of the A pitch-class constraint (see Figure \ref{fig:solA}). We can conclude that the $\tau^4$ induces a bijection between the pitch class $F$ and the pitch class $A$ seen as a structural constraint solution. We can easily extend this example to prove that any pitch class can be correctly transposed to another pitch class by one of the 12 transpositions constraint $\tau^4$.
+    \begin{tzcategory}{\caption{The EK-net X graphic representation}
+        \label{fig:solA}}
+    \node[scale=1.3] (a) at (0,0){
+        % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoA2AXVJADcBDAGwFcYkQAdDgI2ccZg4QAX1LpMufIRRkALNTpNW7Lr36CRYkBmx4CRAIyliChizaIQm8bqlEyJmmeWWRCmFADm8IqABmAE4QALZIZCA4EGE0jBAQaPakfkxwMAqM9NwwjAAKEnrSIAFYngAWQk5KFiAAKgD6wORYwtYggSFIRhFRiF2x8YYAHGTJjKnpmdl5tvqWxWUViubsAJINAEwA1i2i-kGhiOGRnTRZYFBIALQAzOHO1fWNzSAxk7n5dnMl5a3tB0c9LpnC6IW6vLLvGaFAR+Rb3VYbTaXJotGg4ehYRjsSBgNi7Nr7JDrNE9a7CSjCIA
+        \begin{tikzcd}
+            r\arrow["I_{j+6}"',loop, distance=2em, in=125, out=55]  & &\\
+            &    &  \\
+            a \arrow[uu, "I_{9}"', bend right]
+            \arrow[uu, "T_{j+9}", bend left] &&
+        \end{tikzcd}
+    };
+
+\end{tzcategory}
+
+
+
+\end{exmp}
 
 
 
