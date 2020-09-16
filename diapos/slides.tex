@@ -436,7 +436,7 @@
 	\frametitle{Relational constraints}
 	\textbf{How can we define relations between musical objects ?}
 	\begin{itemize}
-		\item We propose a set of candidates to be arrows between EK-nets  : $$\rho : Obj(\Delta) \rightarrow \wp(T/I)$$
+		\item We propose a set of candidates to be arrows between EK-nets $$\rho : Obj(\Delta) \rightarrow \wp(T/I)$$
 		\item For two EK-net $F:\Delta\rightarrow T/I$ and $F':\Delta'\rightarrow T/I$, $F$ is in relation with $F'$ via the relational constraint $rho$ if there is an arrow $\big<N,\nu\big>$ where for all object $\delta$ of $\Delta$, $$\nu_\delta\in\rho(\Delta)$$
 	\end{itemize}
 
@@ -591,18 +591,18 @@
 \begin{frame}[fragile]
 	\frametitle{Transpositions as relational constraints}
 	\begin{itemize}
-		\item $X$ has a unique solution for $i$ fixed : 
+		\item $X$ has a unique solution for $i$ fixed :
 	\end{itemize}
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
 			\begin{align*}
-				X(T^r_0) &= T_0 &\\
-				X(I_{i+10}) &= I_{i+10} = I_{j+6} \\
-				X(T_{i+5}) &= T_{i+1} = T_{j+9}\\
-				X(I_5) &= I_9\\
-				X(T^a_0) &= T_0
+				X(T^r_0)    & = T_0                & \\
+				X(I_{i+10}) & = I_{i+10} = I_{j+6}   \\
+				X(T_{i+5})  & = T_{i+1} = T_{j+9}    \\
+				X(I_5)      & = I_9                  \\
+				X(T^a_0)    & = T_0
 			\end{align*}
-		
+
 		\end{column}
 		\begin{column}{0.6\textwidth}
 			\begin{figure}[ht]
@@ -624,7 +624,7 @@
 			\end{figure}
 		\end{column}
 	\end{columns}
-	
+
 \end{frame}
 
 
@@ -632,14 +632,14 @@
 \subsubsection{Increase the EK toolbox}
 \begin{frame}
 	\frametitle{Increase the EK toolbox}
-	Many of music theory tools can be embeded within the EK-net paradigm : 
+	Many of music theory tools can be embeded within the EK-net paradigm :
 	\begin{itemize}
 		\item K-nets
 		\item Tonnetz
 		\item Forte's interval vectors
 	\end{itemize}
-\pause
-	What if we change the category T/I for others category we could possibly : 
+	\pause
+	What if we change the category T/I for others category we could possibly :
 	\begin{itemize}
 		\item encode MIDI data
 		\item encode glissandi (by using homotopy theory inside of categories)
@@ -653,7 +653,7 @@
 \subsubsection{Compositionnal tools}
 \begin{frame}
 	\frametitle{Compositionnal tools}
-	We showed a way to generate musical object that are in relation with another musical object.  We could : 
+	We showed a way to generate musical object that are in relation with another musical object.  We could :
 	\begin{itemize}
 		\item develop a solver of EK-constraints
 		\item use Bach constraint solver
@@ -673,4 +673,60 @@
 
 
 \section{Conclusion}
+\listadd{\atiam}{\bf\scriptsize Gon}
+\listadd{\atiam}{\bf\scriptsize Mano}
+\listadd{\atiam}{\bf\scriptsize Yujia}
+\listadd{\atiam}{\bf\scriptsize Alice}
+\listadd{\atiam}{\bf\scriptsize Olivier}
+\listadd{\atiam}{\bf\scriptsize Arthur}
+\listadd{\atiam}{\bf\scriptsize Lucas}
+\listadd{\atiam}{\bf\scriptsize André}
+\listadd{\atiam}{\bf\scriptsize Zitian}
+\listadd{\atiam}{\bf\scriptsize Hugo}
+\listadd{\atiam}{\bf\scriptsize Théo}
+\listadd{\atiam}{\bf\scriptsize Lydia}
+\listadd{\atiam}{\bf\scriptsize Bruno}
+\listadd{\atiam}{\bf\scriptsize Lenny}
+\listadd{\atiam}{\bf\scriptsize Victor}
+\listadd{\atiam}{\bf\scriptsize Colette}
+\listadd{\atiam}{\bf\scriptsize Ninon}
+\listadd{\atiam}{\bf\scriptsize Cyril}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{Merci !}
+	\begin{figure}
+		\begin{tikzpicture}
+
+			\newcommand{\numnodes}{18}
+			\newcounter{atiamit}
+			\setcounter{atiamit}{1}
+			\newcommand{\atiamit}{\number\value{atiamit}}
+
+			\renewcommand*{\do}[1]{
+				\pgfmathsetmacro{\angle}{90 - (\atiamit-1)*360/\numnodes}
+					\node[] (x\atiamit) at (\angle:3cm) {#1\addtocounter{atiamit}{1}};
+			}
+
+			\dolistloop{\atiam}
+
+			\foreach \ii in {1, ..., \numnodes}{
+					\pgfmathsetmacro{\prev}{int(ifthenelse(\ii==1, \numnodes, \ii-1))}
+					\pgfmathsetmacro{\next}{int(ifthenelse(\ii==\numnodes, 1, \ii+1))}
+					\draw (x\ii) -- (0,0) (x\prev) -- (x\ii) -- (x\next);
+
+					\foreach \jj in {\ii, ..., \numnodes}{
+							\pgfmathsetmacro{\drawoptions}{ifthenelse(
+								\jj==(\ii+\numnodes/2) || \jj==\prev || \jj==\next,
+								"none", "gray")}
+							\path[draw=\drawoptions, thin] (x\ii) -- (x\jj);
+						}
+				}
+		\end{tikzpicture}
+		\caption{The ATIAM EK-net}
+		\label{fig:constrRelPitchClass}
+
+	\end{figure}
+\end{frame}
 \end{document}
